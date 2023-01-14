@@ -17,19 +17,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
 
-  // Create Motor Variables
+  // Create Drivetrain Motor Variables
   CANSparkMax topRightMotor = null;
   CANSparkMax bottomRightMotor = null;
   CANSparkMax topLeftMotor = null;
   CANSparkMax bottomLeftMotor = null;
 
   // Create Differntial Drive Variables
+  // Differential drive is used to call arcade drive using the motors. 
   DifferentialDrive differentialDrive = null;
-
-  //FOR SIMULATION PURPOSES ONLY 
-  private final Field2d m_field = new Field2d();
-  DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(new Rotation2d(),0,0);
-
 
 
   public DriveTrainSubsystem() {
@@ -53,23 +49,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
     topLeftMotor.setSmartCurrentLimit(40);
     bottomLeftMotor.setSmartCurrentLimit(40);
 
-    // Create Differential Drive Object 
-    DifferentialDrive differentialDrive  = new DifferentialDrive(bottomLeftMotor, bottomRightMotor);
+    // Create DifferentialDrive Object 
+    differentialDrive = new DifferentialDrive(bottomLeftMotor, bottomRightMotor);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
-  private Pose2d getPose2d()
-  {
-    return m_odometry.getPoseMeters();
-  }
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_odometry.update(null, 0, 0)
-    m_field.setRobotPose(getPose2d());
+    
   }
 }

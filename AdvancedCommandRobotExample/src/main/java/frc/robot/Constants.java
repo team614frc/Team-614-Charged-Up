@@ -33,6 +33,8 @@ public final class Constants {
     public static final double ARCADE_DRIVE_MULTIPLIER = 0.5; 
     public static final int POW_VALUE = 3; 
 
+    // Timer Based Auto Variables
+    public static final double RUN_INITAL_AUTO = 2.0; 
 
   public static class OperatorConstants {
    // public static final int kDriverControllerPort = 0;
