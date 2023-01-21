@@ -44,10 +44,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     topLeftMotor.follow(bottomLeftMotor,false);
 
     // Current Limits Set
-    topRightMotor.setSmartCurrentLimit(40);
-    bottomRightMotor.setSmartCurrentLimit(40);
-    topLeftMotor.setSmartCurrentLimit(40);
-    bottomLeftMotor.setSmartCurrentLimit(40);
+    topRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    bottomRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    topLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    bottomLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
 
     // Create DifferentialDrive Object 
     differentialDrive = new DifferentialDrive(bottomLeftMotor, bottomRightMotor);
@@ -56,8 +56,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
-
-
 
   @Override
   public void periodic() {
