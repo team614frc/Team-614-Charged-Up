@@ -38,10 +38,21 @@ public final class Constants {
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
+    public static final double AUTO_STAGE_2 = 7.0;
+    public static final double AUTO_STAGE_3 = 10.0;
+    public static final double AUTO_STAGE_4 = 11.0;
     public static final double AUTO_DRIVE_SPEED = 0.5;
     public static final double AUTO_REVERSE_SPEED = -0.5;
     public static final double AUTO_ROTATE_SPEED = 0.0;
     public static final double AUTO_DRIVE_DISTANCE_INCHES = 36; //3 feet
+    public static final double WAIT_TIME = 5;
+
+    // Encoder Variables
+    public static final int ENCODER_CPR = 1024;
+    public static final double WHEEL_DIAMETER_INCHES = 6;
+    public static final double kEncoderDistancePerPulse =
+        // Assumes the encoders are directly mounted on the wheel shafts
+        (WHEEL_DIAMETER_INCHES * Math.PI) / (double) ENCODER_CPR;
 
   public static class OperatorConstants {
    // public static final int kDriverControllerPort = 0;
