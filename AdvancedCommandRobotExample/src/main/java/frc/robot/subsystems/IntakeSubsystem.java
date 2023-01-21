@@ -1,5 +1,10 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.REVPhysicsSim;
+import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.simulation.REVPHSim;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,7 +30,20 @@ public class IntakeSubsystem extends SubsystemBase {
 
     intakeRightMotor.setSmartCurrentLimit(40);
     intakeLeftMotor.setSmartCurrentLimit(40);
+    REVPhysicsSim.getInstance().addSparkMax(intakeRightMotor, DCMotor.getNEO(2));
+    initSmartdashboard();
 }
+
+  public void set (double val)
+  {
+    intakeRightMotor.set(val);
+  }
+
+private void initSmartdashboard() {
+  Shuffleboard.getTab("Intake").add(this);
+  Shuffleboard.getTab("Intake").add("Intake Right Motor Output", intakeRightMotor.get());
+}
+
 
 @Override
 public void periodic() {
@@ -33,8 +51,10 @@ public void periodic() {
 
 }
 
-public void set (double val)
-{
-  intakeRightMotor.set(val);
+@Override
+  public void simulationPeriodic() {
+    REVPhysicsSim.getInstance().run();
 }
+
+
 }

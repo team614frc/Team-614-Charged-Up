@@ -52,7 +52,7 @@ public class RobotContainer {
     //leftBumper.onTrue(new IntakeWheels()).onFalse(m_TimedAutoCommand);
     //driverController.a().onTrue(wheels.test());
     //m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
-    m_CommandXboxController.button(1).onTrue(new IntakeWheels());
+    m_CommandXboxController.button(1).whileTrue(new IntakeWheels());
    
    }
 
