@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.Extend;
 import frc.robot.commands.Intake;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TimedAuto;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevationSubsystem;
 import frc.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.XboxController.Button;
@@ -25,13 +27,11 @@ public class RobotContainer {
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
-  public static Manipulator intakeSubsystem = new Manipulator();
+  public static Manipulator manipulator = new Manipulator();
+  public static ElevationSubsystem elevatorSubsystem = new ElevationSubsystem();
   // Contollers Initalization
- //public static XboxController driverController = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
-  public static CommandXboxController m_CommandXboxController = new CommandXboxController(0);
-  //final Trigger leftBumper = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);
-
-  Intake wheels = new Intake(Constants.STOP_MOTOR);
+  public static XboxController driverController = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
+  public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
 
   // Timed Auto Initaliztion
   public static TimedAuto m_TimedAutoCommand = new TimedAuto();
@@ -54,7 +54,10 @@ public class RobotContainer {
     //m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
     m_CommandXboxController.button(5).whileTrue(new Intake(Constants.INTAKE_SPEED_FORWARD));
     m_CommandXboxController.button(9).whileTrue(new Intake(Constants.INTAKE_SPEED_BACKWARD));
-   
+    m_CommandXboxController.button(4).whileTrue(new Extend(Constants.ELEVATOR_UP_SPEED));
+    m_CommandXboxController.button(3).whileTrue(new Extend(Constants.ELEVATOR_DOWN_SPEED));
+    m_CommandXboxController.button(7).whileTrue(new Extend(Constants.ELEVATOR_UP_SPEED));
+    m_CommandXboxController.button(8).whileTrue(new Extend(Constants.ELEVATOR_DOWN_SPEED));
    }
 
   public Command getAutonomousCommand() {

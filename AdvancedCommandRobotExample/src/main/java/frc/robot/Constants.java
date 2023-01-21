@@ -20,16 +20,22 @@ public final class Constants {
     // GLOBAL INVERT
     public static final int GLOBAL_INVERT = -1; 
 
-    // DRIVE TRAIN MOTORS
+    // DRIVE TRAIN MOTOR ID's
     public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 1;
     public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 12; //for testing, CAN ID was changed,
     public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 14;     //make sure to have the proper ones later
     public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
 
-    //INTAKE MOTORS
-    public static final int INTAKE_RIGHT_MOTOR = 8;
-    public static final int INTAKE_LEFT_MOTOR = 11;
+    //INTAKE MOTOR ID'S
+    public static final int INTAKE_RIGHT_MOTOR = 2;
+    public static final int INTAKE_LEFT_MOTOR = 13;
 
+    //ELEVATOR MOTOR ID'S
+    public static final int ELEVATOR_RIGHT_MOTOR = 20;
+    public static final int ELEVATOR_LEFT_MOTOR = 21;
+    public static final int ELEVATOR_TOP_RIGHT_MOTOR = 22;
+    public static final int ELEVATOR_TOP_LEFT_MOTOR = 23;
+    
     // Xbox Controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
 
@@ -40,6 +46,10 @@ public final class Constants {
     //Manipulator Commands
     public static final double INTAKE_SPEED_FORWARD = 1;
     public static final double INTAKE_SPEED_BACKWARD = -1;
+
+    //Elevator Commands
+    public static final double ELEVATOR_UP_SPEED = 0.5;
+    public static final double ELEVATOR_DOWN_SPEED = -0.5;
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
