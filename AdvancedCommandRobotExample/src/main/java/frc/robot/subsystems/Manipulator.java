@@ -3,17 +3,17 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Manipulator;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
-public class IntakeSubsystem extends SubsystemBase {
+public class Manipulator extends SubsystemBase {
     /*Creates a new intake subsystem */ 
   CANSparkMax intakeRightMotor = null;
   CANSparkMax intakeLeftMotor = null;
 
-  public IntakeSubsystem(){
+  public Manipulator(){
     intakeRightMotor = new CANSparkMax(Constants.INTAKE_RIGHT_MOTOR, MotorType.kBrushless);
     intakeLeftMotor = new CANSparkMax(Constants.INTAKE_LEFT_MOTOR, MotorType.kBrushless);
 
@@ -35,6 +35,6 @@ public void periodic() {
 
 public void set (double val)
 {
-  intakeRightMotor.set(val);
+  intakeLeftMotor.set(val);
 }
 }

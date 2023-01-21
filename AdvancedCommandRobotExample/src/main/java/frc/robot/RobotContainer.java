@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.IntakeWheels;
+import frc.robot.commands.Intake;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TimedAuto;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -25,13 +25,13 @@ public class RobotContainer {
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
-  public static IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public static Manipulator intakeSubsystem = new Manipulator();
   // Contollers Initalization
  //public static XboxController driverController = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(0);
   //final Trigger leftBumper = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);
 
-  IntakeWheels wheels = new IntakeWheels();
+  Intake wheels = new Intake(Constants.STOP_MOTOR);
 
   // Timed Auto Initaliztion
   public static TimedAuto m_TimedAutoCommand = new TimedAuto();
@@ -52,7 +52,8 @@ public class RobotContainer {
     //leftBumper.onTrue(new IntakeWheels()).onFalse(m_TimedAutoCommand);
     //driverController.a().onTrue(wheels.test());
     //m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
-    m_CommandXboxController.button(1).onTrue(new IntakeWheels());
+    m_CommandXboxController.button(5).whileTrue(new Intake(Constants.INTAKE_SPEED_FORWARD));
+    m_CommandXboxController.button(9).whileTrue(new Intake(Constants.INTAKE_SPEED_BACKWARD));
    
    }
 

@@ -38,7 +38,8 @@ public final class Constants {
     public static final int POW_VALUE = 3; 
 
     //Manipulator Commands
-    public static final double INTAKE_SPEED_FOWARD = 1;
+    public static final double INTAKE_SPEED_FORWARD = 1;
+    public static final double INTAKE_SPEED_BACKWARD = -1;
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
