@@ -13,11 +13,17 @@ import edu.wpi.first.wpilibj.Timer;
 public class TimedAuto extends CommandBase {
   /** Creates a new TimedAuto. */
   Timer arcadeDriveTimer = null; 
+  double localSpeed; 
+  double localRotation;
+  double localEndTime;
 
-
-  public TimedAuto() {
+  public TimedAuto(double speed, double rotation, double endtime) {
     // Use addRequirements() here to declare subsystem dependencies.
     // DriveTrain Subsystem required for arcade drive 
+    localSpeed = speed;
+    localRotation = rotation;
+    localEndTime = endtime;
+
     addRequirements(RobotContainer.driveTrainSubsystem);
 
     arcadeDriveTimer = new Timer();
@@ -35,11 +41,9 @@ public class TimedAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (arcadeDriveTimer.get() <= Constants.RUN_INITAL_AUTO){
-      RobotContainer.driveTrainSubsystem.arcadeDrive(1, 0);
-
-    }
-
+    if (arcadeDriveTimer.get() <= localEndTime) { 
+      RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
+  }
   }
 
   // Called once the command ends or is interrupted.
