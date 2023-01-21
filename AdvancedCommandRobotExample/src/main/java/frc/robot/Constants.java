@@ -52,7 +52,7 @@ public final class Constants {
     public static final double WHEEL_DIAMETER_INCHES = 6;
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
-        (WHEEL_DIAMETER_INCHES * Math.PI) / (double) ENCODER_CPR;
+        (WHEEL_DIAMETER_INCHES * Math.PI) / (double) ENCODER_CPR; // Calculates circumference of wheels in inches
 
   public static class OperatorConstants {
    // public static final int kDriverControllerPort = 0;
