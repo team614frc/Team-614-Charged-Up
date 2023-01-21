@@ -5,47 +5,62 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+// import frc.robot.subsystems.IntakeSubsystem;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+// import edu.wpi.first.wpilibj.XboxController;
+// import edu.wpi.first.wpilibj.XboxController.Button;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
   private RobotContainer m_robotContainer;
+  
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+  m_robotContainer = new RobotContainer();
+    
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    
+    }
+
+
+  @Override
+  public void disabledInit() {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
-
-  @Override
-  public void disabledExit() {}
+  public void disabledExit() {
+  }
 
   @Override
   public void autonomousInit() {
+    
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    if (m_autonomousCommand != null) {
+    if(m_autonomousCommand != null){
+
       m_autonomousCommand.schedule();
     }
+
   }
 
-  @Override
   public void autonomousPeriodic() {}
 
-  @Override
   public void autonomousExit() {}
+  
+ 
 
   @Override
   public void teleopInit() {
@@ -55,10 +70,12 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
-  public void teleopExit() {}
+  public void teleopExit() {
+  }
 
   @Override
   public void testInit() {
@@ -66,8 +83,10 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
   @Override
-  public void testExit() {}
+  public void testExit() {
+  }
 }

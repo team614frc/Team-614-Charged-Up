@@ -1,0 +1,9 @@
+{
+  "lengthUnit": "Foot",
+  "exportUnit": "Always Meters",
+  "maxVelocity": 10.0,
+  "maxAcceleration": 3.0,
+  "trackWidth": 1.5,
+  "gameName": "Rapid React",
+  "outputDir": "../../../WPILib Path Weaver tests 2023"
+}
