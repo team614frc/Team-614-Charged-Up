@@ -5,11 +5,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -26,7 +22,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   // Create Differntial Drive Variables
   // Differential drive is used to call arcade drive using the motors. 
   DifferentialDrive differentialDrive = null;
-
 
   public DriveTrainSubsystem() {
 
