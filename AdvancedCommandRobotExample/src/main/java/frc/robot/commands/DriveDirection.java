@@ -48,6 +48,7 @@ public class DriveDirection extends CommandBase {
   public void end(boolean interrupted) {
     RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
     arcadeDriveTimer.stop();
+    arcadeDriveTimer.reset();
   }
 
   // Returns true when the command should end.
