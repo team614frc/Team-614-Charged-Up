@@ -16,8 +16,8 @@ public class TiltSubsystem extends SubsystemBase {
   CANSparkMax elevatorTopLeftMotor = null;
 
   public TiltSubsystem() {
-  elevatorTopRightMotor = new CANSparkMax(Constants.ELEVATOR_TOP_RIGHT_MOTOR, MotorType.kBrushless);
-  elevatorTopLeftMotor = new CANSparkMax(Constants.ELEVATOR_TOP_LEFT_MOTOR, MotorType.kBrushless);
+  elevatorTopRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
+  elevatorTopLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
 
   elevatorTopRightMotor.follow(elevatorTopLeftMotor);
 
@@ -28,7 +28,7 @@ public class TiltSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void set(double x){
-    elevatorTopLeftMotor.set(x);
+  public void set(double val){
+    elevatorTopLeftMotor.set(val);
   }
 }

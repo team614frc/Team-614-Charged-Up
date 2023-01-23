@@ -33,8 +33,10 @@ public final class Constants {
     //ELEVATOR MOTOR ID'S
     public static final int ELEVATOR_RIGHT_MOTOR = 20;
     public static final int ELEVATOR_LEFT_MOTOR = 21;
-    public static final int ELEVATOR_TOP_RIGHT_MOTOR = 22;
-    public static final int ELEVATOR_TOP_LEFT_MOTOR = 23;
+
+    //TILT MOTOR ID'S
+    public static final int TILT_RIGHT_MOTOR = 22;
+    public static final int TILT_LEFT_MOTOR = 23;
     
     // Xbox Controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -50,6 +52,10 @@ public final class Constants {
     //Elevator Commands
     public static final double ELEVATOR_UP_SPEED = 0.5;
     public static final double ELEVATOR_DOWN_SPEED = -0.5;
+
+    //Tilt Commands
+    public static final double TILT_UP_SPEED = 0.5;
+    public static final double TILT_DOWN_SPEED = -0.5;
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
