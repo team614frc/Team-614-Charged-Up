@@ -14,10 +14,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
 
   // Create Drivetrain Motor Variables
-  CANSparkMax topRightMotor = null;
-  CANSparkMax bottomRightMotor = null;
-  CANSparkMax topLeftMotor = null;
-  CANSparkMax bottomLeftMotor = null;
+  CANSparkMax frontRightMotor = null;
+  CANSparkMax backRightMotor = null;
+  CANSparkMax frontLeftMotor = null;
+  CANSparkMax backLeftMotor = null;
 
   // Create Differntial Drive Variables
   // Differential drive is used to call arcade drive using the motors. 
@@ -26,26 +26,26 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public DriveTrainSubsystem() {
 
     // motor initalization
-    CANSparkMax topRightMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_RIGHT_MOTOR, MotorType.kBrushless);
-    CANSparkMax bottomRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_RIGHT_MOTOR, MotorType.kBrushless);
-    CANSparkMax topLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_LEFT_MOTOR, MotorType.kBrushless);
-    CANSparkMax bottomLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_LEFT_MOTOR, MotorType.kBrushless);
+    CANSparkMax frontRightMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_RIGHT_MOTOR, MotorType.kBrushless);
+    CANSparkMax backRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_RIGHT_MOTOR, MotorType.kBrushless);
+    CANSparkMax frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_LEFT_MOTOR, MotorType.kBrushless);
+    CANSparkMax backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_LEFT_MOTOR, MotorType.kBrushless);
 
     // Bottom motors follow top motors and invertion is set. 
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
     // MAKE SURE TO SET THE CURRENT LIMITS AS WELL
     // NOTE: BOTTOM MOTORS are LEADERS in this example 
-    topRightMotor.follow(bottomRightMotor,false);
-    topLeftMotor.follow(bottomLeftMotor,false);
+    frontRightMotor.follow(backRightMotor,false);
+    frontLeftMotor.follow(backLeftMotor,false);
 
     // Current Limits Set
-    topRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    bottomRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    topLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    bottomLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    frontRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    backRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    frontLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    backLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
 
     // Create DifferentialDrive Object 
-    differentialDrive = new DifferentialDrive(bottomLeftMotor, bottomRightMotor);
+    differentialDrive = new DifferentialDrive(backLeftMotor, backRightMotor);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
