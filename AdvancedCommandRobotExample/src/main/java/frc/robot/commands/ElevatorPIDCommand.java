@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -13,15 +14,17 @@ import frc.robot.subsystems.ElevatorSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ElevatorPIDCommand extends PIDCommand {
   /** Creates a new ElevatorPIDCommand. */
-  
-  public ElevatorPIDCommand(ElevatorSubsystem elevator) {
+  public static ElevatorSubsystem elevator;
+  double elevatorSetpoint;
+  //Makes 3 setpoints for elevator subsystem to check if at certain height
+  public ElevatorPIDCommand(double elevatorSetpoint) {
     super(
         // The controller that the command will use
-        new PIDController(0.1, 0, 0),
+        new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // This should return the measurement
-        () -> elevator.getHeight(),
-        // This should return the setpoint (can also be a constant)
         () -> 0,
+        // This should return the setpoint (can also be a constant)
+        () -> elevatorSetpoint,
         // This uses the output
         output -> {
           // Use the output here
@@ -36,6 +39,6 @@ public class ElevatorPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return getController().atSetpoint();
+    return false;
   }
 }

@@ -57,6 +57,11 @@ public final class Constants {
     public static final double TILT_UP_SPEED = 0.5;
     public static final double TILT_DOWN_SPEED = -0.5;
 
+    //PID Values
+    public static final double kP = 0.1;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
 
