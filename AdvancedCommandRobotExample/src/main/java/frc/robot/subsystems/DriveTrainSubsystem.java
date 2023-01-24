@@ -34,7 +34,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // Back motors follow front motors and invertion is set. 
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
     // MAKE SURE TO SET THE CURRENT LIMITS AS WELL
-    // NOTE: BOTTOM MOTORS are LEADERS in this example 
+    // NOTE: BACK MOTORS are LEADERS in this example 
     frontRightMotor.follow(backRightMotor,false);
     frontLeftMotor.follow(backLeftMotor,false);
 
