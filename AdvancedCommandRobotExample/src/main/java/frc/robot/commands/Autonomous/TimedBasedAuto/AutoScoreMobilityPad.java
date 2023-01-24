@@ -32,7 +32,7 @@ public class AutoScoreMobilityPad extends CommandBase {
   @Override
   public void execute() {
     if (arcadeDriveTimer.get() <= Constants.RUN_INITAL_AUTO){
-      new DriveBackwards();
+    //  new DriveBackwards();
     }
   }
 
