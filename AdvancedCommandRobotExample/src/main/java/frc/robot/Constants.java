@@ -21,10 +21,10 @@ public final class Constants {
     public static final int GLOBAL_INVERT = -1; 
 
     // DRIVE TRAIN MOTORS
-    public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 1;
-    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 12;
-    public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 14;
-    public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
+    public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
+    public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 12;
+    public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
+    public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 15;
     public static final int MOTOR_CURRENT_LIMIT = 40;
 
     // Xbox Controller 
