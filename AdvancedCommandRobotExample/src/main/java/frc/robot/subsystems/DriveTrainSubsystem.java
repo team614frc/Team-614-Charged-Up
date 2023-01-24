@@ -26,10 +26,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public DriveTrainSubsystem() {
 
     // motor initalization
-    CANSparkMax frontRightMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_RIGHT_MOTOR, MotorType.kBrushless);
-    CANSparkMax backRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_RIGHT_MOTOR, MotorType.kBrushless);
-    CANSparkMax frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_TOP_LEFT_MOTOR, MotorType.kBrushless);
-    CANSparkMax backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BOTTOM_LEFT_MOTOR, MotorType.kBrushless);
+    CANSparkMax frontRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_RIGHT_MOTOR, MotorType.kBrushless);
+    CANSparkMax backRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_RIGHT_MOTOR, MotorType.kBrushless);
+    CANSparkMax frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_LEFT_MOTOR, MotorType.kBrushless);
+    CANSparkMax backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_LEFT_MOTOR, MotorType.kBrushless);
 
     // Bottom motors follow top motors and invertion is set. 
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
