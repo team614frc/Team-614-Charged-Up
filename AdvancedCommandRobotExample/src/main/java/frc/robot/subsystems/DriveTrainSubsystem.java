@@ -31,7 +31,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     CANSparkMax frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_LEFT_MOTOR, MotorType.kBrushless);
     CANSparkMax backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_LEFT_MOTOR, MotorType.kBrushless);
 
-    // Bottom motors follow top motors and invertion is set. 
+    // Back motors follow front motors and invertion is set. 
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
     // MAKE SURE TO SET THE CURRENT LIMITS AS WELL
     // NOTE: BOTTOM MOTORS are LEADERS in this example 
