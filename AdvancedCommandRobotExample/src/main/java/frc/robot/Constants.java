@@ -27,12 +27,12 @@ public final class Constants {
     public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
 
     //INTAKE MOTOR ID'S
-    public static final int INTAKE_RIGHT_MOTOR = 2;
-    public static final int INTAKE_LEFT_MOTOR = 13;
+    public static final int INTAKE_RIGHT_MOTOR = 21;
+    public static final int INTAKE_LEFT_MOTOR = 20;
 
     //ELEVATOR MOTOR ID'S
-    public static final int ELEVATOR_RIGHT_MOTOR = 20;
-    public static final int ELEVATOR_LEFT_MOTOR = 21;
+    public static final int ELEVATOR_RIGHT_MOTOR = 2;
+    public static final int ELEVATOR_LEFT_MOTOR = 13;
 
     //TILT MOTOR ID'S
     public static final int TILT_RIGHT_MOTOR = 22;
@@ -53,12 +53,18 @@ public final class Constants {
     public static final double ELEVATOR_UP_SPEED = 0.5;
     public static final double ELEVATOR_DOWN_SPEED = -0.5;
 
+    //Elevator PID Setpoints
+    public static final double ELEVATOR_SETPOINT = 10;
+
+    //Thresholds 
+    public static final double MANIPULATOR_THRESHOLD = 10;
+
     //Tilt Commands
     public static final double TILT_UP_SPEED = 0.5;
     public static final double TILT_DOWN_SPEED = -0.5;
 
     //PID Values
-    public static final double kP = 0.1;
+    public static final double kP = 0.01;
     public static final double kI = 0;
     public static final double kD = 0;
 

@@ -9,25 +9,23 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ElevatorSubsystem extends SubsystemBase {
     /*Creates a new Elevation subsystem */ 
-  Encoder encoder;
+  Encoder subEncoder;
   CANSparkMax elevatorRightMotor = null;
   CANSparkMax elevatorLeftMotor = null;
 
-  public ElevatorSubsystem(Encoder encoder) {
+  public ElevatorSubsystem() {
     elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR, MotorType.kBrushless);
     elevatorLeftMotor = new CANSparkMax(Constants.ELEVATOR_LEFT_MOTOR, MotorType.kBrushless);
-    this.encoder = encoder;
-
-    elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
-
+  elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
+                                                                //might inverted based on the position of the motors (ask hardware)
     elevatorRightMotor.setSmartCurrentLimit(40);
     elevatorLeftMotor.setSmartCurrentLimit(40);
   }
   public void periodic() {
     //Called once per scheduler run
   }
-  public double getHeight(){
-    return encoder.getDistance();
+  public double getHeight() {
+    return subEncoder.getDistance();
   }
   public void set(double val){
     elevatorLeftMotor.set(val);

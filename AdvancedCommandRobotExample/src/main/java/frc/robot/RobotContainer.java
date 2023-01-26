@@ -29,12 +29,12 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class RobotContainer {
   //Encoder 
-  public static Encoder elevatorEncoder = new Encoder(0, 1);
+  //public static Encoder elevatorEncoder = new Encoder(0, 1);
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
   public static Manipulator manipulator = new Manipulator();
-  public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem(elevatorEncoder);
+  public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   // Contollers Initalization
   public static XboxController driverController = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
