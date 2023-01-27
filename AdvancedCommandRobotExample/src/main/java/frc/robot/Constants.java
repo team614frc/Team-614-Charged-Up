@@ -22,13 +22,13 @@ public final class Constants {
 
     // DRIVE TRAIN MOTOR ID's
     public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 1;
-    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 12; //for testing, CAN ID was changed,
+    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 3; //for testing, CAN ID was changed,
     public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 14;     //make sure to have the proper ones later
     public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
 
     //INTAKE MOTOR ID'S
-    public static final int INTAKE_RIGHT_MOTOR = 21;
-    public static final int INTAKE_LEFT_MOTOR = 20;
+    public static final int INTAKE_MOTOR = 12; //new manipulator has only on motor, so changed the can ID for the intake motor
+                                               //to the new spark max that we corresponded to the intake
 
     //ELEVATOR MOTOR ID'S
     public static final int ELEVATOR_RIGHT_MOTOR = 2;
@@ -55,6 +55,9 @@ public final class Constants {
 
     //Elevator PID Setpoints
     public static final double ELEVATOR_SETPOINT = 10;
+
+    //Manipulator PID setpoints (test)
+    public static final double MANIPULATOR_SETPOINT = 25; //for testing
 
     //Thresholds 
     public static final double MANIPULATOR_THRESHOLD = 10;
