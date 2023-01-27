@@ -22,7 +22,7 @@ public class ManipulatorPIDCommand extends PIDCommand {
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // Returns current intake speed
         () -> manipulator.getSpeed(),
-        // This should return the setpoint (can also be a constant)
+        // Could be used to hard code setpoint, but code requires two button presses that dictate setpoint
         () -> 0,
         // This uses the output
         output -> {
@@ -38,12 +38,14 @@ public class ManipulatorPIDCommand extends PIDCommand {
       setSetpoint(newSetpoint);
   }
   public void setSetpoint(double setpoint) {
-    getController().setSetpoint(setpoint);
+    //sets newSetpoint variable equal to setpoint parameter
     newSetpoint = setpoint;
+    //calls setSetpoint on PID controller
+    getController().setSetpoint(setpoint);
   }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
