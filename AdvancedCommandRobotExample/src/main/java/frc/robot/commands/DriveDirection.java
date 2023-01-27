@@ -40,11 +40,11 @@ public class DriveDirection extends CommandBase {
     if (arcadeDriveTimer.get() <= localEndTime) {
     RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
     }
-   // RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
   }
 
   // Called once the command ends or is interrupted.
   @Override
+  //Stops the motor and timer, then resets the timer.
   public void end(boolean interrupted) {
     RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
     arcadeDriveTimer.stop();
