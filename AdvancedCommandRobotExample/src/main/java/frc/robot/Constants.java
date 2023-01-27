@@ -59,6 +59,7 @@ public final class Constants {
 
     //Manipulator PID setpoints (test)
     public static final double MANIPULATOR_SETPOINT = 25; //for testing
+    public static final double MANIPULATOR_SETPOINT2 = -10;
 
     //Thresholds 
     public static final double MANIPULATOR_THRESHOLD = 10;

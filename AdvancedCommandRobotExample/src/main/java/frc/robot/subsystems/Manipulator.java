@@ -45,5 +45,6 @@ public double getSpeed()
 public void set (double val)
 {
   intakeMotor.set(val);
+  System.out.println(intakeMotor.getOutputCurrent());
 }
 }
