@@ -14,41 +14,36 @@ public class Manipulator extends SubsystemBase {
     /*Creates a new intake subsystem */ 
   PowerDistribution pdh;
   double spikeThreshold = Constants.MANIPULATOR_THRESHOLD;
-  CANSparkMax intakeRightMotor = null;
-  CANSparkMax intakeLeftMotor = null;
+  CANSparkMax intakeMotor = null;
   Encoder encoder;
 
   public Manipulator(){
-    intakeRightMotor = new CANSparkMax(Constants.INTAKE_RIGHT_MOTOR, MotorType.kBrushless);
-    intakeLeftMotor = new CANSparkMax(Constants.INTAKE_LEFT_MOTOR, MotorType.kBrushless);
+    intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
     encoder = new Encoder(0, 1);
     pdh = new PowerDistribution();
     /*We might not need the two motors for the gripper to follow each others movements in the future, as there is a possibility
     that we might need them to not match, in order to spin the game pieces onto their designated
     scoring locations*/
     
-    intakeRightMotor.follow(intakeLeftMotor,true);
-
-    intakeRightMotor.setSmartCurrentLimit(40);
-    intakeLeftMotor.setSmartCurrentLimit(40);
+    intakeMotor.setSmartCurrentLimit(40);
 }
 
 @Override
 public void periodic() {
   // This method will be called once per scheduler run
   //Periodically gets current motor is giving off, when the values exceeds the threshold specified, motors stop
-if (pdh.getCurrent(Constants.INTAKE_LEFT_MOTOR) > spikeThreshold) {
-  intakeLeftMotor.set(Constants.STOP_MOTOR);
+if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
+  intakeMotor.set(Constants.STOP_MOTOR);
 }
 }
 //Returns rate of motor
 public double getSpeed()
 {
-  return encoder.getRate();
+  return intakeMotor.get();
 }
 //Speed of motor
 public void set (double val)
 {
-  intakeLeftMotor.set(val);
+  intakeMotor.set(val);
 }
 }
