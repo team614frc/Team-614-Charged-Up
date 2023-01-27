@@ -4,6 +4,7 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Manipulator;
 import com.revrobotics.CANSparkMax;
@@ -32,9 +33,9 @@ public class Manipulator extends SubsystemBase {
 public void periodic() {
   // This method will be called once per scheduler run
   //Periodically gets current motor is giving off, when the values exceeds the threshold specified, motors stop
-if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
-  intakeMotor.set(Constants.STOP_MOTOR);
-}
+//if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
+  //intakeMotor.set(Constants.STOP_MOTOR);
+
 }
 //Returns rate of motor
 public double getSpeed()
@@ -45,6 +46,8 @@ public double getSpeed()
 public void set (double val)
 {
   intakeMotor.set(val);
-  System.out.println(intakeMotor.getOutputCurrent());
+  SmartDashboard.putNumber("Motor Speed", intakeMotor.get());
+  
 }
 }
+
