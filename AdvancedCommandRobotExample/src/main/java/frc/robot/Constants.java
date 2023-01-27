@@ -52,6 +52,7 @@ public final class Constants {
     //Elevator Commands
     public static final double ELEVATOR_UP_SPEED = 0.5;
     public static final double ELEVATOR_DOWN_SPEED = -0.5;
+    public static final int ELEVATOR_CURRENT_LIMIT = 40;
 
     //Elevator PID Setpoints
     public static final double ELEVATOR_SETPOINT = 10;
