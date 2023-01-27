@@ -61,8 +61,8 @@ public class RobotContainer {
     //m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
     m_CommandXboxController.button(5).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
     m_CommandXboxController.button(9).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
-    m_CommandXboxController.button(4).whileTrue(new Extend(Constants.ELEVATOR_UP_SPEED));
-    m_CommandXboxController.button(3).whileTrue(new Extend(Constants.ELEVATOR_DOWN_SPEED));
+    m_CommandXboxController.button(4).whileTrue(new ElevatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
+    m_CommandXboxController.button(3).whileTrue(new ElevatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(7).whileTrue(new Tilt(Constants.TILT_UP_SPEED));
     m_CommandXboxController.button(8).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
    }
