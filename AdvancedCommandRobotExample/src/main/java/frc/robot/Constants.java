@@ -22,13 +22,12 @@ public final class Constants {
 
     // DRIVE TRAIN MOTOR ID's
     public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 1;
-    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 12; //for testing, CAN ID was changed,
+    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 3; //for testing, CAN ID was changed,
     public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 14;     //make sure to have the proper ones later
     public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
 
     //INTAKE MOTOR ID'S
-    public static final int INTAKE_RIGHT_MOTOR = 21;
-    public static final int INTAKE_LEFT_MOTOR = 20;
+    public static final int INTAKE_MOTOR = 12;
 
     //ELEVATOR MOTOR ID'S
     public static final int ELEVATOR_RIGHT_MOTOR = 2;
@@ -53,7 +52,9 @@ public final class Constants {
     public static final double ELEVATOR_UP_SPEED = 0.5;
     public static final double ELEVATOR_DOWN_SPEED = -0.5;
 
-    //Elevator PID Setpoints
+    //PID Setpoints
+    public static final double MANIPULATOR_SETPOINT_FORWARD = 25;
+    public static final double MANIPULATOR_SETPOINT_BACKWARD = -25;
     public static final double ELEVATOR_SETPOINT = 10;
 
     //Thresholds 

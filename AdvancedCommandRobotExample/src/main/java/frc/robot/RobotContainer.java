@@ -19,6 +19,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ElevatorPIDCommand;
 import frc.robot.commands.Extend;
 import frc.robot.commands.Intake;
+import frc.robot.commands.ManipulatorPIDCommand;
 import frc.robot.commands.Tilt;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TimedAuto;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -38,7 +39,6 @@ public class RobotContainer {
   // Contollers Initalization
   public static XboxController driverController = new XboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
-
   // Timed Auto Initaliztion
   public static TimedAuto m_TimedAutoCommand = new TimedAuto();
 
@@ -58,8 +58,8 @@ public class RobotContainer {
     //leftBumper.onTrue(new IntakeWheels()).onFalse(m_TimedAutoCommand);
     //driverController.a().onTrue(wheels.test());
     //m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
-    m_CommandXboxController.button(5).whileTrue(new Intake(Constants.INTAKE_SPEED_FORWARD));
-    m_CommandXboxController.button(9).whileTrue(new Intake(Constants.INTAKE_SPEED_BACKWARD));
+    m_CommandXboxController.button(5).whileTrue(new ManipulatorPIDCommand(manipulator, Constants.MANIPULATOR_SETPOINT_FORWARD));
+    m_CommandXboxController.button(9).whileTrue(new ManipulatorPIDCommand(manipulator, Constants.MANIPULATOR_SETPOINT_BACKWARD));
     m_CommandXboxController.button(4).whileTrue(new Extend(Constants.ELEVATOR_UP_SPEED));
     m_CommandXboxController.button(3).whileTrue(new Extend(Constants.ELEVATOR_DOWN_SPEED));
     m_CommandXboxController.button(7).whileTrue(new Tilt(Constants.TILT_UP_SPEED));

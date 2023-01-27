@@ -7,32 +7,40 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.Manipulator;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ManipulatorPIDCommand extends PIDCommand {
   /** Creates a new ManipulatorPIDCommand. */
-  double setpoint;
-  public ManipulatorPIDCommand(double setpoint) {
+  Manipulator manipulator;
+  double newSetpoint;
+  public ManipulatorPIDCommand(Manipulator manipulator, double manipulatorSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // Returns current intake speed
-        () -> RobotContainer.manipulator.getSpeed(),
+        () -> manipulator.getSpeed(),
         // This should return the setpoint (can also be a constant)
-        () -> setpoint,
+        () -> 0,
         // This uses the output
         output -> {
-          RobotContainer.manipulator.set(output);
+          manipulator.set(output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.manipulator);
-    // Configure additional PID options by calling `getController` here.
-    getController().getSetpoint();
+    newSetpoint = manipulatorSetpoint;
+    this.manipulator = manipulator;
+    addRequirements(manipulator);
   }
-
+  @Override
+  public void execute(){
+      setSetpoint(newSetpoint);
+  }
+  public void setSetpoint(double setpoint) {
+    getController().setSetpoint(setpoint);
+    newSetpoint = setpoint;
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
