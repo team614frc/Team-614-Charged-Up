@@ -21,8 +21,8 @@ public class TiltSubsystem extends SubsystemBase {
 
   elevatorTopRightMotor.follow(elevatorTopLeftMotor);
 
-  elevatorTopRightMotor.setSmartCurrentLimit(40);
-  elevatorTopLeftMotor.setSmartCurrentLimit(40);
+  elevatorTopRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+  elevatorTopLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   }
   @Override
   public void periodic() {
