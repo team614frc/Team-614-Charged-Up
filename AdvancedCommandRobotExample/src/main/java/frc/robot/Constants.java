@@ -22,11 +22,14 @@ public final class Constants {
 
     // DRIVE TRAIN MOTORS
     public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
-    public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 12;
+    public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 3;
     public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
     public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 15;
     public static final int MOTOR_CURRENT_LIMIT = 40;
 
+    // INTAKE MOTORS
+    public static final int INTAKE_MOTOR = 12;
+    
     // Xbox Controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
 
