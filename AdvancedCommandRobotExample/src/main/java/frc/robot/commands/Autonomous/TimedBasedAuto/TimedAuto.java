@@ -6,13 +6,16 @@ package frc.robot.commands.Autonomous.TimedBasedAuto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-//import frc.robot.Constants;
+
+import frc.robot.Constants;
+
 
 import edu.wpi.first.wpilibj.Timer;
 
 public class TimedAuto extends CommandBase {
   /** Creates a new TimedAuto. */
   Timer arcadeDriveTimer = null; 
+
   double localSpeed; 
   double localRotation;
   double localEndTime;
@@ -23,6 +26,7 @@ public class TimedAuto extends CommandBase {
     localSpeed = speed;
     localRotation = rotation;
     localEndTime = endtime;
+
 
     addRequirements(RobotContainer.driveTrainSubsystem);
 
@@ -38,6 +42,7 @@ public class TimedAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     if (arcadeDriveTimer.get() <= localEndTime) { 
       RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
     }

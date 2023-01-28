@@ -6,6 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+//import frc.robot.subsystems.DriveTrainSubsystem;
+
 import frc.robot.Constants;
 
 public class ArcadeDrive extends CommandBase {
@@ -28,11 +32,16 @@ public class ArcadeDrive extends CommandBase {
     // Raw Speed
     double moveRawSpeed = RobotContainer.driverController.getLeftY();
     double rotateRawSpeed = RobotContainer.driverController.getRightX();
+
+    
     // Adjusted Speed
     double moveAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER*moveRawSpeed + Constants.ARCADE_DRIVE_MULTIPLIER*Math.pow(moveRawSpeed, Constants.POW_VALUE);
     double rotateAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER*rotateRawSpeed + Constants.ARCADE_DRIVE_MULTIPLIER*Math.pow(rotateRawSpeed, Constants.POW_VALUE);
+    //Uses an equation in order to get exact values for the amount value that we are getting from the left sitck.
+    
     // Arcade Drive
     RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
+    // Passes the adjusted movement values and rotation values
   }
 
   // Called once the command ends or is interrupted.

@@ -14,14 +14,17 @@ public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
 
   // Create Drivetrain Motor Variables
+
   CANSparkMax frontRightMotor = null;
   CANSparkMax backRightMotor = null;
   CANSparkMax frontLeftMotor = null;
   CANSparkMax backLeftMotor = null;
 
+
   // Create Differntial Drive Variables
   // Differential drive is used to call arcade drive using the motors. 
   DifferentialDrive differentialDrive = null;
+
 
   public DriveTrainSubsystem() {
 
@@ -43,7 +46,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     backRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     frontLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     backLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-
     // Create DifferentialDrive Object 
     differentialDrive = new DifferentialDrive(backLeftMotor, backRightMotor);
   }
@@ -51,7 +53,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
-
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
