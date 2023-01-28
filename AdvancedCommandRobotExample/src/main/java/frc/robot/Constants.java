@@ -21,11 +21,15 @@ public final class Constants {
     public static final int GLOBAL_INVERT = -1; 
 
     // DRIVE TRAIN MOTORS
-    public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 2;
-    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 3;
-    public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 4;
-    public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 5;
+    public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
+    public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 3;
+    public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
+    public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 15;
+    public static final int MOTOR_CURRENT_LIMIT = 40;
 
+    // INTAKE MOTORS
+    public static final int INTAKE_MOTOR = 12;
+    
     // Xbox Controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
 
@@ -35,6 +39,12 @@ public final class Constants {
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
+    public static final double AUTO_STAGE_2 = 7.0;
+    public static final double AUTO_STAGE_3 = 10.0;
+    public static final double AUTO_STAGE_4 = 11.0;
+    public static final double AUTO_DRIVE_SPEED = 0.5;
+    public static final double AUTO_REVERSE_SPEED = -0.5;
+    public static final double AUTO_ROTATE_SPEED = 0.0;
 
   public static class OperatorConstants {
    // public static final int kDriverControllerPort = 0;
