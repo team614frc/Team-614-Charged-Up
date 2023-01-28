@@ -9,21 +9,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class DriveForwards extends CommandBase {
+public class DriveDirection extends CommandBase {
   /** Creates a new DriveForward. */
   Timer arcadeDriveTimer = null; 
+  double localSpeed; 
+  double localRotation;
+  double localEndTime;
 
-  public DriveForwards () {
+  public DriveDirection (double speed, double rotation, double endtime) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveTrainSubsystem);
 
     arcadeDriveTimer = new Timer();
-    
+    localSpeed = speed;
+    localRotation = rotation;
+    localEndTime = endtime;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    arcadeDriveTimer.reset();
     arcadeDriveTimer.start();
   }
 
@@ -31,13 +37,18 @@ public class DriveForwards extends CommandBase {
   @Override
   public void execute() {
     // Drives the motors forward
- 
+    if (arcadeDriveTimer.get() <= localEndTime) {
+    RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
+  //Stops the motor and timer, then resets the timer.
   public void end(boolean interrupted) {
+    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
     arcadeDriveTimer.stop();
+    arcadeDriveTimer.reset();
   }
 
   // Returns true when the command should end.
