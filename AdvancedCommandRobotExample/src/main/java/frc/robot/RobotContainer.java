@@ -22,8 +22,9 @@ import frc.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
 //import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEngaged;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
 
 public class RobotContainer {
   // Encoder
@@ -34,13 +35,14 @@ public class RobotContainer {
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-  private final Command ChargedStationNotEngaged = new ChargeStationNotEngaged();
-  private final Command ScoreMobilityChargeStationNotEngaged = new ScoreMobilityChargeStationNotEngaged();
+
+  private final Command chargedStationNotEngaged = new ChargeStationNotEngaged();
+  private final Command scoreMobilityChargeStationEngaged = new ScoreMobilityChargeStationEngaged();
+  private final Command scoreMobilityChargeStationNotEngaged = new ScoreMobilityChargeStationNotEngaged();
 
   // Timed Auto Initaliztion
-
-
 
   public RobotContainer() {
     configureBindings();
@@ -48,20 +50,14 @@ public class RobotContainer {
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the autonomous command chooser
-    m_chooser.setDefaultOption("ChargeStationNotEngaged", ChargedStationNotEngaged);
-    m_chooser.addOption("ScoreMobilityChargeStationNotEngaged", ScoreMobilityChargeStationNotEngaged);
+    m_chooser.setDefaultOption("Charge_Station_Not_Engaged", chargedStationNotEngaged);
+    m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
+    m_chooser.addOption("Score_Mobility_Charge_Station_Not_Engaged", scoreMobilityChargeStationNotEngaged);
 
     // Put the chooser on the dashboard
     SmartDashboard.putData(m_chooser);
   }
 
-
-
-  public Command getAutonomousCommand() {
-    // Gets the selected autonomous command
-    return m_chooser.getSelected();
-
-  }
 
   private void configureBindings() {
 
@@ -79,4 +75,8 @@ public class RobotContainer {
     m_CommandXboxController.button(8).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
   }
 
+  public Command getAutonomousCommand() {
+    // Gets the selected autonomous command
+    return m_chooser.getSelected();
+  }
 }

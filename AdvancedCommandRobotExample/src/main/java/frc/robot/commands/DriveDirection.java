@@ -16,14 +16,14 @@ public class DriveDirection extends CommandBase {
   double localRotation;
   double localEndTime;
 
-  public DriveDirection (double speed, double rotation, double endtime) {
+  public DriveDirection (double speed, double rotation, double runtime) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveTrainSubsystem);
 
     arcadeDriveTimer = new Timer();
     localSpeed = speed;
     localRotation = rotation;
-    localEndTime = endtime;
+    localEndTime = runtime;
   }
 
   // Called when the command is initially scheduled.
@@ -54,6 +54,6 @@ public class DriveDirection extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return arcadeDriveTimer.get() <= localEndTime;
+    return arcadeDriveTimer.get() >= localEndTime;
   }
 }
