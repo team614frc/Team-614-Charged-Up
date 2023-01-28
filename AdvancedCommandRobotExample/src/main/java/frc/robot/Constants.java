@@ -20,23 +20,16 @@ public final class Constants {
     // GLOBAL INVERT
     public static final int GLOBAL_INVERT = -1; 
 
-    // DRIVE TRAIN MOTOR ID's
-    public static final int DRIVETRAIN_TOP_RIGHT_MOTOR = 1;
-    public static final int DRIVETRAIN_BOTTOM_RIGHT_MOTOR = 3; //for testing, CAN ID was changed,
-    public static final int DRIVETRAIN_TOP_LEFT_MOTOR = 14;     //make sure to have the proper ones later
-    public static final int DRIVETRAIN_BOTTOM_LEFT_MOTOR = 15;
 
-    //INTAKE MOTOR ID'S
-    public static final int INTAKE_MOTOR = 12; //new manipulator has only on motor, so changed the can ID for the intake motor
-                                               //to the new spark max that we corresponded to the intake
+    // DRIVE TRAIN MOTORS
+    public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
+    public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 3;
+    public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
+    public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 15;
+    public static final int MOTOR_CURRENT_LIMIT = 40;
 
-    //ELEVATOR MOTOR ID'S
-    public static final int ELEVATOR_RIGHT_MOTOR = 2;
-    public static final int ELEVATOR_LEFT_MOTOR = 13;
-
-    //TILT MOTOR ID'S
-    public static final int TILT_RIGHT_MOTOR = 22;
-    public static final int TILT_LEFT_MOTOR = 23;
+    // INTAKE MOTORS
+    public static final int INTAKE_MOTOR = 12;
     
     // Xbox Controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -44,6 +37,7 @@ public final class Constants {
     // Arcade Drive Commands
     public static final double ARCADE_DRIVE_MULTIPLIER = 0.5; 
     public static final int POW_VALUE = 3; 
+
 
     //Manipulator Commands
     public static final double INTAKE_SPEED_FORWARD = 1;
@@ -75,6 +69,7 @@ public final class Constants {
 
     // Timer Based Auto Variables
     public static final double RUN_INITAL_AUTO = 2.0; 
+
 
   public static class OperatorConstants {
    // public static final int kDriverControllerPort = 0;
