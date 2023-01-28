@@ -8,7 +8,7 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
-import frc.robot.subsystems.Manipulator;
+
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,7 +16,6 @@ import frc.robot.RobotContainer;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ManipulatorPIDCommand extends PIDCommand {
   /** Creates a new ManipulatorPIDCommand. */
-  double newSetpoint;
   public ManipulatorPIDCommand(double manipulatorSetpoint) {
     super(
         // The controller that the command will use
@@ -35,6 +34,6 @@ public class ManipulatorPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
