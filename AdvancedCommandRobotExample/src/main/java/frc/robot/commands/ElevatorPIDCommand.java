@@ -16,20 +16,19 @@ import frc.robot.RobotContainer;
 public class ElevatorPIDCommand extends PIDCommand {
   /** Creates a new ElevatorPIDCommand. */
   double elevatorSetpoint;
-  //Makes 3 setpoints for elevator subsystem to check if at certain height
+
+  // Makes 3 setpoints for elevator subsystem to check if at certain height
   public ElevatorPIDCommand(double elevatorSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // This should return the measurement
-        () -> RobotContainer.elevatorSubsystem.getHeight(),
+        RobotContainer.elevatorSubsystem::getHeight,
         // This should return the setpoint (can also be a constant)
-        () -> elevatorSetpoint,
+        elevatorSetpoint,
         // This uses the output
-        output -> {
-          // Use the output here
-          RobotContainer.elevatorSubsystem.set(output);
-        });
+        // Use the output here
+        RobotContainer.elevatorSubsystem::set);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.elevatorSubsystem);
     // Configure additional PID options by calling `getController` here.
