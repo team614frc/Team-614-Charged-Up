@@ -19,8 +19,8 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
                                                                 //might inverted based on the position of the motors (ask hardware)
-    elevatorRightMotor.setSmartCurrentLimit(40);
-    elevatorLeftMotor.setSmartCurrentLimit(40);
+    elevatorRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    elevatorLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
   }
   public void periodic() {
     //Called once per scheduler run

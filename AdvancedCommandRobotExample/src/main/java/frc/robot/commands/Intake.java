@@ -31,7 +31,7 @@ public double intakeSpeed;
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.STOP_MOTOR);
+    RobotContainer.manipulator.set(Constants.MOTOR_ZERO_SPEED);
   }
   //gets returned true when the command ends
   @Override

@@ -20,13 +20,13 @@ public class Manipulator extends SubsystemBase {
 
   public Manipulator(){
     intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
-    encoder = new Encoder(0, 1);
-    pdh = new PowerDistribution();
+    //encoder = new Encoder(0, 1);
+    //pdh = new PowerDistribution();
     /*We might not need the two motors for the gripper to follow each others movements in the future, as there is a possibility
     that we might need them to not match, in order to spin the game pieces onto their designated
     scoring locations*/
     
-    intakeMotor.setSmartCurrentLimit(40);
+    intakeMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
 }
 
 @Override

@@ -46,7 +46,7 @@ public class DriveDirection extends CommandBase {
   @Override
   //Stops the motor and timer, then resets the timer.
   public void end(boolean interrupted) {
-    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.MOTOR_ZERO_SPEED, Constants.MOTOR_ZERO_SPEED);
     arcadeDriveTimer.stop();
     arcadeDriveTimer.reset();
   }

@@ -36,7 +36,7 @@ double localRunTime;
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevatorSubsystem.set(Constants.MOTOR_ZERO_SPEED);
     TimedExtendTimer.stop();
     TimedExtendTimer.reset();
   }

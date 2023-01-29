@@ -19,7 +19,7 @@ package frc.robot;
 public final class Constants {
 
   // GLOBAL STOP MOTOR
-  public static final double STOP_MOTOR = 0.0;
+  public static final double MOTOR_ZERO_SPEED = 0.0;
 
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
@@ -37,6 +37,17 @@ public final class Constants {
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
 
+  // Xbox Controller Buttons
+  public static final int X_BUTTON = 3;
+  public static final int Y_BUTTON = 4;
+  public static final int LEFT_BUMPER = 5;
+  public static final int RIGHT_BUMPER = 6;
+  public static final int BACK_BUTTON = 7;
+  public static final int START_BUTTON = 8;
+  public static final int LEFT_STICK_PRESS = 9;
+  public static final int RIGHT_STICK_PRESS = 10;
+  
+  
   // Arcade Drive Commands
   public static final double ARCADE_DRIVE_MULTIPLIER = 0.5;
   public static final int POW_VALUE = 3;

@@ -34,7 +34,7 @@ public class TimedTilt extends CommandBase{
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevatorSubsystem.set(Constants.MOTOR_ZERO_SPEED);
     TimedTiltTimer.stop();
     TimedTiltTimer.reset();
   }

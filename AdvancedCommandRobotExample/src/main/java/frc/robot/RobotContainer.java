@@ -61,18 +61,12 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    // driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    // driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-
-    // leftBumper.onTrue(new IntakeWheels()).onFalse(m_TimedAutoCommand);
-    // driverController.a().onTrue(wheels.test());
-    // m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
-    m_CommandXboxController.button(5).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
-    m_CommandXboxController.button(9).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
-    m_CommandXboxController.button(4).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
-    m_CommandXboxController.button(3).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
-    m_CommandXboxController.button(7).whileTrue(new Tilt(Constants.TILT_UP_SPEED));
-    m_CommandXboxController.button(8).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
+    m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.BACK_BUTTON).whileTrue(new Tilt(Constants.TILT_UP_SPEED));
+    m_CommandXboxController.button(Constants.START_BUTTON).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
   }
 
   public Command getAutonomousCommand() {
