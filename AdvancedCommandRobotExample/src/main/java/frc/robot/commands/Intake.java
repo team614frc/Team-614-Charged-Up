@@ -10,9 +10,9 @@ import frc.robot.RobotContainer;
 
 public class Intake extends CommandBase{
 public double intakeSpeed;
-    public Intake(double x){
+    public Intake(double intakespeed){
         addRequirements(RobotContainer.manipulator);
-        intakeSpeed = x;
+        intakeSpeed = intakespeed;
     }
   
     @Override

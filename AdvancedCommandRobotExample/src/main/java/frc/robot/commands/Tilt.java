@@ -7,9 +7,9 @@ import frc.robot.RobotContainer;
 
 public class Tilt extends CommandBase{
     public double tiltSpeed;
-    public Tilt (double z) {
+    public Tilt (double tiltspeed) {
         addRequirements(RobotContainer.elevatorSubsystem);
-        tiltSpeed = z;
+        tiltSpeed = tiltspeed;
     }
     @Override
   public void initialize() {

@@ -11,9 +11,9 @@ import frc.robot.RobotContainer;
 public class Extend extends CommandBase {
 public double elevationSpeed;
 
-    public Extend (double y) {
+    public Extend (double elevationspeed) {
         addRequirements(RobotContainer.elevatorSubsystem);
-        elevationSpeed = y;
+        elevationSpeed = elevationspeed;
     }
 
     @Override
