@@ -14,7 +14,7 @@ double localRunTime;
 
 
     public TimedExtend (double elevationspeed, double runtime) {
-        addRequirements(RobotContainer.elevatorSubsystem);
+        addRequirements(RobotContainer.elevator);
 
         TimedExtendTimer = new Timer();
 
@@ -32,11 +32,11 @@ double localRunTime;
   @Override
   public void execute() {
     if (TimedExtendTimer.get() <= localRunTime)
-    RobotContainer.elevatorSubsystem.set(elevationSpeed);
+    RobotContainer.elevator.set(elevationSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
     TimedExtendTimer.stop();
     TimedExtendTimer.reset();
   }

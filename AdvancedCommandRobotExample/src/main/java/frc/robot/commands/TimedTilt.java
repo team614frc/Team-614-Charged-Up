@@ -13,7 +13,7 @@ public class TimedTilt extends CommandBase{
 
     public double tiltSpeed;
     public TimedTilt (double tiltspeed, double runtime) {
-        addRequirements(RobotContainer.elevatorSubsystem);
+        addRequirements(RobotContainer.elevator);
 
         TimedTiltTimer = new Timer();
 
@@ -30,11 +30,11 @@ public class TimedTilt extends CommandBase{
   @Override
   public void execute() {
     if (TimedTiltTimer.get() <= localRunTime)
-    RobotContainer.elevatorSubsystem.set(tiltSpeed);
+    RobotContainer.elevator.set(tiltSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
     TimedTiltTimer.stop();
     TimedTiltTimer.reset();
   }

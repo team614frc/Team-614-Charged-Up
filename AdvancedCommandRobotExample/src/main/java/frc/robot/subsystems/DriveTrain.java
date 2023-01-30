@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class DriveTrainSubsystem extends SubsystemBase {
+public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
 
   // Create Drivetrain Motor Variables
@@ -26,7 +26,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   DifferentialDrive differentialDrive = null;
 
 
-  public DriveTrainSubsystem() {
+  public DriveTrain() {
 
     // motor initalization
     frontRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_RIGHT_MOTOR, MotorType.kBrushless);

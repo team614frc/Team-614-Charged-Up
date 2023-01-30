@@ -4,16 +4,16 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.Elevator;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class Elevator extends SubsystemBase {
     /*Creates a new Elevation subsystem */ 
   CANSparkMax elevatorRightMotor = null;
   CANSparkMax elevatorLeftMotor = null;
 
-  public ElevatorSubsystem() {
+  public Elevator() {
     elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR, MotorType.kBrushless);
     elevatorLeftMotor = new CANSparkMax(Constants.ELEVATOR_LEFT_MOTOR, MotorType.kBrushless);
 

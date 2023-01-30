@@ -36,7 +36,7 @@ double localRunTime;
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.STOP_MOTOR);
+    RobotContainer.manipulator.set(Constants.STOP_MOTOR_SPEED);
     TimedIntakeTimer.stop();
     TimedIntakeTimer.reset();
   }

@@ -14,20 +14,18 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ManipulatorPIDCommand extends PIDCommand {
+public class ManipulatorPID extends PIDCommand {
   /** Creates a new ManipulatorPIDCommand. */
-  public ManipulatorPIDCommand(double manipulatorSetpoint) {
+  public ManipulatorPID(double manipulatorSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // Returns current intake speed
-        () -> RobotContainer.manipulator.getSpeed(),
+        RobotContainer.manipulator::getSpeed,
         // Could be used to hard code setpoint, but code requires two button presses that dictate setpoint
-        () -> manipulatorSetpoint,
+        manipulatorSetpoint,
         // This uses the output
-        output -> {
-          RobotContainer.manipulator.set(output);
-        });
+          RobotContainer.manipulator::set);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.manipulator);
   }

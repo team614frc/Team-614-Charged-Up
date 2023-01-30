@@ -18,7 +18,7 @@ public class DriveDirection extends CommandBase {
 
   public DriveDirection (double speed, double rotation, double runtime) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.driveTrainSubsystem);
+    addRequirements(RobotContainer.driveTrain);
 
     arcadeDriveTimer = new Timer();
     localSpeed = speed;
@@ -38,7 +38,7 @@ public class DriveDirection extends CommandBase {
   public void execute() {
     // Drives the motors forward
     if (arcadeDriveTimer.get() <= localEndTime) {
-    RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
+    RobotContainer.driveTrain.arcadeDrive(localSpeed, localRotation);
     }
   }
 
@@ -46,7 +46,7 @@ public class DriveDirection extends CommandBase {
   @Override
   //Stops the motor and timer, then resets the timer.
   public void end(boolean interrupted) {
-    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
+    RobotContainer.driveTrain.arcadeDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
     arcadeDriveTimer.stop();
     arcadeDriveTimer.reset();
   }

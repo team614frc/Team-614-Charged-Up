@@ -34,7 +34,7 @@ public void periodic() {
   // This method will be called once per scheduler run
   //Periodically gets current motor is giving off, when the values exceeds the threshold specified, motors stop
 //if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
-  //intakeMotor.set(Constants.STOP_MOTOR);
+  //intakeMotor.set(Constants.STOP_MOTOR_SPEED);
 
 }
 //Returns rate of motor

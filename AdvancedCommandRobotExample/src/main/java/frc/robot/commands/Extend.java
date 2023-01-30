@@ -12,7 +12,7 @@ public class Extend extends CommandBase {
 public double elevationSpeed;
 
     public Extend (double y) {
-        addRequirements(RobotContainer.elevatorSubsystem);
+        addRequirements(RobotContainer.elevator);
         elevationSpeed = y;
     }
 
@@ -27,11 +27,11 @@ public double elevationSpeed;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.elevatorSubsystem.set(elevationSpeed);
+    RobotContainer.elevator.set(elevationSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
   }
   //gets returned true when the command ends
   @Override

@@ -13,24 +13,24 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ElevatorPIDCommand extends PIDCommand {
+public class ElevatorPID extends PIDCommand {
   /** Creates a new ElevatorPIDCommand. */
   double elevatorSetpoint;
 
   // Makes 3 setpoints for elevator subsystem to check if at certain height
-  public ElevatorPIDCommand(double elevatorSetpoint) {
+  public ElevatorPID(double elevatorSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
         // This should return the measurement
-        RobotContainer.elevatorSubsystem::getHeight,
+        RobotContainer.elevator::getHeight,
         // This should return the setpoint (can also be a constant)
         elevatorSetpoint,
         // This uses the output
         // Use the output here
-        RobotContainer.elevatorSubsystem::set);
+        RobotContainer.elevator::set);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.elevatorSubsystem);
+    addRequirements(RobotContainer.elevator);
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.1);
   }

@@ -15,7 +15,7 @@ public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
  
   public ArcadeDrive() {
-    addRequirements(RobotContainer.driveTrainSubsystem);
+    addRequirements(RobotContainer.driveTrain);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -39,14 +39,14 @@ public class ArcadeDrive extends CommandBase {
     //Uses an equation in order to get exact values for the amount value that we are getting from the left sitck.
     
     // Arcade Drive
-    RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
+    RobotContainer.driveTrain.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
     // Passes the adjusted movement values and rotation values
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.STOP_MOTOR, Constants.STOP_MOTOR);
+    RobotContainer.driveTrain.arcadeDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
   }
 
   // Returns true when the command should end.

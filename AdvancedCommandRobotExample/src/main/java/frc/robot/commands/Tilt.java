@@ -8,7 +8,7 @@ import frc.robot.RobotContainer;
 public class Tilt extends CommandBase{
     public double tiltSpeed;
     public Tilt (double z) {
-        addRequirements(RobotContainer.elevatorSubsystem);
+        addRequirements(RobotContainer.elevator);
         tiltSpeed = z;
     }
     @Override
@@ -22,11 +22,11 @@ public class Tilt extends CommandBase{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.elevatorSubsystem.set(tiltSpeed);
+    RobotContainer.elevator.set(tiltSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevatorSubsystem.set(Constants.STOP_MOTOR);
+    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
   }
   //gets returned true when the command ends
   @Override

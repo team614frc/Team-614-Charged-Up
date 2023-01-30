@@ -19,7 +19,7 @@ package frc.robot;
 public final class Constants {
 
   // GLOBAL STOP MOTOR
-  public static final double STOP_MOTOR = 0.0;
+  public static final double STOP_MOTOR_SPEED = 0.0;
 
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
