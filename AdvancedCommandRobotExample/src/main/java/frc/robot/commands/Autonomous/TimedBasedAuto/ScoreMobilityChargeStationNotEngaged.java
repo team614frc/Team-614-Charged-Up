@@ -5,10 +5,10 @@
 package frc.robot.commands.Autonomous.TimedBasedAuto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.DriveDirection;
-import frc.robot.commands.TimedExtend;
-import frc.robot.commands.TimedIntake;
-import frc.robot.commands.TimedTilt;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.DriveDirection;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedExtend;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedIntake;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedTilt;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

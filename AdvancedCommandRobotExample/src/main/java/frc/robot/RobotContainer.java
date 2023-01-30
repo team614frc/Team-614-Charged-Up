@@ -13,9 +13,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ElevatorPIDCommand;
-import frc.robot.commands.ManipulatorPIDCommand;
-import frc.robot.commands.Tilt;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Manipulator;
@@ -25,6 +22,9 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
 //import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEngaged;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
+import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
+import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
+import frc.robot.commands.SimpleCommands.Tilt;
 
 public class RobotContainer {
   // Encoder
