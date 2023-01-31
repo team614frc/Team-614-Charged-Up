@@ -16,6 +16,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Manipulator;
+import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
@@ -24,6 +25,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEn
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
+import frc.robot.commands.PIDCommand.TiltPID;
 import frc.robot.commands.SimpleCommands.Tilt;
 
 public class RobotContainer {
@@ -35,6 +37,7 @@ public class RobotContainer {
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -60,13 +63,11 @@ public class RobotContainer {
 
 
   private void configureBindings() {
-
     m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
     m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
-    m_CommandXboxController.button(Constants.BACK_BUTTON).whileTrue(new Tilt(Constants.TILT_UP_SPEED));
-    m_CommandXboxController.button(Constants.START_BUTTON).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
+    m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());
   }
 
   public Command getAutonomousCommand() {

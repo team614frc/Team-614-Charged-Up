@@ -32,7 +32,7 @@ public final class Constants {
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 12;
+  public static final int INTAKE_MOTOR = 20; //12
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -75,6 +75,8 @@ public final class Constants {
   // Tilt Commands
   public static final double TILT_UP_SPEED = 0.5;
   public static final double TILT_DOWN_SPEED = -0.5;
+  public static final double TILT_DOWN_SETPOINT = 0;
+  public static final double TILT_UP_SETPOINT = 90;
 
   // PID Values
   public static final double kP = 0.01;
@@ -91,12 +93,12 @@ public final class Constants {
   public static final double AUTO_ROTATE_SPEED = 0.0;
 
   // ELEVATOR MOTOR ID'S
-  public static final int ELEVATOR_RIGHT_MOTOR = 2;
-  public static final int ELEVATOR_LEFT_MOTOR = 13;
+  public static final int ELEVATOR_RIGHT_MOTOR = 2; //2
+  public static final int ELEVATOR_LEFT_MOTOR = 21; //13
 
   // TILT MOTOR ID'S
-  public static final int TILT_RIGHT_MOTOR = 22;
-  public static final int TILT_LEFT_MOTOR = 23;
+  public static final int TILT_RIGHT_MOTOR = 12;
+  public static final int TILT_LEFT_MOTOR = 13;
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
