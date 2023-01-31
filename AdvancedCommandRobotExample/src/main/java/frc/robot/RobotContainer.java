@@ -26,7 +26,6 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNo
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
-import frc.robot.commands.SimpleCommands.Tilt;
 
 public class RobotContainer {
   // Encoder

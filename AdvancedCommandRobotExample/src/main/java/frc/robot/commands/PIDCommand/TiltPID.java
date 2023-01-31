@@ -18,7 +18,7 @@ public class TiltPID extends PIDCommand {
   /** Creates a new TiltPID. */
   static double tiltSetpoint;
 
-  public TiltPID() {
+  public TiltPID() { //this tries to set two setpoints to one button
     super(
         // The controller that the command will use
         new PIDController(Constants.kP, Constants.kI, Constants.kD),
