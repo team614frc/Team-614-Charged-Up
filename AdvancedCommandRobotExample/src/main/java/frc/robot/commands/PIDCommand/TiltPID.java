@@ -16,7 +16,8 @@ import frc.robot.RobotContainer;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TiltPID extends PIDCommand {
   /** Creates a new TiltPID. */
-  static double tiltSetpoint = 0;
+  static double tiltSetpoint;
+
   public TiltPID() {
     super(
         // The controller that the command will use
@@ -24,8 +25,8 @@ public class TiltPID extends PIDCommand {
         // This should return the measurement
         RobotContainer.tiltSubsystem::getHeight,
         // This should return the setpoint (can also be a constant)
-        tiltSetpoint = (RobotContainer.tiltSubsystem.getHeight() > Constants.TILT_DOWN_SETPOINT) ?
-        Constants.TILT_DOWN_SETPOINT : Constants.TILT_UP_SETPOINT,
+        RobotContainer.tiltSubsystem.getHeight() == 0 ?
+        Constants.TILT_UP_SETPOINT : Constants.TILT_DOWN_SETPOINT,
         // This uses the output
         RobotContainer.tiltSubsystem::set);
     // Use addRequirements() here to declare subsystem dependencies.
