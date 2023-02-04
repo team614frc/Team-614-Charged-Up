@@ -19,7 +19,7 @@ public class ManipulatorPIDCommand extends PIDCommand {
   public ManipulatorPIDCommand(double manipulatorSetpoint) {
     super(
         // The controller that the command will use
-        new PIDController(Constants.kP, Constants.kI, Constants.kD),
+        new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // Returns current intake speed
         RobotContainer.manipulator::getSpeed,
         // Could be used to hard code setpoint, but code requires two button presses that dictate setpoint
