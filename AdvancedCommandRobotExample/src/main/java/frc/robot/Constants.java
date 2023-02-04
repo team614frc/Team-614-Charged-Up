@@ -28,11 +28,11 @@ public final class Constants {
   public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
   public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 3;
   public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
-  public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 15;
+  public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 13;
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 20; //12
+  public static final int INTAKE_MOTOR = 12; 
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -98,12 +98,12 @@ public final class Constants {
   public static final double AUTO_ROTATE_SPEED = 0.0;
 
   // ELEVATOR MOTOR ID'S
-  public static final int ELEVATOR_RIGHT_MOTOR = 2; //2
-  public static final int ELEVATOR_LEFT_MOTOR = 21; //13
+  public static final int ELEVATOR_RIGHT_MOTOR = 50; //2
+  public static final int ELEVATOR_LEFT_MOTOR = 2; //13
 
   // TILT MOTOR ID'S
-  public static final int TILT_RIGHT_MOTOR = 12;
-  public static final int TILT_LEFT_MOTOR = 13;
+  public static final int TILT_RIGHT_MOTOR = 51;
+  public static final int TILT_LEFT_MOTOR = 12;
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
