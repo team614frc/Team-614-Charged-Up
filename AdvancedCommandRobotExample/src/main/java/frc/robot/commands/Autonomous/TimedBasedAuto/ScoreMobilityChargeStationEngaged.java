@@ -20,6 +20,11 @@ public class ScoreMobilityChargeStationEngaged extends SequentialCommandGroup {
   public ScoreMobilityChargeStationEngaged() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TimedTilt(0.5, 1), new TimedExtend(0.5, 1), new TimedIntake(0.5, 5), new TimedTilt(-0.5, 1), new DriveDirection(0.5, 0, 2), new DriveDirection(-0.5, 0, 1));
+    addCommands(new TimedTilt(0.5, 1),
+     new TimedExtend(0.5, 1),
+      new TimedIntake(0.5, 5),
+       new TimedTilt(-0.5, 1),
+        new DriveDirection(0.5, 0, 2),
+         new DriveDirection(-0.5, 0, 1));
   }
 }

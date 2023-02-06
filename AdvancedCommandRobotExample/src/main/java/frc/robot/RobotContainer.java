@@ -23,6 +23,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
 //import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEngaged;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
+import frc.robot.commands.Autonomous.TimedBasedAuto.test;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
@@ -43,6 +44,7 @@ public class RobotContainer {
   private final Command chargedStationNotEngaged = new ChargeStationNotEngaged();
   private final Command scoreMobilityChargeStationEngaged = new ScoreMobilityChargeStationEngaged();
   private final Command scoreMobilityChargeStationNotEngaged = new ScoreMobilityChargeStationNotEngaged();
+  private final Command test = new test();
 
   // Timed Auto Initaliztion
 
@@ -55,6 +57,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Charge_Station_Not_Engaged", chargedStationNotEngaged);
     m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
     m_chooser.addOption("Score_Mobility_Charge_Station_Not_Engaged", scoreMobilityChargeStationNotEngaged);
+    m_chooser.addOption("test", test);
 
     // Put the chooser on the dashboard
     SmartDashboard.putData(m_chooser);
