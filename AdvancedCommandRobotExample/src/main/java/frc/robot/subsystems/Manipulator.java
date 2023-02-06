@@ -35,7 +35,7 @@ public void periodic() {
   //Periodically gets current motor is giving off, when the values exceeds the threshold specified, motors stop
 //if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
   //intakeMotor.set(Constants.STOP_MOTOR);
-
+  
 }
 //Returns rate of motor
 public double getSpeed()

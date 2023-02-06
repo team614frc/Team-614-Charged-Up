@@ -17,12 +17,12 @@ public class TiltSubsystem extends SubsystemBase {
   CANSparkMax tiltLeftMotor = null;
 
   public TiltSubsystem() {
-  tiltRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
+  //tiltRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
   tiltLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
 
   //tiltRightMotor.follow(tiltLeftMotor);
 
-  tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+  //tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   tiltLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   }
   @Override

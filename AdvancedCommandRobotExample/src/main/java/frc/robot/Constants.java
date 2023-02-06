@@ -20,6 +20,7 @@ public final class Constants {
 
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
+  public static final double MOTOR_REST_BACK = -0.05;
 
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
@@ -66,11 +67,11 @@ public final class Constants {
   public static final double ELEVATOR_SETPOINT2 = 0;
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SETPOINT = 25; // for testing
-  public static final double MANIPULATOR_SETPOINT2 = -10;
+  public static final double MANIPULATOR_SETPOINT = -30; // for testing
+  public static final double MANIPULATOR_SETPOINT2 = 25;
 
   // Thresholds
-  public static final double MANIPULATOR_THRESHOLD = 10;
+  public static final double MANIPULATOR_THRESHOLD = 5;
 
   // Tilt Commands
   public static final double TILT_UP_SPEED = 0.5;
@@ -103,7 +104,7 @@ public final class Constants {
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 51;
-  public static final int TILT_LEFT_MOTOR = 12;
+  public static final int TILT_LEFT_MOTOR = 15;
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;

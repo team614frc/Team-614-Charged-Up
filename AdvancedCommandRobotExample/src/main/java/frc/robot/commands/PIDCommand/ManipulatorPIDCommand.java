@@ -8,7 +8,7 @@ package frc.robot.commands.PIDCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
-
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -31,8 +31,14 @@ public class ManipulatorPIDCommand extends PIDCommand {
     addRequirements(RobotContainer.manipulator);
   }
   // Returns true when the command should end.
+
+  public void end(boolean interrupted) {
+    RobotContainer.manipulator.set(Constants.MOTOR_REST_BACK);
+  }
   @Override
   public boolean isFinished() {
     return false;
   }
+
+
 }
