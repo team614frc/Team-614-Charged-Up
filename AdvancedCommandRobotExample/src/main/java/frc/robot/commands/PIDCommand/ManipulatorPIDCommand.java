@@ -14,9 +14,9 @@ import frc.robot.RobotContainer;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ManipulatorPID extends PIDCommand {
+public class ManipulatorPIDCommand extends PIDCommand {
   /** Creates a new ManipulatorPIDCommand. */
-  public ManipulatorPID(double manipulatorSetpoint) {
+  public ManipulatorPIDCommand(double manipulatorSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
@@ -25,10 +25,7 @@ public class ManipulatorPID extends PIDCommand {
         // Could be used to hard code setpoint, but code requires two button presses that dictate setpoint
         manipulatorSetpoint,
         // This uses the output
-<<<<<<<< HEAD:AdvancedCommandRobotExample/src/main/java/frc/robot/commands/ManipulatorPID.java
-========
         
->>>>>>>> df3368177b68cf23009bfd45b21fad6d7d1e796f:AdvancedCommandRobotExample/src/main/java/frc/robot/commands/PIDCommand/ManipulatorPIDCommand.java
           RobotContainer.manipulator::set);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.manipulator);

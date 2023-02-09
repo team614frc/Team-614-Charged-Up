@@ -4,23 +4,23 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.ElevatorSubsystem;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Elevator extends SubsystemBase {
+public class ElevatorSubsystem extends SubsystemBase {
     /*Creates a new Elevation subsystem */ 
   CANSparkMax elevatorRightMotor = null;
   CANSparkMax elevatorLeftMotor = null;
 
-  public Elevator() {
-    elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR, MotorType.kBrushless);
+  public ElevatorSubsystem() {
+    //elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR, MotorType.kBrushless);
     elevatorLeftMotor = new CANSparkMax(Constants.ELEVATOR_LEFT_MOTOR, MotorType.kBrushless);
 
-    elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
+    //elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
                                                                 //might inverted based on the position of the motors (ask hardware)
-    elevatorRightMotor.setSmartCurrentLimit(40);
-    elevatorLeftMotor.setSmartCurrentLimit(40);
+    //elevatorRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    elevatorLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
   }
   public void periodic() {
     //Called once per scheduler run

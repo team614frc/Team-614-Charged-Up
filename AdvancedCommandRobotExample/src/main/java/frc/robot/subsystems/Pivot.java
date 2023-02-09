@@ -4,36 +4,31 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.TiltSubsystem;
+import frc.robot.subsystems.Pivot;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class TiltSubsystem extends SubsystemBase {
+public class Pivot extends SubsystemBase {
   /** Creates a new TiltSubsystem. */
-  CANSparkMax tiltRightMotor = null;
-  CANSparkMax tiltLeftMotor = null;
+  CANSparkMax elevatorTopRightMotor = null;
+  CANSparkMax elevatorTopLeftMotor = null;
 
-  public TiltSubsystem() {
-  tiltRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
-  tiltLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
+  public Pivot() {
+  elevatorTopRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
+  elevatorTopLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
 
-  tiltRightMotor.follow(tiltLeftMotor);
+  elevatorTopRightMotor.follow(elevatorTopLeftMotor);
 
-  //tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
-  tiltLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+  elevatorTopRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+  elevatorTopLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public double getHeight() {
-    SmartDashboard.putNumber("Position is", tiltLeftMotor.getEncoder().getPosition());
-    return tiltLeftMotor.getEncoder().getPosition();
-  }
   public void set(double val){
-    tiltLeftMotor.set(val);
+    elevatorTopLeftMotor.set(val);
   }
 }
