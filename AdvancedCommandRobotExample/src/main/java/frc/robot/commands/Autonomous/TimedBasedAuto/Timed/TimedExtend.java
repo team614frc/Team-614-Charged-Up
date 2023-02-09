@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Autonomous.TimedBasedAuto.Timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -14,7 +14,7 @@ double localRunTime;
 
 
     public TimedExtend (double elevationspeed, double runtime) {
-        addRequirements(RobotContainer.elevator);
+        addRequirements(RobotContainer.elevatorSubsystem);
 
         TimedExtendTimer = new Timer();
 
@@ -32,11 +32,11 @@ double localRunTime;
   @Override
   public void execute() {
     if (TimedExtendTimer.get() <= localRunTime)
-    RobotContainer.elevator.set(elevationSpeed);
+    RobotContainer.elevatorSubsystem.set(elevationSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
+    RobotContainer.elevatorSubsystem.set(Constants.MOTOR_ZERO_SPEED);
     TimedExtendTimer.stop();
     TimedExtendTimer.reset();
   }

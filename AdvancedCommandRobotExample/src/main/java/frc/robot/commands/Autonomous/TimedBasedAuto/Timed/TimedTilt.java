@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Autonomous.TimedBasedAuto.Timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,7 +13,7 @@ public class TimedTilt extends CommandBase{
 
     public double tiltSpeed;
     public TimedTilt (double tiltspeed, double runtime) {
-        addRequirements(RobotContainer.elevator);
+        addRequirements(RobotContainer.elevatorSubsystem);
 
         TimedTiltTimer = new Timer();
 
@@ -30,11 +30,11 @@ public class TimedTilt extends CommandBase{
   @Override
   public void execute() {
     if (TimedTiltTimer.get() <= localRunTime)
-    RobotContainer.elevator.set(tiltSpeed);
+    RobotContainer.elevatorSubsystem.set(tiltSpeed);
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.elevator.set(Constants.STOP_MOTOR_SPEED);
+    RobotContainer.elevatorSubsystem.set(Constants.MOTOR_ZERO_SPEED);
     TimedTiltTimer.stop();
     TimedTiltTimer.reset();
   }

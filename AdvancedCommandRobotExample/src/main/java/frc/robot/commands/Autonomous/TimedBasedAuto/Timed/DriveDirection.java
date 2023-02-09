@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Autonomous.TimedBasedAuto.Timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -18,7 +18,7 @@ public class DriveDirection extends CommandBase {
 
   public DriveDirection (double speed, double rotation, double runtime) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.driveTrain);
+    addRequirements(RobotContainer.driveTrainSubsystem);
 
     arcadeDriveTimer = new Timer();
     localSpeed = speed;
@@ -38,7 +38,7 @@ public class DriveDirection extends CommandBase {
   public void execute() {
     // Drives the motors forward
     if (arcadeDriveTimer.get() <= localEndTime) {
-    RobotContainer.driveTrain.arcadeDrive(localSpeed, localRotation);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(localSpeed, localRotation);
     }
   }
 
@@ -46,7 +46,7 @@ public class DriveDirection extends CommandBase {
   @Override
   //Stops the motor and timer, then resets the timer.
   public void end(boolean interrupted) {
-    RobotContainer.driveTrain.arcadeDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.MOTOR_ZERO_SPEED, Constants.MOTOR_ZERO_SPEED);
     arcadeDriveTimer.stop();
     arcadeDriveTimer.reset();
   }

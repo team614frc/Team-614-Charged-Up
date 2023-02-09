@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -57,6 +58,25 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
   }
+
+  //Returns rate of motor
+public double getPosition(){
+  double positionAverage = backLeftMotor.getEncoder().getPosition() + backRightMotor.getEncoder().getPosition();
+  return positionAverage / 2;
+}
+public void setSpeed(double val){
+  backRightMotor.set(val);
+  backLeftMotor.set(val);
+}
+public double rotateRight(double val){
+  backRightMotor.set(-1*val);
+  backLeftMotor.set(val);
+  return Math.abs(val);
+}
+public double rotateLeft(double val){
+  backRightMotor.set(val);
+  backLeftMotor.set(-1*val);
+  return Math.abs(val);
+}
 }

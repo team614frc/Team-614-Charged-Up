@@ -15,7 +15,7 @@ public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
  
   public ArcadeDrive() {
-    addRequirements(RobotContainer.driveTrain);
+    addRequirements(RobotContainer.driveTrainSubsystem);
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,18 +35,18 @@ public class ArcadeDrive extends CommandBase {
     
     // Adjusted Speed
     double moveAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER*moveRawSpeed + Constants.ARCADE_DRIVE_MULTIPLIER*Math.pow(moveRawSpeed, Constants.POW_VALUE);
-    double rotateAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER*rotateRawSpeed + Constants.ARCADE_DRIVE_MULTIPLIER*Math.pow(rotateRawSpeed, Constants.POW_VALUE);
+    double rotateAdjustedSpeed = -(Constants.ARCADE_DRIVE_MULTIPLIER*rotateRawSpeed + Constants.ARCADE_DRIVE_MULTIPLIER*Math.pow(rotateRawSpeed, Constants.POW_VALUE));
     //Uses an equation in order to get exact values for the amount value that we are getting from the left sitck.
     
     // Arcade Drive
-    RobotContainer.driveTrain.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
     // Passes the adjusted movement values and rotation values
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.driveTrain.arcadeDrive(Constants.STOP_MOTOR_SPEED, Constants.STOP_MOTOR_SPEED);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(Constants.MOTOR_ZERO_SPEED, Constants.MOTOR_ZERO_SPEED);
   }
 
   // Returns true when the command should end.

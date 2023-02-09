@@ -5,10 +5,10 @@
 package frc.robot.commands.Autonomous.TimedBasedAuto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.DriveDirection;
-import frc.robot.commands.TimedExtend;
-import frc.robot.commands.TimedIntake;
-import frc.robot.commands.TimedTilt;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.DriveDirection;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedExtend;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedIntake;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Timed.TimedTilt;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -18,6 +18,11 @@ public class ScoreMobilityChargeStationNotEngaged extends SequentialCommandGroup
   public ScoreMobilityChargeStationNotEngaged() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TimedTilt(0.5, 1), new TimedExtend(0.5, 1), new TimedIntake(0.5, 5), new TimedTilt(-0.5, 1), new DriveDirection(0.5, 0, 2), new DriveDirection(-0.5, 0, 1));
+    addCommands(new TimedTilt(0.5, 1),
+     new TimedExtend(0.5, 1),
+      new TimedIntake(0.5, 5),
+       new TimedTilt(-0.5, 1),
+       new DriveDirection(0.5, 0, 2),
+        new DriveDirection(-0.5, 0, 1));
   }
 }

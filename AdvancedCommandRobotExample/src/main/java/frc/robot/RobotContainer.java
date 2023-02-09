@@ -13,45 +13,51 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ElevatorPID;
-import frc.robot.commands.ManipulatorPID;
-import frc.robot.commands.Tilt;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEngaged;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Manipulator;
+import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationNotEngaged;
+//import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationEngaged;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNotEngaged;
+import frc.robot.commands.Autonomous.TimedBasedAuto.test;
+import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
+import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
+import frc.robot.commands.PIDCommand.TiltPID;
 
 public class RobotContainer {
   // Encoder
   // public static Encoder elevatorEncoder = new Encoder(0, 1);
   // Subsystem Initalization
-  public static DriveTrain driveTrain = new DriveTrain();
+  public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
   public static Manipulator manipulator = new Manipulator();
-  public static Elevator elevator = new Elevator();
+  public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   private final Command chargedStationNotEngaged = new ChargeStationNotEngaged();
   private final Command scoreMobilityChargeStationEngaged = new ScoreMobilityChargeStationEngaged();
   private final Command scoreMobilityChargeStationNotEngaged = new ScoreMobilityChargeStationNotEngaged();
+  private final Command test = new test();
 
   // Timed Auto Initaliztion
 
   public RobotContainer() {
     configureBindings();
     // Calling Arcade Drive Comment
-    driveTrain.setDefaultCommand(new ArcadeDrive());
+    driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the autonomous command chooser
     m_chooser.setDefaultOption("Charge_Station_Not_Engaged", chargedStationNotEngaged);
     m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
     m_chooser.addOption("Score_Mobility_Charge_Station_Not_Engaged", scoreMobilityChargeStationNotEngaged);
+    m_chooser.addOption("test", test);
 
     // Put the chooser on the dashboard
     SmartDashboard.putData(m_chooser);
@@ -59,19 +65,12 @@ public class RobotContainer {
 
 
   private void configureBindings() {
-
-    // driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    // driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-
-    // leftBumper.onTrue(new IntakeWheels()).onFalse(m_TimedAutoCommand);
-    // driverController.a().onTrue(wheels.test());
-    // m_CommandXboxController.leftBumper().onTrue(new IntakeWheels());
-    m_CommandXboxController.button(5).whileTrue(new ManipulatorPID(Constants.MANIPULATOR_SETPOINT));
-    m_CommandXboxController.button(9).whileTrue(new ManipulatorPID(Constants.MANIPULATOR_SETPOINT2));
-    m_CommandXboxController.button(4).whileTrue(new ElevatorPID(Constants.ELEVATOR_SETPOINT));
-    m_CommandXboxController.button(3).whileTrue(new ElevatorPID(Constants.ELEVATOR_SETPOINT2));
-    m_CommandXboxController.button(7).whileTrue(new Tilt(Constants.TILT_UP_SPEED));
-    m_CommandXboxController.button(8).whileTrue(new Tilt(Constants.TILT_DOWN_SPEED));
+    m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID(Constants.TILT_UP_SETPOINT));
+    m_CommandXboxController.button(Constants.RIGHT_STICK_PRESS).whileTrue(new TiltPID(Constants.TILT_DOWN_SETPOINT));
   }
 
   public Command getAutonomousCommand() {

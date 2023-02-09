@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.SimpleCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -10,9 +10,9 @@ import frc.robot.RobotContainer;
 
 public class Intake extends CommandBase{
 public double intakeSpeed;
-    public Intake(double x){
+    public Intake(double intakespeed){
         addRequirements(RobotContainer.manipulator);
-        intakeSpeed = x;
+        intakeSpeed = intakespeed;
     }
   
     @Override
@@ -31,7 +31,7 @@ public double intakeSpeed;
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.STOP_MOTOR_SPEED);
+    RobotContainer.manipulator.set(Constants.MOTOR_ZERO_SPEED);
   }
   //gets returned true when the command ends
   @Override

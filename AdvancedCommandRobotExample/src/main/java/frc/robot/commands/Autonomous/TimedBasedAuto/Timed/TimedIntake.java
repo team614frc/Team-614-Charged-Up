@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Autonomous.TimedBasedAuto.Timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -36,7 +36,7 @@ double localRunTime;
   }
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.STOP_MOTOR_SPEED);
+    RobotContainer.manipulator.set(Constants.MOTOR_ZERO_SPEED);
     TimedIntakeTimer.stop();
     TimedIntakeTimer.reset();
   }
