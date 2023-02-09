@@ -17,8 +17,7 @@ public class Elevator extends SubsystemBase {
     elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR, MotorType.kBrushless);
     elevatorLeftMotor = new CANSparkMax(Constants.ELEVATOR_LEFT_MOTOR, MotorType.kBrushless);
 
-    elevatorRightMotor.follow(elevatorLeftMotor, false); //important make sure to test out
-                                                                //might inverted based on the position of the motors (ask hardware)
+    elevatorRightMotor.follow(elevatorLeftMotor, false);
     elevatorRightMotor.setSmartCurrentLimit(40);
     elevatorLeftMotor.setSmartCurrentLimit(40);
   }

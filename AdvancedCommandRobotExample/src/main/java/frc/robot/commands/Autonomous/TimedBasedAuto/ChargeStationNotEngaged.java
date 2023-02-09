@@ -15,5 +15,4 @@ public class ChargeStationNotEngaged extends SequentialCommandGroup {
   public ChargeStationNotEngaged() {
     addCommands(new DriveDirection(0.5, 0, 1));
   }
-  
 }

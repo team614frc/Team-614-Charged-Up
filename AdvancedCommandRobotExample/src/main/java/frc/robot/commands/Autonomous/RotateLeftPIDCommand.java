@@ -15,19 +15,17 @@ import frc.robot.RobotContainer;
 public class RotateLeftPIDCommand extends PIDCommand {
   /** Creates a new PositionPID. */
 
-  double rotationSetpoint;
-
   public RotateLeftPIDCommand (double rotationSetpoint) {
     super(
-        // The controller that the command will use
+
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
-        // This should return the measurement
+
         RobotContainer.driveTrainSubsystem::getPosition,
-        // This should return the setpoint (can also be a constant)
+
         rotationSetpoint,
-        // This uses the output)
+
         RobotContainer.driveTrainSubsystem::rotateLeft);
-        // Use addRequirements() here to declare subsystem dependencies.
+
     addRequirements(RobotContainer.driveTrainSubsystem);
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.1);
@@ -36,6 +34,6 @@ public class RotateLeftPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+     return getController().atSetpoint();
   }
 }

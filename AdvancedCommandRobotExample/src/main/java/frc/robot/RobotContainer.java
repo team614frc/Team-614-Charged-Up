@@ -4,10 +4,6 @@
 
 package frc.robot;
 
-
-
-//import java.sql.Time;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -26,11 +22,10 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreMobilityChargeStationNo
 import frc.robot.commands.Autonomous.TimedBasedAuto.test;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
+// import frc.robot.commands.PIDCommand.TiltPID;
 import frc.robot.commands.PIDCommand.TiltPID;
 
 public class RobotContainer {
-  // Encoder
-  // public static Encoder elevatorEncoder = new Encoder(0, 1);
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
@@ -46,23 +41,21 @@ public class RobotContainer {
   private final Command scoreMobilityChargeStationNotEngaged = new ScoreMobilityChargeStationNotEngaged();
   private final Command test = new test();
 
-  // Timed Auto Initaliztion
-
   public RobotContainer() {
     configureBindings();
     // Calling Arcade Drive Comment
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the autonomous command chooser
-    m_chooser.setDefaultOption("Charge_Station_Not_Engaged", chargedStationNotEngaged);
-    m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
-    m_chooser.addOption("Score_Mobility_Charge_Station_Not_Engaged", scoreMobilityChargeStationNotEngaged);
+    m_chooser.setDefaultOption("Charge Station Not Engaged", chargedStationNotEngaged);
+    m_chooser.addOption("Score Mobility Charge Station Engaged", scoreMobilityChargeStationEngaged);
+    m_chooser.addOption("Score Mobility Charge Station Not Engaged", scoreMobilityChargeStationNotEngaged);
     m_chooser.addOption("test", test);
 
     // Put the chooser on the dashboard
-    SmartDashboard.putData(m_chooser);
-  }
+    SmartDashboard.putData("Autonomous Modes", m_chooser);
 
+  }
 
   private void configureBindings() {
     m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));

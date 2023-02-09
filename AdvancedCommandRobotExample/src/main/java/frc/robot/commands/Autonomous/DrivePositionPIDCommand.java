@@ -13,9 +13,6 @@ import frc.robot.RobotContainer;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DrivePositionPIDCommand extends PIDCommand {
-  /** Creates a new PositionPID. */
-
-  double driveSetpoint;
 
   public DrivePositionPIDCommand(double driveSetpoint) {
     super(
@@ -36,6 +33,6 @@ public class DrivePositionPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atSetpoint();
   }
 }
