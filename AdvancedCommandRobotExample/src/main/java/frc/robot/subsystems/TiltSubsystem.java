@@ -22,7 +22,7 @@ public class TiltSubsystem extends SubsystemBase {
 
   tiltRightMotor.follow(tiltLeftMotor);
 
-  //tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+  tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   tiltLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   }
   @Override
