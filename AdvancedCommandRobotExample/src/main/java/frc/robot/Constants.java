@@ -88,11 +88,11 @@ public final class Constants {
 
   // ELEVATOR MOTOR ID'S
   public static final int ELEVATOR_RIGHT_MOTOR = 50; //2
-  public static final int ELEVATOR_LEFT_MOTOR = 2; //13
+  public static final int ELEVATOR_LEFT_MOTOR = 54; //13
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 51;
-  public static final int TILT_LEFT_MOTOR = 53;
+  public static final int TILT_LEFT_MOTOR = 2;
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
