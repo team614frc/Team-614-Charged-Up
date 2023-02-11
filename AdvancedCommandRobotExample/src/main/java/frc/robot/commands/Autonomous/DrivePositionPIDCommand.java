@@ -5,6 +5,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -13,6 +14,9 @@ import frc.robot.RobotContainer;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DrivePositionPIDCommand extends PIDCommand {
+  /** Creates a new PositionPID. */
+
+  double driveSetpoint;
 
   public DrivePositionPIDCommand(double driveSetpoint) {
     super(
@@ -24,6 +28,7 @@ public class DrivePositionPIDCommand extends PIDCommand {
         driveSetpoint,
         // This uses the output
         RobotContainer.driveTrainSubsystem::setSpeed);
+        SmartDashboard.putNumber("Position setpoint value", getController().getSetpoint());
         // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveTrainSubsystem);
     // Configure additional PID options by calling `getController` here.
@@ -33,6 +38,7 @@ public class DrivePositionPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    SmartDashboard.putNumber("Position setpoint value", getController().getSetpoint());
     return getController().atSetpoint();
   }
 }

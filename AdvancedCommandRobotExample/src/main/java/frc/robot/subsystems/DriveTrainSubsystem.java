@@ -53,8 +53,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
-
-    SmartDashboard.putNumber("Drive Train Velocity", backLeftMotor.get());
   }
   
   @Override
@@ -64,21 +62,24 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //Returns rate of motor
 public double getPosition(){
-  return (Math.abs(backLeftMotor.getEncoder().getPosition()) + Math.abs(backRightMotor.getEncoder().getPosition())) / 2;
+  double positionAverage = (backLeftMotor.getEncoder().getPosition() + backRightMotor.getEncoder().getPosition()) / 2;
+  SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
+  return positionAverage;
 }
-
-public void rotateRight(double val){
-  backLeftMotor.set(val);
-  backRightMotor.set(-val);
-}
-
-public void rotateLeft(double val){
-  backLeftMotor.set(-val);
-  backRightMotor.set(val);
-}
-
 public void setSpeed(double val){
   backRightMotor.set(val);
   backLeftMotor.set(val);
+  SmartDashboard.putNumber("Drive Left Motor Subsystem Speed Value ", backLeftMotor.get());
+  SmartDashboard.putNumber("Drivetrain Right Motor Subsystem Speed Value", val);
+}
+public double rotateRight(double val){
+  backRightMotor.set(-1*val);
+  backLeftMotor.set(val);
+  return Math.abs(val);
+}
+public double rotateLeft(double val){
+  backRightMotor.set(val);
+  backLeftMotor.set(-1*val);
+  return Math.abs(val);
 }
 }
