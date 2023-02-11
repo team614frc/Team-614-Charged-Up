@@ -1,6 +1,7 @@
 {
   "HALProvider": {
     "Other Devices": {
+
       "SPARK MAX [15]": {
         "header": {
           "open": true
@@ -23,7 +24,6 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-      "/SmartDashboard/Autonomous Modes": "String Chooser",
       "/SmartDashboard/SendableChooser[0]": "String Chooser"
     }
   },
