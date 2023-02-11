@@ -62,9 +62,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   //Returns rate of motor
 public double getPosition(){
-
   double positionAverage = (Math.abs(backLeftMotor.getEncoder().getPosition()) + Math.abs(backRightMotor.getEncoder().getPosition())) / 2;
-
   SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
   return positionAverage;
 }
