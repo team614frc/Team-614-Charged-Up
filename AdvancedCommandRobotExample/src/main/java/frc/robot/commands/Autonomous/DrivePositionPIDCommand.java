@@ -8,7 +8,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -23,6 +22,7 @@ public class DrivePositionPIDCommand extends PIDCommand {
   public void initialize() {
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
   }
+  
   public DrivePositionPIDCommand(double driveSetpoint) {
     super(
         // The controller that the command will use

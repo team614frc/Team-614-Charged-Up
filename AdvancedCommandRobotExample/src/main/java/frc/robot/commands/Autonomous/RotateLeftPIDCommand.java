@@ -5,6 +5,7 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -17,6 +18,11 @@ public class RotateLeftPIDCommand extends PIDCommand {
 
   double rotationSetpoint;
 
+  @Override
+  public void initialize() {
+    RobotContainer.driveTrainSubsystem.resetEncoderValues();
+  }
+  
   public RotateLeftPIDCommand (double rotationSetpoint) {
     super(
         // The controller that the command will use
@@ -27,6 +33,7 @@ public class RotateLeftPIDCommand extends PIDCommand {
         rotationSetpoint,
         // This uses the output)
         RobotContainer.driveTrainSubsystem::rotateLeft);
+        SmartDashboard.putNumber("Rotate Left Position setpoint value", getController().getSetpoint());
         // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveTrainSubsystem);
     // Configure additional PID options by calling `getController` here.
@@ -36,6 +43,7 @@ public class RotateLeftPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    SmartDashboard.putNumber("Rotate Left Position setpoint value", getController().getSetpoint());
+    return getController().atSetpoint();
   }
 }
