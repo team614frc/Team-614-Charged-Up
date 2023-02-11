@@ -80,9 +80,9 @@ public final class Constants {
   public static final double TILT_UP_SETPOINT = 5;
 
   // Position-based PID Values
-  public static final double P_kP = 0.01;
+  public static final double P_kP = 44.251;
   public static final double P_kI = 0;
-  public static final double P_kD = 0;
+  public static final double P_kD = 3.617;
 
   // Velocity-based PID Values
   public static final double V_kP = 0.16375;
