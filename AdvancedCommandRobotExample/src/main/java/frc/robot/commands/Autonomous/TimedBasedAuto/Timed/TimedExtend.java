@@ -7,42 +7,51 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class TimedExtend extends CommandBase {
-public double elevationSpeed;
 
-Timer TimedExtendTimer = null;
-double localRunTime;
+  Timer TimedExtendTimer = null;
+  // Local variables for this command
+  double localElevationSpeed;
+  double localRunTime;
 
+  public TimedExtend(double elevationspeed, double runtime) {
+    // Requires the drivetrain subsystem for the command
+    addRequirements(RobotContainer.elevatorSubsystem);
+    // Creates a new timmer
+    TimedExtendTimer = new Timer();
 
-    public TimedExtend (double elevationspeed, double runtime) {
-        addRequirements(RobotContainer.elevatorSubsystem);
+    localElevationSpeed = elevationspeed;
+    localRunTime = runtime;
+  }
 
-        TimedExtendTimer = new Timer();
-
-        elevationSpeed = elevationspeed;
-        localRunTime = runtime;
-    }
-
-    @Override
+  @Override
   public void initialize() {
+    // Resets and starts the timer
     TimedExtendTimer.reset();
     TimedExtendTimer.start();
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // Runs the motors for the specified runtime
     if (TimedExtendTimer.get() <= localRunTime)
-    RobotContainer.elevatorSubsystem.set(elevationSpeed);
+      RobotContainer.elevatorSubsystem.set(localElevationSpeed);
   }
+
   @Override
   public void end(boolean interrupted) {
+    // Stops the motor, stops the timer, resets the timer, and if needed alerts the
+    // drive if the command was interrupted
     RobotContainer.elevatorSubsystem.set(Constants.MOTOR_ZERO_SPEED);
     TimedExtendTimer.stop();
     TimedExtendTimer.reset();
+    if (interrupted) {
+      System.out.println("COMMAND WAS INTERRUPTED! : DIDN'T FINISH ON TIME!");
+    }
   }
-  //gets returned true when the command ends
+
   @Override
   public boolean isFinished() {
-    return TimedExtendTimer.get() <= localRunTime;
+    // Returns true when the command is finished
+    return TimedExtendTimer.get() >= localRunTime;
   }
 }

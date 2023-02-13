@@ -5,20 +5,20 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class ElevatorPIDCommand extends PIDCommand {
-  // Makes 3 setpoints for elevator subsystem to check if at certain height
-  public ElevatorPIDCommand(double elevatorSetpoint) {
+public class RotateLeftPIDCommand extends PIDCommand {
+
+  public RotateLeftPIDCommand(double rotationSetpoint) {
     super(
         // The controller that the command will use
-        new PIDController(Constants.V_kP, Constants.V_kI, Constants.V_kD),
+        new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // This should return the measurement
-        RobotContainer.elevatorSubsystem::getHeight,
+        RobotContainer.driveTrainSubsystem::getPosition,
         // This should return the setpoint (can also be a constant)
-        elevatorSetpoint,
-        // This uses the output
-        RobotContainer.elevatorSubsystem::set);
+        rotationSetpoint,
+        // This uses the output)
+        RobotContainer.driveTrainSubsystem::rotateLeft);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.elevatorSubsystem);
+    addRequirements(RobotContainer.driveTrainSubsystem);
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.1);
   }
@@ -26,6 +26,6 @@ public class ElevatorPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atSetpoint();
   }
 }
