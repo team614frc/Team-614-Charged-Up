@@ -7,6 +7,6 @@ public class TestAuto extends SequentialCommandGroup {
 
   public TestAuto() {
     // Auto for testing purposes
-    addCommands(new DrivePositionPIDCommand(50));
+    addCommands(new DrivePositionPIDCommand(1));
   }
 }

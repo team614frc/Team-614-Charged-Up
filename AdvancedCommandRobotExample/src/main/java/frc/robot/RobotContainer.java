@@ -34,8 +34,7 @@ public class RobotContainer {
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the auto chooser
-    // m_chooser.addOption("Score_Mobility_Charge_Station_Engaged",
-    // scoreMobilityChargeStationEngaged);
+    // m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
     m_chooser.setDefaultOption("Test Auto", TestAuto);
 
     // Puts the auto chooser on the dashboard
