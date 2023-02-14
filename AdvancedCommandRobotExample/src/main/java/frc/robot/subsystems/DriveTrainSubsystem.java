@@ -1,7 +1,14 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -15,8 +22,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
   CANSparkMax leaderLeftMotor = null;
 
   // Create Differntial Drive Variables
-  // Differential drive is used to call arcade drive using the motors.
   DifferentialDrive differentialDrive = null;
+  private ChassisSpeeds chassisSpeeds;
+  DifferentialDriveWheelSpeeds wheelSpeeds = Constants.kDriveKinematics.toWheelSpeeds(chassisSpeeds);
+  
+  Gyro navX = new AHRS(SPI.Port.kMXP);
+  private final DifferentialDriveOdometry m_odometry;
 
   public DriveTrainSubsystem() {
     // motor initalization
@@ -40,7 +51,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
-  }
+
+    navX.reset();
+    navX.calibrate();
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
+    m_odometry.resetPosition(navX.getRotation2d(), new Pose2d());
+  } x
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
@@ -59,11 +75,20 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return positionAverage;
   }
 
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
+
   public void setSpeed(double val) {
     leaderRightMotor.set(val);
     leaderLeftMotor.set(val);
     SmartDashboard.putNumber("Drive Left Motor Subsystem Speed Value ", leaderLeftMotor.get());
     SmartDashboard.putNumber("Drivetrain Right Motor Subsystem Speed Value", val);
+  }
+
+  public void getSpeed() {
+    leaderLeftMotor.get();
+    leaderRightMotor.get();
   }
 
   public void resetEncoderValues() {
@@ -79,5 +104,22 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void rotateLeft(double val) {
     leaderRightMotor.set(val);
     leaderLeftMotor.set(-val);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoderValues();
+    m_odometry.resetPosition(navX.getRotation2d(), new Pose2d());
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftEncoderVelocity(), getRightEncoderVelocity());
+  }
+
+  public double getRightEncoderVelocity() {
+    return -leaderRightMotor.get();
+  }
+
+  public double getLeftEncoderVelocity() {
+    return leaderLeftMotor.get();
   }
 }

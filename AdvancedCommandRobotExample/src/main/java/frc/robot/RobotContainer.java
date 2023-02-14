@@ -1,7 +1,23 @@
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.sql.Driver;
+
+import com.pathplanner.lib.auto.RamseteAutoBuilder;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -19,7 +35,8 @@ public class RobotContainer {
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
-  public static CommandXboxController m_CommandXboxController = new CommandXboxController(Constants.DRIVER_CONTROLLER_PORT);
+  public static CommandXboxController m_CommandXboxController = new CommandXboxController(
+      Constants.DRIVER_CONTROLLER_PORT);
   public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
@@ -34,12 +51,42 @@ public class RobotContainer {
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the auto chooser
-    // m_chooser.addOption("Score_Mobility_Charge_Station_Engaged", scoreMobilityChargeStationEngaged);
+    // m_chooser.addOption("Score_Mobility_Charge_Station_Engaged",
+    // scoreMobilityChargeStationEngaged);
     m_chooser.setDefaultOption("Test Auto", TestAuto);
+    m_chooser.addOption("Straight Path",
+        loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
 
     // Puts the auto chooser on the dashboard
     SmartDashboard.putData(m_chooser);
     SmartDashboard.putNumber("Drivetrain Encoder Position", driveTrainSubsystem.getPosition());
+  }
+
+  public Command loadPathPlannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
+    Trajectory trajectory;
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException exception) {
+      DriverStation.reportError("Unable to open trajectory " + filename, exception.getStackTrace());
+      System.out.println("Unable to read from file " + filename);
+      return new InstantCommand();
+    }
+
+    RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrainSubsystem::getPose,
+    new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+    new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
+        Constants.kaVoltSecondsSquaredPerMeter), Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
+    new PIDController(Constants.kPDriveVel, 0, 0),
+    new PIDController(Constants.kPDriveVel, 0, 0), driveTrainSubsystem::tankDriveVolts,
+    driveTrainSubsystem);
+   
+    if (resetOdomtry) {
+      return new SequentialCommandGroup(
+          new InstantCommand(() -> driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())), ramseteCommand);
+    } else {
+      return ramseteCommand;
+    }
   }
 
   private void configureBindings() {

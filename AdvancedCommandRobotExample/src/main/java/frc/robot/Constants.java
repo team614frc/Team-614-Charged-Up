@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -84,6 +87,10 @@ public final class Constants {
   public static final double V_kI = 0;
   public static final double V_kD = 0;
 
+  // IDK
+  public static final double kRamseteB = 2;
+  public static final double kRamseteZeta = 0.7;
+
   // Timer Based Auto Variables
   public static final double RUN_INITAL_AUTO = 2.0;
   public static final double AUTO_STAGE_2 = 7.0;
@@ -101,8 +108,14 @@ public final class Constants {
   public static final int TILT_RIGHT_MOTOR = 51;
   public static final int TILT_LEFT_MOTOR = 53;
 
+  public static double kvVoltSecondsPerMeter;
+  public static double kaVoltSecondsSquaredPerMeter;
+  public static final double kTrackWidthMeters = Units.inchesToMeters(20);
+  public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+public static final double kPDriveVel = 0;
+  public static double ksVolts;
+
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
-
   }
 }
