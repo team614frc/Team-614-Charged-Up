@@ -182,8 +182,4 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
     SmartDashboard.putNumber("Gyro Heading", getHeading());
   }
-
-  public double getAverageEncoderPosition() {
-    return 0;
-  }
 }

@@ -55,7 +55,7 @@ public class RobotContainer {
 
     // Puts the auto chooser on the dashboard
     SmartDashboard.putData(m_chooser);
-    SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getAverageEncoderPosition());
+    SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
 
   public Command loadPathPlannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
