@@ -61,7 +61,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     resetEncoderValues();
 
     m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
-    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(), new Pose2d());
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        new Pose2d());
   }
 
   public void setBreakMode() {
@@ -139,14 +140,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public static double getHeading() {
     return navX.getRotation2d().getDegrees();
   }
-  
+
   public Pose2d getPose() {
     return m_odometry.getPoseMeters();
   }
 
   public void resetOdometry(Pose2d pose) {
     resetEncoderValues();
-    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(), pose);
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        pose);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
@@ -163,7 +165,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     differentialDrive.setMaxOutput(maxOutput);
   }
 
-  public static void zeroHeading () {
+  public static void zeroHeading() {
     navX.calibrate();
     navX.calibrate();
   }
