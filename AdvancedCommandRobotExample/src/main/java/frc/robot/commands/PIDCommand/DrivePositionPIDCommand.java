@@ -18,7 +18,7 @@ public class DrivePositionPIDCommand extends PIDCommand {
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // This should return the measurement
-        RobotContainer.driveTrainSubsystem::getPosition,
+        RobotContainer.driveTrainSubsystem::getAverageEncoderPosition,
         // This should return the setpoint (can also be a constant)
         driveSetpoint,
         // This uses the output
