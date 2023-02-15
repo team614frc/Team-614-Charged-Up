@@ -2,10 +2,6 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.Driver;
-
-import com.pathplanner.lib.auto.RamseteAutoBuilder;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -59,7 +55,7 @@ public class RobotContainer {
 
     // Puts the auto chooser on the dashboard
     SmartDashboard.putData(m_chooser);
-    SmartDashboard.putNumber("Drivetrain Encoder Position", driveTrainSubsystem.getPosition());
+    SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
 
   public Command loadPathPlannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
@@ -74,13 +70,12 @@ public class RobotContainer {
     }
 
     RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrainSubsystem::getPose,
-    new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-    new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
-        Constants.kaVoltSecondsSquaredPerMeter), Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
-    new PIDController(Constants.kPDriveVel, 0, 0),
-    new PIDController(Constants.kPDriveVel, 0, 0), driveTrainSubsystem::tankDriveVolts,
-    driveTrainSubsystem);
-   
+        new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+        new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
+            Constants.kaVoltSecondsSquaredPerMeter),
+        Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds, new PIDController(Constants.V_kP, 0, 0),
+        new PIDController(Constants.V_kP, 0, 0), driveTrainSubsystem::DifferentialDriveVolts, driveTrainSubsystem);
+
     if (resetOdomtry) {
       return new SequentialCommandGroup(
           new InstantCommand(() -> driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())), ramseteCommand);
@@ -92,8 +87,10 @@ public class RobotContainer {
   private void configureBindings() {
     // Configures the bindings for the xbox controller
     // Should probably be changed to .onTrue() instead of .whileTrue()
-    m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
-    m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.LEFT_BUMPER)
+        .whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.LEFT_STICK_PRESS)
+        .whileTrue(new ManipulatorPIDCommand(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID(Constants.TILT_UP_SETPOINT));

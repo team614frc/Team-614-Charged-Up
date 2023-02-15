@@ -87,10 +87,6 @@ public final class Constants {
   public static final double V_kI = 0;
   public static final double V_kD = 0;
 
-  // IDK
-  public static final double kRamseteB = 2;
-  public static final double kRamseteZeta = 0.7;
-
   // Timer Based Auto Variables
   public static final double RUN_INITAL_AUTO = 2.0;
   public static final double AUTO_STAGE_2 = 7.0;
@@ -101,19 +97,26 @@ public final class Constants {
   public static final double AUTO_ROTATE_SPEED = 0.0;
 
   // ELEVATOR MOTOR ID'S
-  public static final int ELEVATOR_RIGHT_MOTOR = 50; // 2
-  public static final int ELEVATOR_LEFT_MOTOR = 2; // 13
+  public static final int ELEVATOR_RIGHT_MOTOR = 50;
+  public static final int ELEVATOR_LEFT_MOTOR = 2;
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 51;
   public static final int TILT_LEFT_MOTOR = 53;
 
-  public static double kvVoltSecondsPerMeter;
-  public static double kaVoltSecondsSquaredPerMeter;
+  public static final double ksVolts = 0.14585;
+  public static final double kvVoltSecondsPerMeter = 1.3101;
+  public static final double kaVoltSecondsSquaredPerMeter = 0.1824;
   public static final double kTrackWidthMeters = Units.inchesToMeters(20);
   public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
-public static final double kPDriveVel = 0;
-  public static double ksVolts;
+  public static final double kMaxSpeedMetersPerSecond = 3;
+  public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+  public static final double kRamseteB = 2;
+  public static final double kRamseteZeta = 0.7;
+  public static final double kGearRatio = 12.6;
+  public static final double kWheelRadiusInches = 3;
+  public static final double kLinearDistanceConversionFactor = (Units
+      .inchesToMeters(1 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;

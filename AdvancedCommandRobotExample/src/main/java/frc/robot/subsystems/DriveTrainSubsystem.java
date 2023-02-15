@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI;
@@ -14,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
@@ -45,6 +44,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     followerRightMotor.follow(leaderRightMotor, false);
     followerLeftMotor.follow(leaderLeftMotor, false);
 
+    leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+
     // Current Limits Set
     followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     leaderRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
@@ -58,29 +62,36 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     navX.reset();
     navX.calibrate();
+    resetEncoderValues();
+
     m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
-    m_odometry.resetPosition(navX.getRotation2d(), getLeftEncoderVelocity(), getLeftEncoderVelocity(), new Pose2d());
-  } x
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        new Pose2d());
+  }
+
+  public void setBreakMode() {
+    leaderLeftMotor.setIdleMode(IdleMode.kBrake);
+    leaderRightMotor.setIdleMode(IdleMode.kBrake);
+    followerLeftMotor.setIdleMode(IdleMode.kBrake);
+    followerRightMotor.setIdleMode(IdleMode.kBrake);
+  }
+
+  public void setCoastMode() {
+    leaderLeftMotor.setIdleMode(IdleMode.kCoast);
+    leaderRightMotor.setIdleMode(IdleMode.kCoast);
+    followerLeftMotor.setIdleMode(IdleMode.kCoast);
+    followerRightMotor.setIdleMode(IdleMode.kCoast);
+  }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-
-  // Returns rate of motor
-  public double getPosition() {
+  public double getEncoderPositionAverage() {
     double positionAverage = (Math.abs(leaderLeftMotor.getEncoder().getPosition())
-        + Math.abs(leaderRightMotor.getEncoder().getPosition())) / 2;
+        + Math.abs(leaderRightMotor.getEncoder().getPosition())) / 2.0;
     SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
     return positionAverage;
-  }
-
-  public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
   }
 
   public void setSpeed(double val) {
@@ -110,20 +121,69 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leaderLeftMotor.set(-val);
   }
 
+  public double getLeaderLeftEncoderPosition() {
+    return leaderLeftMotor.getEncoder().getPosition();
+  }
+
+  public double getLeaderRightEncoderPosition() {
+    return leaderRightMotor.getEncoder().getPosition();
+  }
+
+  public double getLeaderRightEncoderVelocity() {
+    return leaderRightMotor.getEncoder().getVelocity();
+  }
+
+  public double getLeaderLeftEncoderVelocity() {
+    return leaderLeftMotor.getEncoder().getVelocity();
+  }
+
+  public double getTurnRate() {
+    return -navX.getRate();
+  }
+
+  public static double getHeading() {
+    return navX.getRotation2d().getDegrees();
+  }
+
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
+
   public void resetOdometry(Pose2d pose) {
     resetEncoderValues();
-    m_odometry.resetPosition(navX.getRotation2d(), new Pose2d());
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        pose);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getLeftEncoderVelocity(), getRightEncoderVelocity());
+    return new DifferentialDriveWheelSpeeds(getLeaderLeftEncoderVelocity(), getLeaderRightEncoderVelocity());
   }
 
-  public double getRightEncoderVelocity() {
-    return -leaderRightMotor.get();
+  public void DifferentialDriveVolts(double leftVolts, double rightVolts) {
+    leaderLeftMotor.setVoltage(leftVolts);
+    leaderRightMotor.setVoltage(rightVolts);
+    differentialDrive.feed();
   }
 
-  public double getLeftEncoderVelocity() {
-    return leaderLeftMotor.get();
+  public void setMaxOutput(double maxOutput) {
+    differentialDrive.setMaxOutput(maxOutput);
+  }
+
+  public static void zeroHeading() {
+    navX.calibrate();
+    navX.calibrate();
+  }
+
+  public Gyro getGyro() {
+    return navX;
+  }
+
+  @Override
+  public void periodic() {
+    m_odometry.update(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
+
+    SmartDashboard.putNumber("Left Encoder Value Meters", getLeaderLeftEncoderPosition());
+    SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
+    SmartDashboard.putNumber("Gyro Heading", getHeading());
   }
 }

@@ -12,7 +12,7 @@ public class RotateLeftPIDCommand extends PIDCommand {
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // This should return the measurement
-        RobotContainer.driveTrainSubsystem::getPosition,
+        RobotContainer.driveTrainSubsystem::getEncoderPositionAverage,
         // This should return the setpoint (can also be a constant)
         rotationSetpoint,
         // This uses the output)
