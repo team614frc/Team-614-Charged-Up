@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -23,10 +25,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;
-  private ChassisSpeeds chassisSpeeds;
+ private ChassisSpeeds chassisSpeeds;
+  private static AHRS navX;
   DifferentialDriveWheelSpeeds wheelSpeeds = Constants.kDriveKinematics.toWheelSpeeds(chassisSpeeds);
   
-  Gyro navX = new AHRS(SPI.Port.kMXP);
   private final DifferentialDriveOdometry m_odometry;
 
   public DriveTrainSubsystem() {
@@ -51,11 +53,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
+    
+    navX = new AHRS(SPI.Port.kMXP);
 
     navX.reset();
     navX.calibrate();
     m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
-    m_odometry.resetPosition(navX.getRotation2d(), new Pose2d());
+    m_odometry.resetPosition(navX.getRotation2d(), getLeftEncoderVelocity(), getLeftEncoderVelocity(), new Pose2d());
   } x
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
