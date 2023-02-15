@@ -24,9 +24,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;
- private ChassisSpeeds chassisSpeeds;
   private static AHRS navX;
-  DifferentialDriveWheelSpeeds wheelSpeeds = Constants.kDriveKinematics.toWheelSpeeds(chassisSpeeds);
   
   private final DifferentialDriveOdometry m_odometry;
 
