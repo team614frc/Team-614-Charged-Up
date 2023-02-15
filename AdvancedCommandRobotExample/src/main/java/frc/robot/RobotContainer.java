@@ -10,6 +10,7 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -52,8 +53,9 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Test Auto", TestAuto);
     m_chooser.addOption("Straight Path",
         loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
-
     // Puts the auto chooser on the dashboard
+
+    Shuffleboard.getTab("Autonomous");
     SmartDashboard.putData(m_chooser);
     SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
