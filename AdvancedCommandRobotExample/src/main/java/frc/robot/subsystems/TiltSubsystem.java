@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,23 +13,26 @@ public class TiltSubsystem extends SubsystemBase {
   CANSparkMax tiltLeftMotor = null;
 
   public TiltSubsystem() {
-  tiltRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
-  tiltLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
+    tiltRightMotor = new CANSparkMax(Constants.TILT_RIGHT_MOTOR, MotorType.kBrushless);
+    tiltLeftMotor = new CANSparkMax(Constants.TILT_LEFT_MOTOR, MotorType.kBrushless);
 
-  tiltRightMotor.follow(tiltLeftMotor);
+    tiltRightMotor.follow(tiltLeftMotor);
 
-  //tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
-  tiltLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+    // tiltRightMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
+    tiltLeftMotor.setSmartCurrentLimit(Constants.ELEVATOR_CURRENT_LIMIT);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
   public double getHeight() {
     SmartDashboard.putNumber("Position is", tiltLeftMotor.getEncoder().getPosition());
     return tiltLeftMotor.getEncoder().getPosition();
   }
-  public void set(double val){
+
+  public void set(double val) {
     tiltLeftMotor.set(val);
   }
 }

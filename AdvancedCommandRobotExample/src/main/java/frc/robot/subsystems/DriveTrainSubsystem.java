@@ -1,91 +1,189 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
-  /** Creates a new DriveTrainSubsystem. */
-
   // Create Drivetrain Motor Variables
-
-  CANSparkMax frontRightMotor = null;
-  CANSparkMax backRightMotor = null;
-  CANSparkMax frontLeftMotor = null;
-  CANSparkMax backLeftMotor = null;
-
+  CANSparkMax followerRightMotor = null;
+  CANSparkMax leaderRightMotor = null;
+  CANSparkMax followerLeftMotor = null;
+  CANSparkMax leaderLeftMotor = null;
 
   // Create Differntial Drive Variables
-  // Differential drive is used to call arcade drive using the motors. 
   DifferentialDrive differentialDrive = null;
+  private static AHRS navX;
+  
+  private final DifferentialDriveOdometry m_odometry;
 
+  public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.kWheelDiameterInches;
 
   public DriveTrainSubsystem() {
-
     // motor initalization
-    frontRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_RIGHT_MOTOR, MotorType.kBrushless);
-    backRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_RIGHT_MOTOR, MotorType.kBrushless);
-    frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_LEFT_MOTOR, MotorType.kBrushless);
-    backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_LEFT_MOTOR, MotorType.kBrushless);
+    followerRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_RIGHT_MOTOR, MotorType.kBrushless);
+    leaderRightMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_RIGHT_MOTOR, MotorType.kBrushless);
+    followerLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_LEFT_MOTOR, MotorType.kBrushless);
+    leaderLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_LEFT_MOTOR, MotorType.kBrushless);
 
-    // Back motors follow front motors and invertion is set. 
+    // Leader motors follow follower motors and invertion is set.
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
     // MAKE SURE TO SET THE CURRENT LIMITS AS WELL
-    // NOTE: BACK MOTORS are LEADERS in this example 
-    frontRightMotor.follow(backRightMotor,false);
-    frontLeftMotor.follow(backLeftMotor,false);
+    // NOTE: LEADER MOTORS are LEADERS in this example
+    followerRightMotor.follow(leaderRightMotor, false);
+    followerLeftMotor.follow(leaderLeftMotor, false);
+
+    leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
     // Current Limits Set
-    frontRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    backRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    frontLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    backLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-    // Create DifferentialDrive Object 
-    differentialDrive = new DifferentialDrive(backLeftMotor, backRightMotor);
+    followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    leaderRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    followerLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+    leaderLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
+
+    // Create DifferentialDrive Object
+    differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
+    
+    navX = new AHRS(SPI.Port.kMXP);
+
+    navX.reset();
+    navX.calibrate();
+    resetEncoderValues();
+
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        new Pose2d());
+  }
+
+  public void setBreakMode() {
+    leaderLeftMotor.setIdleMode(IdleMode.kBrake);
+    leaderRightMotor.setIdleMode(IdleMode.kBrake);
+    followerLeftMotor.setIdleMode(IdleMode.kBrake);
+    followerRightMotor.setIdleMode(IdleMode.kBrake);
+  }
+
+  public void setCoastMode() {
+    leaderLeftMotor.setIdleMode(IdleMode.kCoast);
+    leaderRightMotor.setIdleMode(IdleMode.kCoast);
+    followerLeftMotor.setIdleMode(IdleMode.kCoast);
+    followerRightMotor.setIdleMode(IdleMode.kCoast);
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
-  
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+
+  public double getEncoderPositionAverage() {
+    double positionAverage = (Math.abs(leaderLeftMotor.getEncoder().getPosition())
+        + Math.abs(leaderRightMotor.getEncoder().getPosition())) / 2.0;
+    SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
+    return positionAverage;
   }
 
-  //Returns rate of motor
-public double getPosition(){
+  public void setSpeed(double val) {
+    leaderRightMotor.set(val);
+    leaderLeftMotor.set(val);
+    SmartDashboard.putNumber("Drive Left Motor Subsystem Speed Value ", leaderLeftMotor.get());
+    SmartDashboard.putNumber("Drivetrain Right Motor Subsystem Speed Value", val);
+  }
 
-  double positionAverage = (Math.abs(backLeftMotor.getEncoder().getPosition()) + Math.abs(backRightMotor.getEncoder().getPosition())) / 2;
+  public void getSpeed() {
+    leaderLeftMotor.get();
+    leaderRightMotor.get();
+  }
 
-  SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
-  return positionAverage;
-}
-public void setSpeed(double val){
-  backRightMotor.set(val);
-  backLeftMotor.set(val);
-  SmartDashboard.putNumber("Drive Left Motor Subsystem Speed Value ", backLeftMotor.get());
-  SmartDashboard.putNumber("Drivetrain Right Motor Subsystem Speed Value", val);
-}
-public void resetEncoderValues(){
-  backLeftMotor.getEncoder().setPosition(0.0);
-  backRightMotor.getEncoder().setPosition(0.0);
-}
-public double rotateRight(double val){
-  backRightMotor.set(-1*val);
-  backLeftMotor.set(val);
-  return Math.abs(val);
-}
-public double rotateLeft(double val){
-  backRightMotor.set(val);
-  backLeftMotor.set(-1*val);
-  return Math.abs(val);
-}
+  public void resetEncoderValues() {
+    leaderLeftMotor.getEncoder().setPosition(0.0);
+    leaderRightMotor.getEncoder().setPosition(0.0);
+  }
+
+  public void rotateRight(double val) {
+    leaderRightMotor.set(-val);
+    leaderLeftMotor.set(val);
+  }
+
+  public void rotateLeft(double val) {
+    leaderRightMotor.set(val);
+    leaderLeftMotor.set(-val);
+  }
+
+  public double getLeaderLeftEncoderPosition() {
+    return leaderLeftMotor.getEncoder().getPosition();
+  }
+
+  public double getLeaderRightEncoderPosition() {
+    return leaderRightMotor.getEncoder().getPosition();
+  }
+
+  public double getLeaderRightEncoderVelocity() {
+    return leaderRightMotor.getEncoder().getVelocity();
+  }
+
+  public double getLeaderLeftEncoderVelocity() {
+    return leaderLeftMotor.getEncoder().getVelocity();
+  }
+
+  public double getTurnRate() {
+    return -navX.getRate();
+  }
+
+  public static double getHeading() {
+    return navX.getRotation2d().getDegrees();
+  }
+
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoderValues();
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+        pose);
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeaderLeftEncoderVelocity(), getLeaderRightEncoderVelocity());
+  }
+
+  public void DifferentialDriveVolts(double leftVolts, double rightVolts) {
+    leaderLeftMotor.setVoltage(leftVolts);
+    leaderRightMotor.setVoltage(rightVolts);
+    differentialDrive.feed();
+  }
+
+  public void setMaxOutput(double maxOutput) {
+    differentialDrive.setMaxOutput(maxOutput);
+  }
+
+  public static void zeroHeading() {
+    navX.calibrate();
+    navX.calibrate();
+  }
+
+  public Gyro getGyro() {
+    return navX;
+  }
+
+  @Override
+  public void periodic() {
+    m_odometry.update(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
+
+    SmartDashboard.putNumber("Left Encoder Value Meters", getLeaderLeftEncoderPosition());
+    SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
+    SmartDashboard.putNumber("Gyro Heading", getHeading());
+  }
 }
