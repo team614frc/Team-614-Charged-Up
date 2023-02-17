@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SPI;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /** Creates a new DriveTrainSubsystem. */
-
+  public AHRS navx;
   // Create Drivetrain Motor Variables
-
   CANSparkMax frontRightMotor = null;
   CANSparkMax backRightMotor = null;
   CANSparkMax frontLeftMotor = null;
@@ -34,7 +36,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     backRightMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_RIGHT_MOTOR, MotorType.kBrushless);
     frontLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FRONT_LEFT_MOTOR, MotorType.kBrushless);
     backLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_BACK_LEFT_MOTOR, MotorType.kBrushless);
-
+    
+    navx = new AHRS(SPI.Port.kMXP);
+    navx.calibrate();
     // Back motors follow front motors and invertion is set. 
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
     // MAKE SURE TO SET THE CURRENT LIMITS AS WELL

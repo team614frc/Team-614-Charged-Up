@@ -5,9 +5,8 @@
 package frc.robot.commands.Autonomous.TimedBasedAuto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Autonomous.DrivePositionPIDCommand;
-import frc.robot.commands.Autonomous.RotateLeftPIDCommand;
-import frc.robot.commands.Autonomous.RotateRightPIDCommand;
+import frc.robot.commands.Autonomous.RotateBangBangCommand;
+import frc.robot.commands.Autonomous.RotatePIDCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -17,6 +16,6 @@ public class test extends SequentialCommandGroup {
   public test() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DrivePositionPIDCommand(100));
+    addCommands(new RotatePIDCommand(20));
   }
 }

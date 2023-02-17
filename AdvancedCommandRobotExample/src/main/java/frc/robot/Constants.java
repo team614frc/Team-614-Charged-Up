@@ -17,7 +17,17 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
+  //Tick Conversions
+  public static final double TICKS_PER_REV = 42;
+  public static final double GEAR_BOX_RATIO = 8.45;
+  public static final double GEAR_BOX_SHAFT_SPROCKET_TEETH = 0.0;
+  public static final double WHEEL_SHAFT_SPROCKET_TEETH = 0.0;
+  public static final double WHEEL_DIAMETER = 6;
+  public static final double M_PI = Math.PI;
+  
+  //PWM LED Port
+  public static final int ADDRESSABLE_LED_PORT = 0;
+  
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
   public static final double MOTOR_REST_BACK = -0.05;
@@ -33,7 +43,7 @@ public final class Constants {
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 12; 
+  public static final int INTAKE_MOTOR = 15; 
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -63,8 +73,12 @@ public final class Constants {
   public static final int ELEVATOR_CURRENT_LIMIT = 40;
 
   // Elevator PID Setpoints
-  public static final double ELEVATOR_SETPOINT = 10;
-  public static final double ELEVATOR_SETPOINT2 = 0;
+  public static final double ELEVATOR_SETPOINT = 0;
+  public static final double ELEVATOR_SETPOINT2 = 10;
+
+  //Elevator Min and Max height
+  public static final double ELEVATOR_MAX_HEIGHT = 0;
+  public static final double ELEVATOR_MIN_HEIGHT = 55;
 
   // Manipulator PID setpoints (test)
   public static final double MANIPULATOR_SETPOINT = -30; // for testing
@@ -80,9 +94,10 @@ public final class Constants {
   public static final double TILT_UP_SETPOINT = 5;
 
   // Position-based PID Values
-  public static final double P_kP = 44.251;
-  public static final double P_kI = 0;
-  public static final double P_kD = 3.617;
+  //public static final double P_kP = 44.251;
+  public static final double P_kP = 0.023;
+  public static final double P_kI = 0.00001;
+  public static final double P_kD = 0;
 
   // Velocity-based PID Values
   public static final double V_kP = 0.16375;

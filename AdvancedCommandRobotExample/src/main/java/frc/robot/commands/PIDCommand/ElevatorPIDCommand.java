@@ -7,7 +7,6 @@ package frc.robot.commands.PIDCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
-
 import frc.robot.RobotContainer;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -27,17 +26,19 @@ public class ElevatorPIDCommand extends PIDCommand {
         // This should return the setpoint (can also be a constant)
         elevatorSetpoint,
         // This uses the output
-        // Use the output here
-        RobotContainer.elevatorSubsystem::set);
+        output -> {
+            RobotContainer.elevatorSubsystem.set(output);
+        });
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.elevatorSubsystem);
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.1);
-  }
-
+      }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atSetpoint() || 
+    RobotContainer.elevatorSubsystem.getInches() >= Constants.ELEVATOR_MIN_HEIGHT &&
+    RobotContainer.elevatorSubsystem.getInches() <= Constants.ELEVATOR_MAX_HEIGHT;
   }
 }
