@@ -6,8 +6,10 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class TiltPID extends PIDCommand {
+  /** Creates a new TiltPID. */
+  static double tiltSetpoint;
 
-  public TiltPID(double tiltSetpoint) {
+  public TiltPID() { 
     super(
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
@@ -24,6 +26,16 @@ public class TiltPID extends PIDCommand {
   }
 
   // Returns true when the command should end.
+  @Override
+  public void initialize() {
+    if (RobotContainer.tiltSubsystem.getHeight() == 0){
+tiltSetpoint=90;
+    }
+    else if (RobotContainer.tiltSubsystem.getHeight() > 0){
+      tiltSetpoint=0;
+    }
+  }
+  
   @Override
   public boolean isFinished() {
     return false;

@@ -34,6 +34,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    
+    RobotContainer.driveTrainSubsystem.navx.reset();
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // Runs an auto command in auto mode if there is one selected
     if (m_autonomousCommand != null)

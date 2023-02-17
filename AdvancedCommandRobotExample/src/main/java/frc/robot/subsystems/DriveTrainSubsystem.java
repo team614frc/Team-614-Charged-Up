@@ -17,6 +17,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   // Create Drivetrain Motor Variables
+  public AHRS navx;
+
   CANSparkMax followerRightMotor = null;
   CANSparkMax leaderRightMotor = null;
   CANSparkMax followerLeftMotor = null;
@@ -28,7 +30,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   
   private final DifferentialDriveOdometry m_odometry;
 
-  public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.kWheelDiameterInches;
+  public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
 
   public DriveTrainSubsystem() {
     // motor initalization
@@ -36,6 +38,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leaderRightMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_RIGHT_MOTOR, MotorType.kBrushless);
     followerLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_LEFT_MOTOR, MotorType.kBrushless);
     leaderLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_LEFT_MOTOR, MotorType.kBrushless);
+
+    navx = new AHRS(SPI.Port.kMXP);
+    navx.calibrate();
 
     // Leader motors follow follower motors and invertion is set.
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE

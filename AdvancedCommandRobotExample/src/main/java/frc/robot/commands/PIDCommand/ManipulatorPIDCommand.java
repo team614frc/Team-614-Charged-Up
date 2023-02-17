@@ -23,7 +23,7 @@ public class ManipulatorPIDCommand extends PIDCommand {
   }
 
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.MOTOR_REST_LEADER);
+    RobotContainer.manipulator.set(Constants.MOTOR_REST_BACK);
   }
 
   @Override

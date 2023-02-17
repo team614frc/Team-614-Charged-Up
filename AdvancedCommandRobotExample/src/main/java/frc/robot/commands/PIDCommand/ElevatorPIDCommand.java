@@ -26,6 +26,8 @@ public class ElevatorPIDCommand extends PIDCommand {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return getController().atSetpoint() ||
+        RobotContainer.elevatorSubsystem.getInches() >= Constants.ELEVATOR_MIN_HEIGHT &&
+            RobotContainer.elevatorSubsystem.getInches() <= Constants.ELEVATOR_MAX_HEIGHT;
   }
 }
