@@ -6,11 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Manipulator;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 
 public class Manipulator extends SubsystemBase {
-    /*Creates a new intake subsystem */ 
+  /* Creates a new intake subsystem */
   PowerDistribution pdh;
   double spikeThreshold = Constants.MANIPULATOR_THRESHOLD;
   CANSparkMax intakeMotor = null;
@@ -24,7 +22,7 @@ public class Manipulator extends SubsystemBase {
     scoring locations*/
     
     intakeMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
-}
+  }
 
 @Override
 public void periodic() {
@@ -39,17 +37,16 @@ else {
 }
 SmartDashboard.putNumber("Current Outputted by PDH:", pdh.getCurrent(Constants.INTAKE_MOTOR));
 }
-//Returns rate of motor
-public double getSpeed()
-{
-  return intakeMotor.get();
-}
-//Speed of motor
-public void set (double val)
-{
-  intakeMotor.set(val);
-  SmartDashboard.putNumber("Motor Speed", intakeMotor.get());
-  
-}
-}
 
+  // Returns rate of motor
+  public double getSpeed() {
+    return intakeMotor.get();
+  }
+
+  // Speed of motor
+  public void set(double val) {
+    intakeMotor.set(val);
+    SmartDashboard.putNumber("Motor Speed", intakeMotor.get());
+
+  }
+}

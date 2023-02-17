@@ -1,8 +1,7 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
+
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -20,10 +19,24 @@ public final class Constants {
   //Tick Conversions
   public static final double TICKS_PER_REV = 42;
   public static final double GEAR_BOX_RATIO = 8.45;
-  public static final double GEAR_BOX_SHAFT_SPROCKET_TEETH = 0.0;
-  public static final double WHEEL_SHAFT_SPROCKET_TEETH = 0.0;
   public static final double WHEEL_DIAMETER = 6;
+  public static final double ksVolts = 0.14585;
+  public static final double kvVoltSecondsPerMeter = 1.3101;
+  public static final double kaVoltSecondsSquaredPerMeter = 0.1824;
+  public static final double kTrackWidthMeters = Units.inchesToMeters(20);
+  public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+  public static final double kMaxSpeedMetersPerSecond = 3;
+  public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+  public static final double kRamseteB = 2;
+  public static final double kRamseteZeta = 0.7;
+  public static final double GEARBOX_OUTPUT_REVOLUTIONS = 0;
   public static final double M_PI = Math.PI;
+
+  public static final double kGearRatio = 10.71; // need to change to 8.45 with new roboto
+  public static final double kWheelRadiusInches = 3;
+  public static final double kLinearDistanceConversionFactor = (Units
+      .inchesToMeters(2 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
+
   
   //PWM LED Port
   public static final int ADDRESSABLE_LED_PORT = 0;
@@ -36,10 +49,10 @@ public final class Constants {
   public static final int GLOBAL_INVERT = -1;
 
   // DRIVE TRAIN MOTORS
-  public static final int DRIVETRAIN_FRONT_RIGHT_MOTOR = 1;
-  public static final int DRIVETRAIN_BACK_RIGHT_MOTOR = 3;
-  public static final int DRIVETRAIN_FRONT_LEFT_MOTOR = 14;
-  public static final int DRIVETRAIN_BACK_LEFT_MOTOR = 13;
+  public static final int DRIVETRAIN_FOLLOWER_RIGHT_MOTOR = 1;
+  public static final int DRIVETRAIN_LEADER_RIGHT_MOTOR = 3;
+  public static final int DRIVETRAIN_FOLLOWER_LEFT_MOTOR = 14;
+  public static final int DRIVETRAIN_LEADER_LEFT_MOTOR = 13;
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
@@ -57,15 +70,14 @@ public final class Constants {
   public static final int START_BUTTON = 8;
   public static final int LEFT_STICK_PRESS = 9;
   public static final int RIGHT_STICK_PRESS = 10;
-  
-  
+
   // Arcade Drive Commands
   public static final double ARCADE_DRIVE_MULTIPLIER = 0.5;
   public static final int POW_VALUE = 3;
 
   // Manipulator Commands
   public static final double INTAKE_SPEED_FORWARD = 1;
-  public static final double INTAKE_SPEED_BACKWARD = -1;
+  public static final double INTAKE_SPEED_LEADERWARD = -1;
 
   // Elevator Commands
   public static final double ELEVATOR_UP_SPEED = 0.5;
@@ -114,15 +126,17 @@ public final class Constants {
   public static final double AUTO_ROTATE_SPEED = 0.0;
 
   // ELEVATOR MOTOR ID'S
-  public static final int ELEVATOR_RIGHT_MOTOR = 50; //2
-  public static final int ELEVATOR_LEFT_MOTOR = 2; //13
+  public static final int ELEVATOR_RIGHT_MOTOR = 50;
+  public static final int ELEVATOR_LEFT_MOTOR = 2;
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 51;
   public static final int TILT_LEFT_MOTOR = 53;
 
+  
+                    //1
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
-
   }
+  
 }
