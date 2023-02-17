@@ -10,7 +10,6 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -48,14 +47,13 @@ public class RobotContainer {
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
     // Add commands to the auto chooser
-    // m_chooser.addOption("Score_Mobility_Charge_Station_Engaged",
-    // scoreMobilityChargeStationEngaged);
     m_chooser.setDefaultOption("Test Auto", TestAuto);
     m_chooser.addOption("Straight Path",
+        loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/testpath.wpilib.json", true));
+    m_chooser.addOption("Curly Wirly",
         loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
     // Puts the auto chooser on the dashboard
 
-    Shuffleboard.getTab("Autonomous");
     SmartDashboard.putData(m_chooser);
     SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
@@ -75,8 +73,10 @@ public class RobotContainer {
         new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
         new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
             Constants.kaVoltSecondsSquaredPerMeter),
-        Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds, new PIDController(Constants.V_kP, 0, 0),
-        new PIDController(Constants.V_kP, 0, 0), driveTrainSubsystem::DifferentialDriveVolts, driveTrainSubsystem);
+        Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
+        new PIDController(Constants.V_kP, 0, 0),
+        new PIDController(Constants.V_kP, 0, 0), driveTrainSubsystem::DifferentialDriveVolts,
+        driveTrainSubsystem);
 
     if (resetOdomtry) {
       return new SequentialCommandGroup(

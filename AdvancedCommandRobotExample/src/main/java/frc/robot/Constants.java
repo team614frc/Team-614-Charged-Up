@@ -113,11 +113,13 @@ public final class Constants {
   public static final double kMaxAccelerationMetersPerSecondSquared = 3;
   public static final double kRamseteB = 2;
   public static final double kRamseteZeta = 0.7;
-  public static final double kGearRatio = 10.71; // need to change to 8.54 with new roboto
-  public static final double kWheelRadiusInches = 3;
-  public static final double kLinearDistanceConversionFactor = (Units
-      .inchesToMeters(1 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
 
+  public static final double kGearRatio = 10.71; // need to change to 8.45 with new roboto
+  public static final double kWheelRadiusInches = 3;
+
+  public static final double kLinearDistanceConversionFactor = (Units
+      .inchesToMeters(2 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
+                    //1
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
   }
