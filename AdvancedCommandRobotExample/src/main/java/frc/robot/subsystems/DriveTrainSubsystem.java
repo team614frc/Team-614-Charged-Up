@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
@@ -17,7 +18,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   // Create Drivetrain Motor Variables
-  public AHRS navx;
+  public static AHRS navx;
 
   CANSparkMax followerRightMotor = null;
   CANSparkMax leaderRightMotor = null;
@@ -25,8 +26,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   CANSparkMax leaderLeftMotor = null;
 
   // Create Differntial Drive Variables
-  DifferentialDrive differentialDrive = null;
-  private static AHRS navX;
+  public static DifferentialDrive differentialDrive = null;
   
   private final DifferentialDriveOdometry m_odometry;
 
@@ -63,14 +63,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
     
-    navX = new AHRS(SPI.Port.kMXP);
-
-    navX.reset();
-    navX.calibrate();
     resetEncoderValues();
 
-    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
-    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+    m_odometry = new DifferentialDriveOdometry(navx.getRotation2d(), 0, 0);
+    m_odometry.resetPosition(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         new Pose2d());
   }
 
@@ -91,6 +87,26 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
+  // Takes in a target rotation value and current gyro angle
+  public void rotationArcadeDrive(double pidOutput, double targetRotation, double currentRotation) {
+    // Create a feedforward controller
+    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
+
+    // Calculate the feedforward term for the target rotation
+    double feedForward = feedforward.calculate(targetRotation);
+
+    // Combine the feedforward term with the PID output
+    double rotationOutput = feedForward + pidOutput;
+
+    // Limit the rotation output to be within the maximum and minimum output values
+    double maxOutput = 1.0; // Maximum output value
+    double minOutput = -1.0; // Minimum output value
+    rotationOutput = Math.max(Math.min(rotationOutput, maxOutput), minOutput);
+
+    // Use the rotation output to control the robot's motors
+    DriveTrainSubsystem.differentialDrive.arcadeDrive(0, rotationOutput);
+}
+
 
   public double getEncoderPositionAverage() {
     double positionAverage = (Math.abs(leaderLeftMotor.getEncoder().getPosition())
@@ -143,11 +159,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public double getTurnRate() {
-    return -navX.getRate();
+    return -navx.getRate();
   }
 
   public static double getHeading() {
-    return navX.getRotation2d().getDegrees();
+    return navx.getRotation2d().getDegrees();
   }
 
   public Pose2d getPose() {
@@ -156,7 +172,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose) {
     resetEncoderValues();
-    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+    m_odometry.resetPosition(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         pose);
   }
 
@@ -175,17 +191,17 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public static void zeroHeading() {
-    navX.calibrate();
-    navX.calibrate();
+    navx.calibrate();
+    navx.calibrate();
   }
 
   public Gyro getGyro() {
-    return navX;
+    return navx;
   }
 
   @Override
   public void periodic() {
-    m_odometry.update(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
+    m_odometry.update(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
 
     SmartDashboard.putNumber("Left Encoder Value Meters", getLeaderLeftEncoderPosition());
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());

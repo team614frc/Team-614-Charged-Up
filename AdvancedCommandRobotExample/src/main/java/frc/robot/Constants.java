@@ -56,7 +56,7 @@ public final class Constants {
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 15; 
+  public static final int INTAKE_MOTOR = 42; 
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -85,16 +85,16 @@ public final class Constants {
   public static final int ELEVATOR_CURRENT_LIMIT = 40;
 
   // Elevator PID Setpoints
-  public static final double ELEVATOR_SETPOINT = 0;
-  public static final double ELEVATOR_SETPOINT2 = 10;
+  public static final double ELEVATOR_SETPOINT = 10;
+  public static final double ELEVATOR_SETPOINT2 = 20;
 
   //Elevator Min and Max height
   public static final double ELEVATOR_MAX_HEIGHT = 0;
   public static final double ELEVATOR_MIN_HEIGHT = 55;
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SETPOINT = -30; // for testing
-  public static final double MANIPULATOR_SETPOINT2 = 25;
+  public static final double MANIPULATOR_SETPOINT = -15; // for testing
+  public static final double MANIPULATOR_SETPOINT2 = 15;
 
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 5;
@@ -108,7 +108,12 @@ public final class Constants {
   // Position-based PID Values
   //public static final double P_kP = 44.251;
   public static final double P_kP = 0.023;
-  public static final double P_kI = 0.00001;
+  //public static final double P_kI = 0.000001;
+  //public static final double P_kP = 42.8;
+  //public static final double P_kI = 0;
+  //public static final double P_kD = 3.1736;
+  //public static final double P_kP = 0.01;
+  public static final double P_kI = 0;
   public static final double P_kD = 0;
 
   // Velocity-based PID Values
@@ -116,6 +121,11 @@ public final class Constants {
   public static final double V_kI = 0;
   public static final double V_kD = 0;
 
+  // kS, kV, kA values
+  public static final double kS = 0.14397;
+  public static final double kV = 1.316;
+  public static final double kA = 0.14549;
+  public static final double kSDivision = 0.14402/12;
   // Timer Based Auto Variables
   public static final double RUN_INITAL_AUTO = 2.0;
   public static final double AUTO_STAGE_2 = 7.0;
@@ -127,11 +137,11 @@ public final class Constants {
 
   // ELEVATOR MOTOR ID'S
   public static final int ELEVATOR_RIGHT_MOTOR = 50;
-  public static final int ELEVATOR_LEFT_MOTOR = 2;
+  public static final int ELEVATOR_LEFT_MOTOR = 52;
 
   // TILT MOTOR ID'S
-  public static final int TILT_RIGHT_MOTOR = 51;
-  public static final int TILT_LEFT_MOTOR = 53;
+  //public static final int TILT_RIGHT_MOTOR = 51;
+  public static final int TILT_LEFT_MOTOR = 2;
 
   
                     //1

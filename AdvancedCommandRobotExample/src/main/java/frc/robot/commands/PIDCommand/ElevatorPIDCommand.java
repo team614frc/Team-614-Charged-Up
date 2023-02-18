@@ -10,7 +10,7 @@ public class ElevatorPIDCommand extends PIDCommand {
   public ElevatorPIDCommand(double elevatorSetpoint) {
     super(
         // The controller that the command will use
-        new PIDController(Constants.V_kP, Constants.V_kI, Constants.V_kD),
+        new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // This should return the measurement
         RobotContainer.elevatorSubsystem::getHeight,
         // This should return the setpoint (can also be a constant)

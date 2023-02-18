@@ -1,15 +1,16 @@
 package frc.robot.commands.PIDCommand;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class TiltPID extends PIDCommand {
   /** Creates a new TiltPID. */
-  static double tiltSetpoint;
 
-  public TiltPID() { 
+  public TiltPID(double tiltSetpoint) { 
     super(
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
@@ -26,16 +27,11 @@ public class TiltPID extends PIDCommand {
   }
 
   // Returns true when the command should end.
-  @Override
-  public void initialize() {
-    if (RobotContainer.tiltSubsystem.getHeight() == 0){
-tiltSetpoint=90;
-    }
-    else if (RobotContainer.tiltSubsystem.getHeight() > 0){
-      tiltSetpoint=0;
-    }
+
+  public void execute() {
+    super.execute();
+  SmartDashboard.putNumber("Current Tilt Height:", RobotContainer.tiltSubsystem.getHeight());
   }
-  
   @Override
   public boolean isFinished() {
     return false;

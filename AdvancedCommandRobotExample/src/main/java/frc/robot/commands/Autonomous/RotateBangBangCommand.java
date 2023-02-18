@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class RotateBangBangCommand extends CommandBase {
   
@@ -18,12 +19,12 @@ public class RotateBangBangCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    RobotContainer.driveTrainSubsystem.navx.reset();
+    DriveTrainSubsystem.navx.reset();
   }
 
   @Override
   public void execute() {
-    double currentAngle = RobotContainer.driveTrainSubsystem.navx.getAngle();
+    double currentAngle = DriveTrainSubsystem.navx.getAngle();
     double output = controller.calculate(currentAngle, setpoint);
     RobotContainer.driveTrainSubsystem.arcadeDrive(0, output);
     SmartDashboard.putNumber("Rotate setpoint value", setpoint);
@@ -32,7 +33,7 @@ public class RotateBangBangCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(setpoint - RobotContainer.driveTrainSubsystem.navx.getAngle()) < 1.0; // within a tolerance of 1 degree
+    return Math.abs(setpoint - DriveTrainSubsystem.navx.getAngle()) < 1.0; // within a tolerance of 1 degree
   }
 
   @Override

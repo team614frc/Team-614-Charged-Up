@@ -15,9 +15,9 @@ import frc.robot.commands.PIDCommand.TiltPID;
 public class ScoreAuto extends SequentialCommandGroup {
   /** Creates a new ChargeStationNotEngaged. */
   public ScoreAuto() {
-    addCommands(new TiltPID(),
+    addCommands(new TiltPID(0),
      new ManipulatorPIDCommand(-1),
-      new TiltPID());
+      new TiltPID(90));
   }
   
 }

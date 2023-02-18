@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Manipulator;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Manipulator extends SubsystemBase {
   /* Creates a new intake subsystem */
@@ -15,7 +16,7 @@ public class Manipulator extends SubsystemBase {
 
 
   public Manipulator(){
-    //intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
+    intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
     pdh = new PowerDistribution();
     /*We might not need the two motors for the gripper to follow each others movements in the future, as there is a possibility
     that we might need them to not match, in order to spin the game pieces onto their designated

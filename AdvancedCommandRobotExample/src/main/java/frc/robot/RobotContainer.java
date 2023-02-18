@@ -96,11 +96,10 @@ public class RobotContainer {
     m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
-    m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());
+    m_CommandXboxController.button(Constants.RIGHT_BUMPER).toggleOnTrue(new TiltPID(90));
+    m_CommandXboxController.button(Constants.RIGHT_BUMPER).toggleOnTrue(new TiltPID(0));
     m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); //Sets LED's to purple
     m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); //Sets LED's to yellow
-    //m_CommandXboxController.button(Constants.RIGHT_STICK_PRESS).whileTrue(new TiltPID());
-    
   }
 
   public Command getAutonomousCommand() {

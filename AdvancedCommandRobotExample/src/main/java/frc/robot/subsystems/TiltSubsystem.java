@@ -28,7 +28,6 @@ public class TiltSubsystem extends SubsystemBase {
   }
 
   public double getHeight() {
-    SmartDashboard.putNumber("Position is", tiltLeftMotor.getEncoder().getPosition());
     return tiltLeftMotor.getEncoder().getPosition();
   }
 

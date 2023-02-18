@@ -1,5 +1,8 @@
 package frc.robot.commands;
 
+import javax.swing.text.StyleContext.SmallAttributeSet;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
@@ -28,13 +31,14 @@ public class ArcadeDrive extends CommandBase {
     // Adjusted Speed
     double moveAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER * moveRawSpeed
         + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(moveRawSpeed, Constants.POW_VALUE);
-    double rotateAdjustedSpeed = -(Constants.ARCADE_DRIVE_MULTIPLIER * rotateRawSpeed
-        + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(rotateRawSpeed, Constants.POW_VALUE));
+    // double rotateAdjustedSpeed = -(Constants.ARCADE_DRIVE_MULTIPLIER * rotateRawSpeed
+    //     + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(rotateRawSpeed, Constants.POW_VALUE));
     // Uses an equation in order to get exact values for the amount value that we
     // are getting from the left sitck.
 
     // Arcade Drive
-    RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, rotateRawSpeed);
+    SmartDashboard.putNumber("Possible feed forward value", rotateRawSpeed);
     // Passes the adjusted movement values and rotation values
   }
 
