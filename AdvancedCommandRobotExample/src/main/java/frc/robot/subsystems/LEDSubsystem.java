@@ -50,5 +50,4 @@ public class LEDSubsystem extends SubsystemBase {
     // Check bounds
     rainbowInitialHue %= 180;
   }
-
 }
