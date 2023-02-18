@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ManipulatorDefaultCommand;
 import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -49,27 +50,28 @@ public class RobotContainer {
     configureBindings();
     // Sets the default command for drivetrain subsystem
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    //manipulator.setDefaultCommand(new ManipulatorDefaultCommand(RobotContainer.manipulator));
+    manipulator.setDefaultCommand(new ManipulatorDefaultCommand(RobotContainer.manipulator));
 
     // Add commands to the auto chooser
     m_chooser.setDefaultOption("Test Auto", TestAuto);
     m_chooser.addOption("Straight Path",
-        loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/testpath.wpilib.json", true));
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Straight-Path.wpilib.json", true));
     m_chooser.addOption("Curly Wirly",
-        loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/S-Curve-Path.wpilib.json", true));
     // Puts the auto chooser on the dashboard
 
     SmartDashboard.putData(m_chooser);
     SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
 
-  public Command loadPathPlannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
+  public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
     Trajectory trajectory;
+
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
       trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
     } catch (IOException exception) {
-      DriverStation.reportError("Unable to open trajectory " + filename, exception.getStackTrace());
+      DriverStation.reportError("Unable to open trajectory" + filename, exception.getStackTrace());
       System.out.println("Unable to read from file " + filename);
       return new InstantCommand();
     }

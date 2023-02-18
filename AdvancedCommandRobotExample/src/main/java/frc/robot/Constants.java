@@ -16,31 +16,26 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  //Tick Conversions
-  public static final double TICKS_PER_REV = 42;
-  public static final double GEAR_BOX_RATIO = 8.45;
-  public static final double WHEEL_DIAMETER = 6;
-  public static final double ksVolts = 0.14585;
-  public static final double kvVoltSecondsPerMeter = 1.3101;
-  public static final double kaVoltSecondsSquaredPerMeter = 0.1824;
+  // Tick Conversions
+  public static final double M_PI = Math.PI;
+
+  public static final double ksVolts = 0.14397;
+  public static final double kvVoltSecondsPerMeter = 1.316;
+  public static final double kaVoltSecondsSquaredPerMeter = 0.14549;
   public static final double kTrackWidthMeters = Units.inchesToMeters(20);
   public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
   public static final double kMaxSpeedMetersPerSecond = 3;
   public static final double kMaxAccelerationMetersPerSecondSquared = 3;
   public static final double kRamseteB = 2;
   public static final double kRamseteZeta = 0.7;
-  public static final double GEARBOX_OUTPUT_REVOLUTIONS = 0;
-  public static final double M_PI = Math.PI;
-
   public static final double kGearRatio = 10.71; // need to change to 8.45 with new roboto
   public static final double kWheelRadiusInches = 3;
   public static final double kLinearDistanceConversionFactor = (Units
-      .inchesToMeters(2 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
-                    //1
-  
-  //PWM LED Port
+      .inchesToMeters(1 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
+
+  // PWM LED Port
   public static final int ADDRESSABLE_LED_PORT = 0;
-  
+
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
   public static final double MOTOR_REST_BACK = -0.05;
@@ -56,7 +51,7 @@ public final class Constants {
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 15; 
+  public static final int INTAKE_MOTOR = 15;
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -88,7 +83,7 @@ public final class Constants {
   public static final double ELEVATOR_SETPOINT = 0;
   public static final double ELEVATOR_SETPOINT2 = 10;
 
-  //Elevator Min and Max height
+  // Elevator Min and Max height
   public static final double ELEVATOR_MAX_HEIGHT = 0;
   public static final double ELEVATOR_MIN_HEIGHT = 55;
 
@@ -106,7 +101,7 @@ public final class Constants {
   public static final double TILT_UP_SETPOINT = 5;
 
   // Position-based PID Values
-  //public static final double P_kP = 44.251;
+  // public static final double P_kP = 44.251;
   public static final double P_kP = 0.023;
   public static final double P_kI = 0.00001;
   public static final double P_kD = 0;
@@ -133,10 +128,8 @@ public final class Constants {
   public static final int TILT_RIGHT_MOTOR = 51;
   public static final int TILT_LEFT_MOTOR = 53;
 
-  
-                    //1
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
   }
-  
+
 }

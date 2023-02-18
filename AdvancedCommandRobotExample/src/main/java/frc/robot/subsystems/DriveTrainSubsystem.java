@@ -30,8 +30,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   private final DifferentialDriveOdometry m_odometry;
 
-  public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
-
   public DriveTrainSubsystem() {
     // motor initalization
     followerRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_RIGHT_MOTOR, MotorType.kBrushless);

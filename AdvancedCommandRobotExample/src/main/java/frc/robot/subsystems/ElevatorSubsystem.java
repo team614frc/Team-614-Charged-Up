@@ -33,9 +33,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public double getInches() {
-    double motorRevolutions = elevatorLeftMotor.getEncoder().getPosition() / Constants.TICKS_PER_REV;
-    double gearBoxOutputRevolutions = motorRevolutions * Constants.GEAR_BOX_RATIO;
-    double inchesTraveled = gearBoxOutputRevolutions * Constants.M_PI * Constants.WHEEL_DIAMETER;
+    double motorRevolutions = elevatorLeftMotor.getEncoder().getPosition() / 42;
+    double gearBoxOutputRevolutions = motorRevolutions * Constants.kGearRatio;
+    double inchesTraveled = gearBoxOutputRevolutions * Constants.M_PI * 6;
     return inchesTraveled;
   }
 
