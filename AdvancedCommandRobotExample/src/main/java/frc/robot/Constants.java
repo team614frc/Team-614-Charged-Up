@@ -65,6 +65,7 @@ public final class Constants {
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
+  public static final int CO_DRIVER_CONTROLLER_PORT = 1;
 
   // Xbox Controller Buttons
   public static final int X_BUTTON = 3;

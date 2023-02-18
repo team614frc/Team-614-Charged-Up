@@ -6,12 +6,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Manipulator;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Manipulator extends SubsystemBase {
   /* Creates a new intake subsystem */
   PowerDistribution pdh;
   double spikeThreshold = Constants.MANIPULATOR_THRESHOLD;
-  CANSparkMax intakeMotor = null;
+  CANSparkMax intakeMotor = new CANSparkMax(99, MotorType.kBrushless);
 
 
   public Manipulator(){

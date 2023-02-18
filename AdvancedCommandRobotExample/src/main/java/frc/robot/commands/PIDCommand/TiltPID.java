@@ -9,7 +9,7 @@ public class TiltPID extends PIDCommand {
   /** Creates a new TiltPID. */
   static double tiltSetpoint;
 
-  public TiltPID() { 
+  public TiltPID(double tiltSetpoint) { 
     super(
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
