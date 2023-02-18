@@ -26,14 +26,16 @@ public class RotatePIDCommand extends PIDCommand {
         degrees,
         // This uses the output
         output -> {
-          //if statement to ensure motors do not output too much or too little power to reach setpoint
-          RobotContainer.driveTrainSubsystem.arcadeDrive(0, -output-(0.14402/12));
+          // if statement to ensure motors do not output too much or too little power to
+          // reach setpoint
+          RobotContainer.driveTrainSubsystem.arcadeDrive(0, -output - (0.14402 / 12));
           SmartDashboard.putNumber("Output:", output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.driveTrainSubsystem);
     // Configure additional PID options by calling `getController` here.
   }
+
   @Override
   public void initialize() {
     SmartDashboard.putNumber("Rotate P Value:", Constants.P_kP);
@@ -55,5 +57,5 @@ public class RotatePIDCommand extends PIDCommand {
   public boolean isFinished() {
     return getController().atSetpoint();
   }
- 
+
 }

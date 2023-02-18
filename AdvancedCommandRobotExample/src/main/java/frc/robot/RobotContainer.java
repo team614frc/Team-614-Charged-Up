@@ -99,6 +99,7 @@ public class RobotContainer {
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());
     m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); //Sets LED's to purple
     m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); //Sets LED's to yellow
+    m_CommandXboxController.button(1).toggleOnTrue(new SetLEDColorCommand(2));
     //m_CommandXboxController.button(Constants.RIGHT_STICK_PRESS).whileTrue(new TiltPID());
     
   }

@@ -30,7 +30,7 @@ public class ArcadeDrive extends CommandBase {
         + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(moveRawSpeed, Constants.POW_VALUE);
     double rotateAdjustedSpeed = -(Constants.ARCADE_DRIVE_MULTIPLIER * rotateRawSpeed
         + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(rotateRawSpeed, Constants.POW_VALUE));
-    // Uses an equation in order to get exact values for the amount value that we
+    // Uses an equation in order tFo get exact values for the amount value that we
     // are getting from the left sitck.
 
     // Arcade Drive

@@ -27,7 +27,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;
   private static AHRS navX;
-  
+
   private final DifferentialDriveOdometry m_odometry;
 
   public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
@@ -62,7 +62,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
-    
+
     navX = new AHRS(SPI.Port.kMXP);
 
     navX.reset();

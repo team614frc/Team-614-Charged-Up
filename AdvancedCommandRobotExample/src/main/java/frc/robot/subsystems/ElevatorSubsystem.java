@@ -31,13 +31,15 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Position is", elevatorLeftMotor.getEncoder().getPosition());
     return elevatorLeftMotor.getEncoder().getPosition();
   }
-  public double getInches(){
-    double motorRevolutions = elevatorLeftMotor.getEncoder().getPosition()/Constants.TICKS_PER_REV;
+
+  public double getInches() {
+    double motorRevolutions = elevatorLeftMotor.getEncoder().getPosition() / Constants.TICKS_PER_REV;
     double gearBoxOutputRevolutions = motorRevolutions * Constants.GEAR_BOX_RATIO;
     double inchesTraveled = gearBoxOutputRevolutions * Constants.M_PI * Constants.WHEEL_DIAMETER;
     return inchesTraveled;
   }
-  public void set(double val){
+
+  public void set(double val) {
     elevatorLeftMotor.set(val);
   }
 }

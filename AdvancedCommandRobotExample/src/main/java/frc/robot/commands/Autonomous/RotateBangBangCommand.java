@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class RotateBangBangCommand extends CommandBase {
-  
+
   double setpoint;
   BangBangController controller;
-  
+
   public RotateBangBangCommand(double setpoint) {
     this.setpoint = setpoint;
     addRequirements(RobotContainer.driveTrainSubsystem);
@@ -32,7 +32,8 @@ public class RotateBangBangCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(setpoint - RobotContainer.driveTrainSubsystem.navx.getAngle()) < 1.0; // within a tolerance of 1 degree
+    return Math.abs(setpoint - RobotContainer.driveTrainSubsystem.navx.getAngle()) < 1.0; // within a tolerance of 1
+                                                                                          // degree
   }
 
   @Override
