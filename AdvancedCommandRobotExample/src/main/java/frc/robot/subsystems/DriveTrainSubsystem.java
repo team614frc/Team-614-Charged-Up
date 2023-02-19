@@ -67,7 +67,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     navX.calibrate();
     resetEncoderValues();
 
-    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), getLeaderLeftEncoderPosition(),
+        getLeaderRightEncoderPosition());
+
     m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         new Pose2d());
   }
@@ -174,7 +176,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public static void zeroHeading() {
     navX.calibrate();
-    navX.calibrate();
+    navX.reset();
   }
 
   public Gyro getGyro() {

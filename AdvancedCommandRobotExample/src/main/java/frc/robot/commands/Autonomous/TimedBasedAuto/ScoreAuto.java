@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Autonomous.TimedBasedAuto;
 
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
@@ -17,6 +18,8 @@ public class ScoreAuto extends SequentialCommandGroup {
     addCommands(new TiltPID(),
         new ManipulatorPIDCommand(-1),
         new TiltPID());
+
+        // addCommands(new ParallelRaceGroup());
   }
 
 }
