@@ -2,6 +2,8 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -12,6 +14,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -66,6 +69,9 @@ public class RobotContainer {
 
   public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
     Trajectory trajectory;
+    HashMap<String, Command> eventMap = new HashMap<>();
+    eventMap.put("marker1", new PrintCommand("Passed marker 1"));
+    // eventMap.put("intakeDown", new IntakeDown());
 
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
@@ -99,9 +105,11 @@ public class RobotContainer {
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());
-    m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); //Sets LED's to purple
-    m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); //Sets LED's to yellow
-    m_CommandXboxController.button(1).toggleOnTrue(new SetLEDColorCommand(2)); //Sets the LED's to rainbow!
+    m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); // Sets LED's to
+                                                                                                    // purple
+    m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); // Sets LED's to
+                                                                                                   // yellow
+    m_CommandXboxController.button(1).toggleOnTrue(new SetLEDColorCommand(2)); // Sets the LED's to rainbow!
   }
 
   public Command getAutonomousCommand() {
