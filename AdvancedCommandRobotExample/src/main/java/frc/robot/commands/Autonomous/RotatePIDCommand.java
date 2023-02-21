@@ -5,7 +5,6 @@
 package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -27,8 +26,7 @@ public class RotatePIDCommand extends PIDCommand {
         degrees,
         // This uses the output
         output -> {
-          //if statement to ensure motors do not output too much or too little power to reach setpoint
-          RobotContainer.driveTrainSubsystem.rotationArcadeDrive(output, degrees, DriveTrainSubsystem.navx.getAngle());
+          RobotContainer.driveTrainSubsystem.rotationArcadeDrive(output);
           SmartDashboard.putNumber("Output:", output);
         });
     // Use addRequirements() here to declare subsystem dependencies.

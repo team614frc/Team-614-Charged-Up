@@ -30,6 +30,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   
   private final DifferentialDriveOdometry m_odometry;
 
+     // Create a feedforward controller
+   private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
+
   public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
 
   public DriveTrainSubsystem() {
@@ -87,26 +90,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
-  // Takes in a target rotation value and current gyro angle
-  public void rotationArcadeDrive(double pidOutput, double targetRotation, double currentRotation) {
-    // Create a feedforward controller
-    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
 
-    // Calculate the feedforward term for the target rotation
-    double feedForward = feedforward.calculate(targetRotation);
+  public void rotationArcadeDrive(double rotateSpeed) {
+    double feedForwardOutput = feedforward.calculate(rotateSpeed);
+    double outputSpeed = feedForwardOutput + rotateSpeed;
+    differentialDrive.arcadeDrive(0, outputSpeed);
 
-    // Combine the feedforward term with the PID output
-    double rotationOutput = feedForward + pidOutput;
-
-    // Limit the rotation output to be within the maximum and minimum output values
-    double maxOutput = 1.0; // Maximum output value
-    double minOutput = -1.0; // Minimum output value
-    rotationOutput = Math.max(Math.min(rotationOutput, maxOutput), minOutput);
-
-    // Use the rotation output to control the robot's motors
-    DriveTrainSubsystem.differentialDrive.arcadeDrive(0, rotationOutput);
-}
-
+  }
 
   public double getEncoderPositionAverage() {
     double positionAverage = (Math.abs(leaderLeftMotor.getEncoder().getPosition())
