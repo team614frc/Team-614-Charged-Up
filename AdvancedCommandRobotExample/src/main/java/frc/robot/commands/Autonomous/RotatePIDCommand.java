@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -21,7 +22,7 @@ public class RotatePIDCommand extends PIDCommand {
         // The controller that the command will use
         new PIDController(Constants.P_kP, Constants.P_kI, Constants.P_kD),
         // This should return the measurement
-        RobotContainer.driveTrainSubsystem.navx::getAngle,
+        DriveTrainSubsystem.navX::getAngle,
         // This should return the setpoint (can also be a constant)
         degrees,
         // This uses the output
@@ -49,7 +50,7 @@ public class RotatePIDCommand extends PIDCommand {
   public void execute() {
     super.execute();
     SmartDashboard.putNumber("Rotate Gyro setpoint value", getController().getSetpoint());
-    SmartDashboard.putNumber("Rotate Gyro current value", RobotContainer.driveTrainSubsystem.navx.getAngle());
+    SmartDashboard.putNumber("Rotate Gyro current value", DriveTrainSubsystem.navX.getAngle());
   }
 
   // Returns true when the command should end.

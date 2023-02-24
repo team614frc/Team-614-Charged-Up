@@ -12,7 +12,7 @@ public class Manipulator extends SubsystemBase {
   /* Creates a new intake subsystem */
   PowerDistribution pdh;
   double spikeThreshold = Constants.MANIPULATOR_THRESHOLD;
-  CANSparkMax intakeMotor = null;
+  CANSparkMax intakeMotor = new CANSparkMax(99, MotorType.kBrushless);
 
 
   public Manipulator(){

@@ -2,8 +2,6 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -14,7 +12,6 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -61,17 +58,24 @@ public class RobotContainer {
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Straight-Path.wpilib.json", true));
     m_chooser.addOption("Curly Wirly",
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/S-Curve-Path.wpilib.json", true));
-    // Puts the auto chooser on the dashboard
-
+    m_chooser.addOption("Path Path Path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New New Path.wpilib.json", true));
+    m_chooser.addOption("3 meter",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New New New Path.wpilib.json", true));
+    m_chooser.addOption("Straight Path 2",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Forwardandright.wpilib.json", true));
+    m_chooser.addOption("Forward and reverse",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
+    m_chooser.addOption("Candy Cane Path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Candy Cane Path.wpilib.json", true));
+    m_chooser.addOption("score grab charge",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Score Grab Charge.wpilib.json", true));
+        
     SmartDashboard.putData(m_chooser);
-    SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
 
   public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
     Trajectory trajectory;
-    HashMap<String, Command> eventMap = new HashMap<>();
-    eventMap.put("marker1", new PrintCommand("Passed marker 1"));
-    // eventMap.put("intakeDown", new IntakeDown());
 
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
