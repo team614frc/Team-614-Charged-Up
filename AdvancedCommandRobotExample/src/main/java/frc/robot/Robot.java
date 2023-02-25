@@ -1,10 +1,9 @@
 package frc.robot;
 
-import java.nio.file.Path;
-
 import com.pathplanner.lib.server.PathPlannerServer;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -21,6 +20,9 @@ public class Robot extends TimedRobot {
     PathPlannerServer.startServer(5811); // 5811 = port number. adjust this according to your needs
     PathPlannerServer.sendActivePath(null);
     PathPlannerServer.sendPathFollowingData(null, RobotContainer.driveTrainSubsystem.getPose());
+    RobotContainer.elevatorSubsystem.resetElevatorEncoders();
+    RobotContainer.tiltSubsystem.resetTiltEncoders();
+    RobotContainer.driveTrainSubsystem.resetEncoderValues();
   }
 
   @Override
@@ -44,6 +46,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     DriveTrainSubsystem.zeroHeading();
+    
+    RobotContainer.driveTrainSubsystem.navX.reset();
+    RobotContainer.tiltSubsystem.resetTiltEncoders();
+    RobotContainer.driveTrainSubsystem.resetEncoderValues();
+    RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // Runs an auto command in auto mode if there is one selected
     if (m_autonomousCommand != null)
@@ -62,6 +69,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
   }
 
   @Override
@@ -80,6 +88,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
+    SmartDashboard.putNumber("Current ticks of elevator", RobotContainer.elevatorSubsystem.getHeight());
   }
 
   @Override

@@ -19,28 +19,36 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 // import frc.robot.commands.ManipulatorDefaultCommand;
-import frc.robot.commands.SetLEDColorCommand;
+// import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.Manipulator;
 // import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
-import frc.robot.commands.PIDCommand.TiltPID;
-// import frc.robot.commands.SimpleCommands.Intake;
-import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
+// import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
+// import frc.robot.commands.PIDCommand.TiltPID;
+import frc.robot.commands.SimpleCommands.Extend;
+import frc.robot.commands.SimpleCommands.Intake;
+import frc.robot.commands.SimpleCommands.MaxTiltUp;
+import frc.robot.commands.SimpleCommands.Retract;
+import frc.robot.commands.SimpleCommands.TiltHold;
+import frc.robot.commands.SimpleCommands.MaxTiltDown;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TimedCommands.WaitCommand;
 
 public class RobotContainer {
+
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
   public static Timer autoTimer;
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(
       Constants.DRIVER_CONTROLLER_PORT);
-  // public static Manipulator manipulator = new Manipulator();
+  public static CommandXboxController co_CommandXboxController = new CommandXboxController(
+      Constants.CO_DRIVER_CONTROLLER_PORT);
+  public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
   public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
@@ -48,7 +56,7 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   HashMap<String, Command> eventMap = new HashMap<>();
 
-  private final Command TestAuto = new TestAuto();
+  // private final Command TestAuto = new TestAuto();
 
   public RobotContainer() {
     configureBindings();
@@ -58,7 +66,7 @@ public class RobotContainer {
     // ManipulatorDefaultCommand(RobotContainer.manipulator));
 
     // Add commands to the auto chooser
-    m_chooser.setDefaultOption("Test Auto", TestAuto);
+    // m_chooser.setDefaultOption("Test Auto", TestAuto);
     m_chooser.addOption("Circle",
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Circle Path.wpilib.json", true));
     m_chooser.addOption("Straight Path",
@@ -118,18 +126,29 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    // m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new
-    // Intake(Constants.MANIPULATOR_SETPOINT));
-    // m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new
-    // Intake(Constants.MANIPULATOR_SETPOINT2));
-    m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
-    m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
-    m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());
-    m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); // Sets LED's to
-                                                                                                    // purple
-    m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); // Sets LED's to
-                                                                                                   // yellow
-    m_CommandXboxController.button(1).toggleOnTrue(new SetLEDColorCommand(2)); // Sets the LED's to rainbow!
+
+    // MAIN DRIVER CONTROLLER BINDS
+    m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
+    m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
+    m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
+    m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
+    m_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
+    m_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
+    m_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
+    // m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new
+    // SetLEDColorCommand(0)); Sets LED's to purple
+    // m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new
+    // SetLEDColorCommand(1)); Sets LED's to yellow
+
+    // CO-DRIVER CONTROLLER BINDS
+    co_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
+    co_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
+    co_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
+    co_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
+    co_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
+    co_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
+    co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
+
   }
 
   public Command getAutonomousCommand() {

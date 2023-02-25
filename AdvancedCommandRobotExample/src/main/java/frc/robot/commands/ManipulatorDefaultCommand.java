@@ -15,7 +15,6 @@
 //   Manipulator m_manipulator;
 //   PowerDistribution pdh;
 //   double spikeThreshold = Constants.MANIPULATOR_THRESHOLD;
-
 //   public ManipulatorDefaultCommand(Manipulator manipulator) {
 //     // Use addRequirements() here to declare subsystem dependencies.
 //     m_manipulator = manipulator;
@@ -28,11 +27,12 @@
 //     if (pdh.getCurrent(Constants.INTAKE_MOTOR) > spikeThreshold) {
 //       m_manipulator.set(Constants.MOTOR_REST_BACK);
 //       SmartDashboard.putBoolean("Picked Up game piece:", true);
-//     } else {
+//     }
+//     else {
 //       SmartDashboard.putBoolean("Picked Up game piece:", false);
 //     }
 //   }
-
+  
 //   // Returns true when the command should end.
 //   @Override
 //   public boolean isFinished() {

@@ -1,10 +1,7 @@
 package frc.robot;
 
-import java.util.HashMap;
-
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -48,21 +45,24 @@ public final class Constants {
   public static final int GLOBAL_INVERT = -1;
 
   // DRIVE TRAIN MOTORS
-  public static final int DRIVETRAIN_FOLLOWER_RIGHT_MOTOR = 1;
-  public static final int DRIVETRAIN_LEADER_RIGHT_MOTOR = 3;
-  public static final int DRIVETRAIN_FOLLOWER_LEFT_MOTOR = 14;
-  public static final int DRIVETRAIN_LEADER_LEFT_MOTOR = 13;
+  public static final int DRIVETRAIN_FOLLOWER_RIGHT_MOTOR = 9;
+  public static final int DRIVETRAIN_LEADER_RIGHT_MOTOR = 2;
+  public static final int DRIVETRAIN_FOLLOWER_LEFT_MOTOR = 10;
+  public static final int DRIVETRAIN_LEADER_LEFT_MOTOR = 19;
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 15;
+  public static final int INTAKE_MOTOR = 4; 
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
+  public static final int CO_DRIVER_CONTROLLER_PORT = 1;
 
   // Xbox Controller Buttons
   public static final int X_BUTTON = 3;
   public static final int Y_BUTTON = 4;
+  public static final int A_BUTTON = 1;
+  public static final int B_BUTTON = 2;
   public static final int LEFT_BUMPER = 5;
   public static final int RIGHT_BUMPER = 6;
   public static final int BACK_BUTTON = 7;
@@ -76,31 +76,36 @@ public final class Constants {
 
   // Manipulator Commands
   public static final double INTAKE_SPEED_FORWARD = 1;
-  public static final double INTAKE_SPEED_LEADERWARD = -1;
+  public static final double INTAKE_SPEED_BACKWARD = -1;
 
   // Elevator Commands
-  public static final double ELEVATOR_UP_SPEED = 0.5;
-  public static final double ELEVATOR_DOWN_SPEED = -0.5;
+  public static final double ELEVATOR_UP_SPEED = 0.8;
+  public static final double ELEVATOR_DOWN_SPEED = -0.8;
   public static final int ELEVATOR_CURRENT_LIMIT = 40;
 
   // Elevator PID Setpoints
   public static final double ELEVATOR_SETPOINT = 0;
   public static final double ELEVATOR_SETPOINT2 = 10;
 
-  // Elevator Min and Max height
-  public static final double ELEVATOR_MAX_HEIGHT = 0;
-  public static final double ELEVATOR_MIN_HEIGHT = 55;
+  //Elevator Min and Max height
+  public static final double ELEVATOR_MAX_HEIGHT = 34; //22.8
+  public static final double ELEVATOR_MIN_HEIGHT = 3;
+
+  //Tilt Min and Max height
+  public static final double TILT_MIN_ENCODER_VALUE = 5; //Pivot going downwards increases encoder value
+  public static final double TILT_MAX_ENCODER_VALUE = 17;
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SETPOINT = -30; // for testing
-  public static final double MANIPULATOR_SETPOINT2 = 25;
+  public static final double MANIPULATOR_SETPOINT  =  0.5; // for testing
+  public static final double MANIPULATOR_SETPOINT2 = -0.8;
 
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 5;
 
   // Tilt Commands
-  public static final double TILT_UP_SPEED = 0.5;
-  public static final double TILT_DOWN_SPEED = -0.5;
+  public static final double TILT_UP_SPEED = 0.4;
+  public static final double TILT_DOWN_SPEED = -0.2;
+  public static final double TILT_REST_SPEED = 0.05;
   public static final double TILT_DOWN_SETPOINT = 0;
   public static final double TILT_UP_SETPOINT = 5;
 
@@ -125,13 +130,12 @@ public final class Constants {
   public static final double AUTO_ROTATE_SPEED = 0.0;
 
   // ELEVATOR MOTOR ID'S
-  public static final int ELEVATOR_RIGHT_MOTOR = 50;
-  public static final int ELEVATOR_LEFT_MOTOR = 2;
+  public static final int ELEVATOR_RIGHT_MOTOR = 17;
+  public static final int ELEVATOR_LEFT_MOTOR = 3;
 
   // TILT MOTOR ID'S
-  public static final int TILT_RIGHT_MOTOR = 51;
-  public static final int TILT_LEFT_MOTOR = 53;
-
+  public static final int TILT_RIGHT_MOTOR = 18;
+  public static final int TILT_LEFT_MOTOR = 1;
 
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
