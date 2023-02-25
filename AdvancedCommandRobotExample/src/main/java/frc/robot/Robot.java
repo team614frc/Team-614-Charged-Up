@@ -17,9 +17,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
     DriveTrainSubsystem.zeroHeading();
-    PathPlannerServer.startServer(5811); // 5811 = port number. adjust this according to your needs
-    PathPlannerServer.sendActivePath(null);
-    PathPlannerServer.sendPathFollowingData(null, RobotContainer.driveTrainSubsystem.getPose());
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();

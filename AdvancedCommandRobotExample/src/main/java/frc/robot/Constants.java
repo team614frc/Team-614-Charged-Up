@@ -93,7 +93,7 @@ public final class Constants {
 
   //Tilt Min and Max height
   public static final double TILT_MIN_ENCODER_VALUE = 5; //Pivot going downwards increases encoder value
-  public static final double TILT_MAX_ENCODER_VALUE = 17;
+  public static final double TILT_MAX_ENCODER_VALUE = 10; //17 //15
 
   // Manipulator PID setpoints (test)
   public static final double MANIPULATOR_SETPOINT  =  0.5; // for testing
