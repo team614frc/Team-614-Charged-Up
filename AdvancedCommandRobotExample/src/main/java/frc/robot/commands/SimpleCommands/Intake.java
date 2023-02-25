@@ -1,5 +1,6 @@
 package frc.robot.commands.SimpleCommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -23,6 +24,7 @@ public class Intake extends CommandBase {
     // If left bumper is pressed, turns the motor on in order to take the game piece
     // in, and grip it
     RobotContainer.manipulator.set(intakeSpeed);
+    SmartDashboard.putNumber("Current Intake Speed", intakeSpeed);
   }
 
   @Override

@@ -49,10 +49,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     followerRightMotor.follow(leaderRightMotor, false);
     followerLeftMotor.follow(leaderLeftMotor, false);
 
-    leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
-    leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    // leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    // leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    // leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    // leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
     // Current Limits Set
     followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
