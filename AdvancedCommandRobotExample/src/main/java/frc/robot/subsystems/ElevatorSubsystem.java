@@ -9,8 +9,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class ElevatorSubsystem extends SubsystemBase {
 
-  CANSparkMax elevatorRightMotor = null;
   CANSparkMax elevatorLeftMotor = null;
+  CANSparkMax elevatorRightMotor = null;
 
   public ElevatorSubsystem() {
     elevatorRightMotor = new CANSparkMax(Constants.ELEVATOR_RIGHT_MOTOR,
@@ -50,14 +50,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorLeftMotor.getEncoder().setPosition(0);
     elevatorRightMotor.getEncoder().setPosition(0);
   }
-  
-  public double getInches(){
-    double motorRevolutions = elevatorLeftMotor.getEncoder().getPosition()/Constants.TICKS_PER_REV;
-    double gearBoxOutputRevolutions = motorRevolutions * Constants.GEAR_BOX_RATIO;
-    double inchesTraveled = gearBoxOutputRevolutions * Constants.M_PI * Constants.WHEEL_DIAMETER;
-    return inchesTraveled;
-  }
-  public void set(double val){
+
+  public void set(double val) {
     elevatorLeftMotor.set(val);
     elevatorRightMotor.set(-1*val);
   }

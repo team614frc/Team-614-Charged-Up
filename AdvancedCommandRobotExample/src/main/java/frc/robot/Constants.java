@@ -15,37 +15,28 @@ import edu.wpi.first.math.util.Units;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
-  
-  //----------------------------------------
-  // (EXPERIMENTAL ROBOT CAN ID AND VALUES) 
-  //----------------------------------------
-  
-  //Tick Conversions
-  public static final double TICKS_PER_REV = 42;
-  public static final double GEAR_BOX_RATIO = 8.45;
-  public static final double WHEEL_DIAMETER = 6;
-  public static final double ksVolts = 0.14585;
-  public static final double kvVoltSecondsPerMeter = 1.3101;
-  public static final double kaVoltSecondsSquaredPerMeter = 0.1824;
+  // Tick Conversions
+  public static final double M_PI = Math.PI;
+
+  public static final double ksVolts = 1.92397; // .14397 //.56397
+  public static final double kvVoltSecondsPerMeter = 1.316;
+  public static final double kaVoltSecondsSquaredPerMeter = 0.14549;
   public static final double kTrackWidthMeters = Units.inchesToMeters(20);
   public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
   public static final double kMaxSpeedMetersPerSecond = 3;
   public static final double kMaxAccelerationMetersPerSecondSquared = 3;
   public static final double kRamseteB = 2;
   public static final double kRamseteZeta = 0.7;
-  public static final double GEARBOX_OUTPUT_REVOLUTIONS = 0;
-  public static final double M_PI = Math.PI;
-
   public static final double kGearRatio = 10.71; // need to change to 8.45 with new roboto
   public static final double kWheelRadiusInches = 3;
   public static final double kLinearDistanceConversionFactor = (Units
-      .inchesToMeters(2 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
+      .inchesToMeters(1 / (kGearRatio * 2 * Math.PI * Units.inchesToMeters(kWheelRadiusInches)) * 10));
 
-  
-  //PWM LED Port
+  // PWM LED Port
   public static final int ADDRESSABLE_LED_PORT = 0;
-  
+
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
   public static final double MOTOR_REST_BACK = -0.05;
@@ -119,7 +110,7 @@ public final class Constants {
   public static final double TILT_UP_SETPOINT = 5;
 
   // Position-based PID Values
-  //public static final double P_kP = 44.251;
+  // public static final double P_kP = 44.251;
   public static final double P_kP = 0.023;
   public static final double P_kI = 0.00001;
   public static final double P_kD = 0;
@@ -149,5 +140,4 @@ public final class Constants {
   public static class OperatorConstants {
     // public static final int kDriverControllerPort = 0;
   }
-  
 }

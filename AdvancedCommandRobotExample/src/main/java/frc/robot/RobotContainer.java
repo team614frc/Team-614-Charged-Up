@@ -2,6 +2,8 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -16,12 +18,14 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.SetLEDColorCommand;
+// import frc.robot.commands.ManipulatorDefaultCommand;
+// import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Manipulator;
+// import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,7 +37,7 @@ import frc.robot.commands.SimpleCommands.MaxTiltUp;
 import frc.robot.commands.SimpleCommands.Retract;
 import frc.robot.commands.SimpleCommands.TiltHold;
 import frc.robot.commands.SimpleCommands.MaxTiltDown;
-import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.TimedCommands.WaitCommand;
 
 public class RobotContainer {
 
@@ -50,6 +54,7 @@ public class RobotContainer {
   public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   public static LEDSubsystem ledSubsystem = new LEDSubsystem();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  HashMap<String, Command> eventMap = new HashMap<>();
 
   // private final Command TestAuto = new TestAuto();
 
@@ -57,70 +62,93 @@ public class RobotContainer {
     configureBindings();
     // Sets the default command for drivetrain subsystem
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    //manipulator.setDefaultCommand(new ManipulatorDefaultCommand(RobotContainer.manipulator));
+    // manipulator.setDefaultCommand(new
+    // ManipulatorDefaultCommand(RobotContainer.manipulator));
 
     // Add commands to the auto chooser
     // m_chooser.setDefaultOption("Test Auto", TestAuto);
-    // m_chooser.addOption("Straight Path",
-    //     loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/testpath.wpilib.json", true));
-    // m_chooser.addOption("Curly Wirly",
-    //     loadPathPlannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
-    // Puts the auto chooser on the dashboard
+    m_chooser.addOption("Circle",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Circle Path.wpilib.json", true));
+    m_chooser.addOption("Straight Path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Straight-Path.wpilib.json", true));
+    m_chooser.addOption("Curly Wirly",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/S-Curve-Path.wpilib.json", true));
+    m_chooser.addOption("Path Path Path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New New Path.wpilib.json", true));
+    m_chooser.addOption("3 meter",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New New New Path.wpilib.json", true));
+    m_chooser.addOption("Straight Path 2",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Forwardandright.wpilib.json", true));
+    m_chooser.addOption("Forward and reverse",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/New Path.wpilib.json", true));
+    m_chooser.addOption("Candy Cane Path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Candy Cane Path.wpilib.json", true));
+    m_chooser.addOption("score grab charge",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Score Grab Charge.wpilib.json", true));
+    m_chooser.addOption("test marker path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/inch.wpilib.json", true));
 
     SmartDashboard.putData(m_chooser);
-    SmartDashboard.putNumber("Drivetrain Average Encoder Position", driveTrainSubsystem.getEncoderPositionAverage());
   }
 
-  // public Command loadPathPlannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
-  //   Trajectory trajectory;
-  //   try {
-  //     Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
-  //     trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-  //   } catch (IOException exception) {
-  //     DriverStation.reportError("Unable to open trajectory " + filename, exception.getStackTrace());
-  //     System.out.println("Unable to read from file " + filename);
-  //     return new InstantCommand();
-  //   }
+  public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
+    Trajectory trajectory;
 
-  //   RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrainSubsystem::getPose,
-  //       new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-  //       new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
-  //           Constants.kaVoltSecondsSquaredPerMeter),
-  //       Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
-  //       new PIDController(Constants.V_kP, 0, 0),
-  //       new PIDController(Constants.V_kP, 0, 0), driveTrainSubsystem::DifferentialDriveVolts,
-  //       driveTrainSubsystem);
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException exception) {
+      DriverStation.reportError("Unable to open trajectory" + filename, exception.getStackTrace());
+      System.out.println("Unable to read from file " + filename);
+      return new InstantCommand();
+    }
 
-  //   if (resetOdomtry) {
-  //     return new SequentialCommandGroup(
-  //         new InstantCommand(() -> driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())), ramseteCommand);
-  //   } else {
-  //     return ramseteCommand;
-  //   }
-  // }
+    RamseteCommand ramseteCommand = new RamseteCommand(trajectory,
+    driveTrainSubsystem::getPose,
+    new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+    new SimpleMotorFeedforward(Constants.ksVolts,
+    Constants.kvVoltSecondsPerMeter,
+    Constants.kaVoltSecondsSquaredPerMeter),
+    Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
+    new PIDController(Constants.V_kP, 0, 0),
+    new PIDController(Constants.V_kP, 0, 0),
+    driveTrainSubsystem::DifferentialDriveVolts,
+    driveTrainSubsystem);
+
+    eventMap.put("marker1", new WaitCommand(2));
+
+    if (resetOdomtry) {
+      return new SequentialCommandGroup(
+          new InstantCommand(() -> driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())), ramseteCommand);
+    } else {
+      return ramseteCommand;
+    }
+  }
 
   private void configureBindings() {
 
-    //MAIN DRIVER CONTROLLER BINDS
+    // MAIN DRIVER CONTROLLER BINDS
     m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
     m_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
     m_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
-    m_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());  
-    //m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); Sets LED's to purple
-    //m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); Sets LED's to yellow
+    m_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
+    // m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new
+    // SetLEDColorCommand(0)); Sets LED's to purple
+    // m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new
+    // SetLEDColorCommand(1)); Sets LED's to yellow
 
-    //CO-DRIVER CONTROLLER BINDS
+    // CO-DRIVER CONTROLLER BINDS
     co_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
     co_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
     co_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
     co_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
     co_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
     co_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
-    co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());  
-    
+    co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
+
   }
 
   public Command getAutonomousCommand() {
