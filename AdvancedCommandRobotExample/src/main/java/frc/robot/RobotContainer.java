@@ -2,6 +2,8 @@ package frc.robot;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -16,20 +18,21 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ManipulatorDefaultCommand;
+// import frc.robot.commands.ManipulatorDefaultCommand;
 import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.Manipulator;
+// import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
-import frc.robot.commands.SimpleCommands.Intake;
+// import frc.robot.commands.SimpleCommands.Intake;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.TimedCommands.WaitCommand;
 
 public class RobotContainer {
   // Subsystem Initalization
@@ -37,12 +40,13 @@ public class RobotContainer {
   public static Timer autoTimer;
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(
       Constants.DRIVER_CONTROLLER_PORT);
-  public static Manipulator manipulator = new Manipulator();
+  // public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
   public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   public static LEDSubsystem ledSubsystem = new LEDSubsystem();
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  HashMap<String, Command> eventMap = new HashMap<>();
 
   private final Command TestAuto = new TestAuto();
 
@@ -50,10 +54,13 @@ public class RobotContainer {
     configureBindings();
     // Sets the default command for drivetrain subsystem
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    manipulator.setDefaultCommand(new ManipulatorDefaultCommand(RobotContainer.manipulator));
+    // manipulator.setDefaultCommand(new
+    // ManipulatorDefaultCommand(RobotContainer.manipulator));
 
     // Add commands to the auto chooser
     m_chooser.setDefaultOption("Test Auto", TestAuto);
+    m_chooser.addOption("Circle",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Circle Path.wpilib.json", true));
     m_chooser.addOption("Straight Path",
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Straight-Path.wpilib.json", true));
     m_chooser.addOption("Curly Wirly",
@@ -70,7 +77,9 @@ public class RobotContainer {
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Candy Cane Path.wpilib.json", true));
     m_chooser.addOption("score grab charge",
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Score Grab Charge.wpilib.json", true));
-        
+    m_chooser.addOption("test marker path",
+        loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/inch.wpilib.json", true));
+
     SmartDashboard.putData(m_chooser);
   }
 
@@ -86,14 +95,19 @@ public class RobotContainer {
       return new InstantCommand();
     }
 
-    RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrainSubsystem::getPose,
-        new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-        new SimpleMotorFeedforward(Constants.ksVolts, Constants.kvVoltSecondsPerMeter,
-            Constants.kaVoltSecondsSquaredPerMeter),
-        Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
-        new PIDController(Constants.V_kP, 0, 0),
-        new PIDController(Constants.V_kP, 0, 0), driveTrainSubsystem::DifferentialDriveVolts,
-        driveTrainSubsystem);
+    RamseteCommand ramseteCommand = new RamseteCommand(trajectory,
+    driveTrainSubsystem::getPose,
+    new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+    new SimpleMotorFeedforward(Constants.ksVolts,
+    Constants.kvVoltSecondsPerMeter,
+    Constants.kaVoltSecondsSquaredPerMeter),
+    Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
+    new PIDController(Constants.V_kP, 0, 0),
+    new PIDController(Constants.V_kP, 0, 0),
+    driveTrainSubsystem::DifferentialDriveVolts,
+    driveTrainSubsystem);
+
+    eventMap.put("marker1", new WaitCommand(2));
 
     if (resetOdomtry) {
       return new SequentialCommandGroup(
@@ -104,8 +118,10 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
-    m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
+    // m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new
+    // Intake(Constants.MANIPULATOR_SETPOINT));
+    // m_CommandXboxController.button(Constants.LEFT_STICK_PRESS).whileTrue(new
+    // Intake(Constants.MANIPULATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT));
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new ElevatorPIDCommand(Constants.ELEVATOR_SETPOINT2));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new TiltPID());

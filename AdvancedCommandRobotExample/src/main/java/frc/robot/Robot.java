@@ -1,5 +1,9 @@
 package frc.robot;
 
+import java.nio.file.Path;
+
+import com.pathplanner.lib.server.PathPlannerServer;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -14,6 +18,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer = new RobotContainer();
     DriveTrainSubsystem.zeroHeading();
+    PathPlannerServer.startServer(5811); // 5811 = port number. adjust this according to your needs
+    PathPlannerServer.sendActivePath(null);
+    PathPlannerServer.sendPathFollowingData(null, RobotContainer.driveTrainSubsystem.getPose());
   }
 
   @Override
