@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
@@ -18,7 +17,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   // Create Drivetrain Motor Variables
-  public static AHRS navx;
+  public AHRS navx;
 
   CANSparkMax followerRightMotor = null;
   CANSparkMax leaderRightMotor = null;
@@ -26,12 +25,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   CANSparkMax leaderLeftMotor = null;
 
   // Create Differntial Drive Variables
-  public static DifferentialDrive differentialDrive = null;
+  DifferentialDrive differentialDrive = null;
+  private static AHRS navX;
   
   private final DifferentialDriveOdometry m_odometry;
-
-     // Create a feedforward controller
-   private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
 
   public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
 
@@ -52,10 +49,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     followerRightMotor.follow(leaderRightMotor, false);
     followerLeftMotor.follow(leaderLeftMotor, false);
 
-    leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
-    leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    // leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    // leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    // leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    // leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
     // Current Limits Set
     followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
@@ -66,10 +63,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
     
+    navX = new AHRS(SPI.Port.kMXP);
+
+    navX.reset();
+    navX.calibrate();
     resetEncoderValues();
 
-    m_odometry = new DifferentialDriveOdometry(navx.getRotation2d(), 0, 0);
-    m_odometry.resetPosition(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         new Pose2d());
   }
 
@@ -89,13 +90,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed) {
     differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
-  }
-
-  public void rotationArcadeDrive(double rotateSpeed) {
-    double feedForwardOutput = feedforward.calculate(rotateSpeed);
-    double outputSpeed = feedForwardOutput + rotateSpeed;
-    differentialDrive.arcadeDrive(0, outputSpeed);
-
   }
 
   public double getEncoderPositionAverage() {
@@ -149,11 +143,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public double getTurnRate() {
-    return -navx.getRate();
+    return -navX.getRate();
   }
 
   public static double getHeading() {
-    return navx.getRotation2d().getDegrees();
+    return navX.getRotation2d().getDegrees();
   }
 
   public Pose2d getPose() {
@@ -162,7 +156,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose) {
     resetEncoderValues();
-    m_odometry.resetPosition(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
+    m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         pose);
   }
 
@@ -181,17 +175,17 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public static void zeroHeading() {
-    navx.calibrate();
-    navx.calibrate();
+    navX.calibrate();
+    navX.calibrate();
   }
 
   public Gyro getGyro() {
-    return navx;
+    return navX;
   }
 
   @Override
   public void periodic() {
-    m_odometry.update(navx.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
+    m_odometry.update(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
 
     SmartDashboard.putNumber("Left Encoder Value Meters", getLeaderLeftEncoderPosition());
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());

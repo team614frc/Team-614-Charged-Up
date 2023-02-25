@@ -5,31 +5,26 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class Intake extends CommandBase {
-  public double intakeSpeed;
+public class TiltHold extends CommandBase {
 
-  public Intake(double intakespeed) {
-    addRequirements(RobotContainer.manipulator);
-    intakeSpeed = intakespeed;
+  public TiltHold() {
+  addRequirements(RobotContainer.tiltSubsystem);
   }
 
   @Override
   public void initialize() {
-
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // If left bumper is pressed, turns the motor on in order to take the game piece
-    // in, and grip it
-    RobotContainer.manipulator.set(intakeSpeed);
-    SmartDashboard.putNumber("Current Intake Speed", intakeSpeed);
-  }
-
+      RobotContainer.tiltSubsystem.set(Constants.TILT_REST_SPEED);
+    }
+ 
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.manipulator.set(Constants.MOTOR_ZERO_SPEED);
+    RobotContainer.tiltSubsystem.set(Constants.MOTOR_ZERO_SPEED);
   }
 
   // gets returned true when the command ends
@@ -37,4 +32,5 @@ public class Intake extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
 }

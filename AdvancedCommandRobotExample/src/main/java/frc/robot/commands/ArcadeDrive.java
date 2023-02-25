@@ -1,8 +1,5 @@
 package frc.robot.commands;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
@@ -25,20 +22,20 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
 
     // Raw Speed
-    double moveRawSpeed = RobotContainer.m_CommandXboxController.getLeftY();
-    double rotateRawSpeed = RobotContainer.m_CommandXboxController.getRightX();
+    double moveRawSpeed = RobotContainer.m_CommandXboxController.getRightX();
+    double rotateRawSpeed = RobotContainer.m_CommandXboxController.getLeftY();
 
     // Adjusted Speed
     double moveAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER * moveRawSpeed
         + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(moveRawSpeed, Constants.POW_VALUE);
-    // double rotateAdjustedSpeed = -(Constants.ARCADE_DRIVE_MULTIPLIER * rotateRawSpeed
-    //     + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(rotateRawSpeed, Constants.POW_VALUE));
+    double rotateAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER * rotateRawSpeed
+        + Constants.ARCADE_DRIVE_MULTIPLIER * Math.pow(rotateRawSpeed, Constants.POW_VALUE);
     // Uses an equation in order to get exact values for the amount value that we
     // are getting from the left sitck.
 
     // Arcade Drive
-    RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, rotateRawSpeed);
-    SmartDashboard.putNumber("Possible feed forward value", rotateRawSpeed);
+    // Right side of drivetrain is inverted
+    RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
     // Passes the adjusted movement values and rotation values
   }
 
