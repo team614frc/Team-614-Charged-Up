@@ -38,12 +38,12 @@ public void periodic() {
 // SmartDashboard.putNumber("Current Outputted by PDH:", pdh.getCurrent(Constants.INTAKE_MOTOR));
 }
 
-  // Returns rate of motor
+//   // Returns rate of motor
   public double getSpeed() {
     return intakeMotor.get();
   }
 
-  // Speed of motor
+//   // Speed of motor
   public void set(double val) {
     intakeMotor.set(val);
     SmartDashboard.putNumber("Motor Speed", intakeMotor.get());

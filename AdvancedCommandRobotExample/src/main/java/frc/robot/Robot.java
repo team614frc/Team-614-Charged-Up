@@ -1,9 +1,12 @@
 package frc.robot;
 
+import com.pathplanner.lib.server.PathPlannerServer;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class Robot extends TimedRobot {
 
@@ -13,6 +16,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    DriveTrainSubsystem.zeroHeading();
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
@@ -38,8 +42,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    DriveTrainSubsystem.zeroHeading();
     
-    RobotContainer.driveTrainSubsystem.navx.reset();
+    RobotContainer.driveTrainSubsystem.navX.reset();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();

@@ -19,6 +19,8 @@ public class SetLEDColorCommand extends CommandBase {
       RobotContainer.ledSubsystem.setLedColorPurple();
     } else if (m_color == 1) {
       RobotContainer.ledSubsystem.setLedColorYellow();
-    }
+    } else
+      RobotContainer.ledSubsystem.setLedColorRainbow();
   }
 }
+ 

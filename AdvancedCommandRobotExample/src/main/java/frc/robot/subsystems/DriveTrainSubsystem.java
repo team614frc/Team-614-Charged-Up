@@ -17,7 +17,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   // Create Drivetrain Motor Variables
-  public AHRS navx;
 
   CANSparkMax followerRightMotor = null;
   CANSparkMax leaderRightMotor = null;
@@ -26,11 +25,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;
-  private static AHRS navX;
-  
-  private final DifferentialDriveOdometry m_odometry;
+  public static AHRS navX;
 
-  public static final double INCH_SETPOINT = Constants.GEARBOX_OUTPUT_REVOLUTIONS * Math.PI * Constants.WHEEL_DIAMETER;
+  private final DifferentialDriveOdometry m_odometry;
 
   public DriveTrainSubsystem() {
     // motor initalization
@@ -39,8 +36,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     followerLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_LEFT_MOTOR, MotorType.kBrushless);
     leaderLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_LEFT_MOTOR, MotorType.kBrushless);
 
-    navx = new AHRS(SPI.Port.kMXP);
-    navx.calibrate();
+    leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
+    leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
+    leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
     // Leader motors follow follower motors and invertion is set.
     // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
@@ -48,11 +47,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // NOTE: LEADER MOTORS are LEADERS in this example
     followerRightMotor.follow(leaderRightMotor, false);
     followerLeftMotor.follow(leaderLeftMotor, false);
-
-    // leaderLeftMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    // leaderRightMotor.getEncoder().setPositionConversionFactor(Constants.kLinearDistanceConversionFactor);
-    // leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
-    // leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
     // Current Limits Set
     followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
@@ -62,14 +56,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
-    
+
     navX = new AHRS(SPI.Port.kMXP);
 
-    navX.reset();
-    navX.calibrate();
+    zeroHeading();
     resetEncoderValues();
 
-    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), 0, 0);
+    m_odometry = new DifferentialDriveOdometry(navX.getRotation2d(), getLeaderLeftEncoderPosition(),
+        getLeaderRightEncoderPosition());
+
     m_odometry.resetPosition(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition(),
         new Pose2d());
   }
@@ -95,7 +90,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getEncoderPositionAverage() {
     double positionAverage = (Math.abs(leaderLeftMotor.getEncoder().getPosition())
         + Math.abs(leaderRightMotor.getEncoder().getPosition())) / 2.0;
-    SmartDashboard.putNumber("Drivetrain Subsystem Encoder Position", positionAverage);
     return positionAverage;
   }
 
@@ -176,7 +170,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public static void zeroHeading() {
     navX.calibrate();
-    navX.calibrate();
+    navX.reset();
   }
 
   public Gyro getGyro() {
@@ -189,6 +183,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("Left Encoder Value Meters", getLeaderLeftEncoderPosition());
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
+    SmartDashboard.putNumber("Average Encoder Distance 2", getEncoderPositionAverage());
     SmartDashboard.putNumber("Gyro Heading", getHeading());
   }
 }
