@@ -92,7 +92,6 @@ public class RobotContainer {
 
   public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
     Trajectory trajectory;
-
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
       trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
@@ -101,7 +100,6 @@ public class RobotContainer {
       System.out.println("Unable to read from file " + filename);
       return new InstantCommand();
     }
-
     RamseteCommand ramseteCommand = new RamseteCommand(trajectory,
     driveTrainSubsystem::getPose,
     new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
@@ -144,6 +142,7 @@ public class RobotContainer {
     // SetLEDColorCommand(1)); Sets LED's to yellow
 
     // CO-DRIVER CONTROLLER BINDS
+
     SmartDashboard.putBoolean("Co Driver: Is B-Button pressed:", co_CommandXboxController.button(Constants.B_BUTTON).getAsBoolean());
     SmartDashboard.putBoolean("Co Driver: Is X-Button pressed:", co_CommandXboxController.button(Constants.X_BUTTON).getAsBoolean());
     SmartDashboard.putBoolean("Co Driver: Is Y-Button pressed:", co_CommandXboxController.button(Constants.Y_BUTTON).getAsBoolean());
