@@ -2,7 +2,6 @@ package frc.robot.commands.SimpleCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class Retract extends CommandBase {
