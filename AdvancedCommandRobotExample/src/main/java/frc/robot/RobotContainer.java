@@ -120,8 +120,6 @@ public class RobotContainer {
     co_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
     co_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
     co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());  
-    // co_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); //Sets LED's to purple
-    // co_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); //Sets LED's to yellow
     
   }
 

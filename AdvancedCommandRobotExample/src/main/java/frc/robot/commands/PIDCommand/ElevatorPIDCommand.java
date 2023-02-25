@@ -22,7 +22,6 @@
 //     // Configure additional PID options by calling `getController` here.
 //     getController().setTolerance(0.1);
 //   }
-
 //   // Returns true when the command should end.
 //   @Override
 //   public boolean isFinished() {

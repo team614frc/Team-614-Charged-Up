@@ -8,7 +8,6 @@
 // import frc.robot.commands.PIDCommand.ManipulatorPIDCommand;
 // import frc.robot.commands.PIDCommand.TiltPID;
 
-
 // // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // // information, see:
 // // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -19,5 +18,4 @@
 //      new ManipulatorPIDCommand(-1),
 //       new TiltPID(0));
 //   }
-  
-// }
+  }
