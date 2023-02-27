@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.TiltSubsystem;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class TiltSubsystem extends SubsystemBase {
@@ -23,6 +24,7 @@ public class TiltSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    //RIGHT GOOD LEFT BAD!!!!!!!
     SmartDashboard.putNumber("Current tilt left:", tiltLeftMotor.getEncoder().getPosition());
     SmartDashboard.putNumber("Current tilt right:", tiltRightMotor.getEncoder().getPosition());
   }

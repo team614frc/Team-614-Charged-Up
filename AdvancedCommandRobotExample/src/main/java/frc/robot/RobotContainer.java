@@ -121,13 +121,6 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    SmartDashboard.putBoolean("Main Driver: Is B-Button pressed:", m_CommandXboxController.button(Constants.B_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is X-Button pressed:", m_CommandXboxController.button(Constants.X_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is Y-Button pressed:", m_CommandXboxController.button(Constants.Y_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is Right Bumper pressed:", m_CommandXboxController.button(Constants.RIGHT_BUMPER).getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is Left Bumper pressed:", m_CommandXboxController.button(Constants.LEFT_BUMPER).getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is Right Trigger pressed:", m_CommandXboxController.rightTrigger().getAsBoolean());
-    SmartDashboard.putBoolean("Main Driver: Is Left Trigger pressed:", m_CommandXboxController.leftTrigger().getAsBoolean());
     // MAIN DRIVER CONTROLLER BINDS
     m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
@@ -142,14 +135,6 @@ public class RobotContainer {
     // SetLEDColorCommand(1)); Sets LED's to yellow
 
     // CO-DRIVER CONTROLLER BINDS
-
-    SmartDashboard.putBoolean("Co Driver: Is B-Button pressed:", co_CommandXboxController.button(Constants.B_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is X-Button pressed:", co_CommandXboxController.button(Constants.X_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is Y-Button pressed:", co_CommandXboxController.button(Constants.Y_BUTTON).getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is Right Bumper pressed:", co_CommandXboxController.button(Constants.RIGHT_BUMPER).getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is Left Bumper pressed:", co_CommandXboxController.button(Constants.LEFT_BUMPER).getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is Right Trigger pressed:", co_CommandXboxController.rightTrigger().getAsBoolean());
-    SmartDashboard.putBoolean("Co Driver: Is Left Trigger pressed:", co_CommandXboxController.leftTrigger().getAsBoolean());
     co_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
     co_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
     co_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());

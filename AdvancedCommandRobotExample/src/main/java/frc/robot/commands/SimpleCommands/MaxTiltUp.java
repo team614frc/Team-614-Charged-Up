@@ -18,8 +18,7 @@ public class MaxTiltUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((RobotContainer.tiltSubsystem.getRightHeight() > Constants.TILT_MIN_ENCODER_VALUE ||  
-    RobotContainer.tiltSubsystem.getLeftHeight() > Constants.TILT_MIN_ENCODER_VALUE))  {
+    if (RobotContainer.tiltSubsystem.getRightHeight() > Constants.TILT_MIN_ENCODER_VALUE)  {
               RobotContainer.tiltSubsystem.set(Constants.TILT_UP_SPEED);
             }
     else {
