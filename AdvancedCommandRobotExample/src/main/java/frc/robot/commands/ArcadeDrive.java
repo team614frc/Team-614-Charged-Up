@@ -22,8 +22,8 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
 
     // Raw Speed
-    double moveRawSpeed = RobotContainer.m_CommandXboxController.getRightX();
-    double rotateRawSpeed = RobotContainer.m_CommandXboxController.getLeftY();
+    double moveRawSpeed = RobotContainer.m_CommandXboxController.getLeftY();
+    double rotateRawSpeed = RobotContainer.m_CommandXboxController.getRightX();
 
     // Adjusted Speed
     double moveAdjustedSpeed = Constants.ARCADE_DRIVE_MULTIPLIER * moveRawSpeed
@@ -35,7 +35,7 @@ public class ArcadeDrive extends CommandBase {
 
     // Arcade Drive
     // Right side of drivetrain is inverted
-    RobotContainer.driveTrainSubsystem.arcadeDrive(moveAdjustedSpeed, rotateAdjustedSpeed);
+    RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
     // Passes the adjusted movement values and rotation values
   }
 

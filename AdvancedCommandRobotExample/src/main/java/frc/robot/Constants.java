@@ -89,14 +89,14 @@ public final class Constants {
 
   //Elevator Min and Max height
   public static final double ELEVATOR_MAX_HEIGHT = 34; //22.8
-  public static final double ELEVATOR_MIN_HEIGHT = 3;
+  public static final double ELEVATOR_MIN_HEIGHT = 5;
 
   //Tilt Min and Max height
-  public static final double TILT_MIN_ENCODER_VALUE = 5; //Pivot going downwards increases encoder value
-  public static final double TILT_MAX_ENCODER_VALUE = 10; //17 //15
+  public static final double TILT_MIN_ENCODER_VALUE = 2; //Pivot going downwards increases encoder value
+  public static final double TILT_MAX_ENCODER_VALUE = 20; //17 //15
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SETPOINT  =  0.5; // for testing
+  public static final double MANIPULATOR_SETPOINT  =  0.8; // for testing
   public static final double MANIPULATOR_SETPOINT2 = -0.8;
 
   // Thresholds
