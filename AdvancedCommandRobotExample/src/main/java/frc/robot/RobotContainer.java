@@ -13,11 +13,14 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
+import frc.robot.commands.PIDCommand.TiltPID;
 // import frc.robot.commands.ManipulatorDefaultCommand;
 // import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -124,11 +127,16 @@ public class RobotContainer {
     // MAIN DRIVER CONTROLLER BINDS
     m_CommandXboxController.button(Constants.LEFT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT));
     m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SETPOINT2));
+    // m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(-0.1));
+    // m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
+    // m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
     m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
     m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
-    m_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
-    m_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
-    m_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
+    // m_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
+    // m_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
+    m_CommandXboxController.rightTrigger().onTrue(new TiltPID(Constants.TILT_UP_SETPOINT));
+    m_CommandXboxController.leftTrigger().onTrue(new TiltPID(Constants.TILT_SCORE_SETPOINT));
+    //m_CommandXboxController.button(Constants.B_BUTTON).onTrue(Commands.parallel(new TiltPID(Constants.TILT_LOAD_STATION_SETPOINT), new Intake(Constants.MANIPULATOR_SETPOINT)));
     // m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new
     // SetLEDColorCommand(0)); Sets LED's to purple
     // m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new

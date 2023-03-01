@@ -85,7 +85,7 @@ public final class Constants {
 
   // Elevator PID Setpoints
   public static final double ELEVATOR_SETPOINT = 0;
-  public static final double ELEVATOR_SETPOINT2 = 10;
+  public static final double ELEVATOR_SETPOINT2 = 5;
 
   //Elevator Min and Max height
   public static final double ELEVATOR_MAX_HEIGHT = 34; //22.8
@@ -100,20 +100,31 @@ public final class Constants {
   public static final double MANIPULATOR_SETPOINT2 = -0.8;
 
   // Thresholds
-  public static final double MANIPULATOR_THRESHOLD = 5;
+  public static final double MANIPULATOR_THRESHOLD = 10;
 
   // Tilt Commands
   public static final double TILT_UP_SPEED = 0.4;
   public static final double TILT_DOWN_SPEED = -0.2;
   public static final double TILT_REST_SPEED = 0.05;
-  public static final double TILT_DOWN_SETPOINT = 0;
-  public static final double TILT_UP_SETPOINT = 5;
+  public static final double TILT_LOAD_STATION_SETPOINT = 10.48; //10.48 for charge station
+  public static final double TILT_SCORE_SETPOINT = 14.5;
+  public static final double TILT_UP_SETPOINT = 1;
 
   // Position-based PID Values
   // public static final double P_kP = 44.251;
   public static final double P_kP = 0.023;
   public static final double P_kI = 0.00001;
   public static final double P_kD = 0;
+
+  //Pivot PID Values
+  public static final double Pivot_kP = 0.05; //1.18
+  public static final double Pivot_kI = 0; //0.06
+  public static final double Pivot_kD = 0; //1.95
+
+  //Elevator PID Values
+  public static final double Elevator_kP = 0.000000001; //0.08
+  public static final double Elevator_kI = 0; //0.01
+  public static final double Elevator_kD = 0; //6.14
 
   // Velocity-based PID Values
   public static final double V_kP = 0.16375;

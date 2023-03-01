@@ -1,5 +1,6 @@
 package frc.robot.commands.SimpleCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -7,7 +8,7 @@ import frc.robot.RobotContainer;
 
 public class Intake extends CommandBase {
   public double intakeSpeed;
-
+  // public boolean stopRunning;
   public Intake(double intakespeed) {
     addRequirements(RobotContainer.manipulator);
     intakeSpeed = intakespeed;
@@ -24,8 +25,16 @@ public class Intake extends CommandBase {
     // If left bumper is pressed, turns the motor on in order to take the game piece
     // in, and grip it
     RobotContainer.manipulator.set(intakeSpeed);
-    SmartDashboard.putNumber("Current Intake Speed", intakeSpeed);
-  }
+    // if ((RobotContainer.manipulator.pdh.getCurrent(Constants.INTAKE_MOTOR) >= Constants.MANIPULATOR_THRESHOLD) && (Timer.getFPGATimestamp() > 5) && !stopRunning) {
+    //   stopRunning = true;
+    //   SmartDashboard.putBoolean("Picked Up game piece:", true);
+    // }
+    //   else {
+    //     stopRunning = false;
+    //     SmartDashboard.putBoolean("Picked Up game piece:", false);
+    //   }
+    //   SmartDashboard.putNumber("Current Outputted by PDH:", RobotContainer.manipulator.pdh.getCurrent(Constants.INTAKE_MOTOR));
+    }
 
   @Override
   public void end(boolean interrupted) {
