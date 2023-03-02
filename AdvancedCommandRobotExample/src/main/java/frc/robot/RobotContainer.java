@@ -19,13 +19,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 // import frc.robot.commands.ManipulatorDefaultCommand;
-// import frc.robot.commands.SetLEDColorCommand;
+import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Manipulator;
-// import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,6 +36,7 @@ import frc.robot.commands.SimpleCommands.MaxTiltUp;
 import frc.robot.commands.SimpleCommands.Retract;
 import frc.robot.commands.SimpleCommands.TiltHold;
 import frc.robot.commands.SimpleCommands.MaxTiltDown;
+import frc.robot.commands.Autonomous.TimedBasedAuto.TimedCommands.WaitCommand;
 
 public class RobotContainer {
 
@@ -59,13 +59,12 @@ public class RobotContainer {
 
   public RobotContainer() {
     configureBindings();
-    // Sets the default command for drivetrain subsystem
+    //Sets the default command for drivetrain subsystem
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-    // manipulator.setDefaultCommand(new
-    // ManipulatorDefaultCommand(RobotContainer.manipulator));
+    //manipulator.setDefaultCommand(new ManipulatorDefaultCommand(RobotContainer.manipulator));
 
-    // Add commands to the auto chooser
-    // m_chooser.setDefaultOption("Test Auto", TestAuto);
+    //Add commands to the auto chooser
+    //m_chooser.setDefaultOption("Test Auto", TestAuto);
     m_chooser.addOption("Circle",
         loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Circle Path.wpilib.json", true));
     m_chooser.addOption("Straight Path",
@@ -90,7 +89,7 @@ public class RobotContainer {
     SmartDashboard.putData(m_chooser);
   }
 
-  public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
+   public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
     Trajectory trajectory;
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
@@ -111,6 +110,8 @@ public class RobotContainer {
     new PIDController(Constants.V_kP, 0, 0),
     driveTrainSubsystem::DifferentialDriveVolts,
     driveTrainSubsystem);
+
+    eventMap.put("marker1", new WaitCommand(2));
 
     if (resetOdomtry) {
       return new SequentialCommandGroup(
