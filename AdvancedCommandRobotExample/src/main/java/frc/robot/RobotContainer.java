@@ -23,13 +23,12 @@ import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 // import frc.robot.commands.ManipulatorDefaultCommand;
-// import frc.robot.commands.SetLEDColorCommand;
+import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Manipulator;
-// import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,9 +40,9 @@ import frc.robot.commands.SimpleCommands.MaxTiltUp;
 import frc.robot.commands.SimpleCommands.Retract;
 import frc.robot.commands.SimpleCommands.TiltHold;
 import frc.robot.commands.SimpleCommands.MaxTiltDown;
+import frc.robot.commands.Autonomous.TimedBasedAuto.TimedCommands.WaitCommand;
 
 public class RobotContainer {
-
     // Subsystem Initalization
     public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
     public static Timer autoTimer;
