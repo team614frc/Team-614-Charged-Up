@@ -39,7 +39,7 @@ public final class Constants {
 
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
-  public static final double MOTOR_REST_BACK = -0.05;
+  public static final double MOTOR_REST_BACK = 0.05;
 
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
@@ -96,8 +96,9 @@ public final class Constants {
   public static final double TILT_MAX_ENCODER_VALUE = 20; //17 //15
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SETPOINT  =  0.8; // for testing
-  public static final double MANIPULATOR_SETPOINT2 = -0.8;
+  public static final double MANIPULATOR_SPEED_INTAKE  =  0.8; // for testing
+  public static final double MANIPULATOR_SPEED_OUTTAKE = -0.8;
+  public static final double MANIPULATOR_SPEED_BLEH = -0.1;
 
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 10;
@@ -107,15 +108,14 @@ public final class Constants {
   public static final double TILT_DOWN_SPEED = -0.2;
   public static final double TILT_REST_SPEED = 0.05;
   public static final double TILT_LOAD_STATION_SETPOINT = 10.48; //10.48 for charge station
-  public static final double TILT_SCORE_SETPOINT = 14.5;
-  public static final double TILT_UP_SETPOINT = 1;
+  public static final double TILT_MID_SCORE_SETPOINT = 14.5;
+  public static final double TILT_HYBRID_SCORE_SETPOINT = 22;
+  public static final double TILT_UP_SETPOINT = 0.5;
 
-  // Position-based PID Values
-  // public static final double P_kP = 44.251;
-  public static final double P_kP = 0.023;
-  public static final double P_kI = 0.00001;
-  public static final double P_kD = 0;
-
+  //Position PID Values
+  public static final double P_kP = 0.023; //1.18
+  public static final double P_kI = 0.00001; //0.06
+  public static final double P_kD = 0; //1.95
   //Pivot PID Values
   public static final double Pivot_kP = 0.05; //1.18
   public static final double Pivot_kI = 0; //0.06
