@@ -16,6 +16,6 @@ public class ScoreChargeStation extends SequentialCommandGroup {
         new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.2),
         new Retract().withTimeout(0.5),
         new TiltPID(Constants.TILT_UP_SETPOINT).withTimeout(0.5),
-        new LoadPathplannerTrajectoryCommand("path_to_file", true));
+        new LoadPathplannerTrajectoryCommand("pathplanner/generatedJSON/inch.wpilib.json", true));
   }
 }
