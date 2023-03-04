@@ -1,6 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -27,62 +26,29 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreChargeStation;
 public class RobotContainer {
   // Subsystem Initalization
   public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
-  public static Timer autoTimer;
   public static CommandXboxController m_CommandXboxController = new CommandXboxController(
       Constants.DRIVER_CONTROLLER_PORT);
   public static CommandXboxController co_CommandXboxController = new CommandXboxController(
       Constants.CO_DRIVER_CONTROLLER_PORT);
+
   public static Manipulator manipulator = new Manipulator();
   public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
   public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   public static LEDSubsystem ledSubsystem = new LEDSubsystem();
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  // private final Command TestAuto = new TestAuto();
   private final Command ScoreChargeStation = new ScoreChargeStation();
 
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
   public RobotContainer() {
     configureBindings();
     driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
     // manipulator.setDefaultCommand(new
     // ManipulatorDefaultCommand(RobotContainer.manipulator));
-    m_chooser.setDefaultOption("ScoreChargeStationNotEngaged", ScoreChargeStation);
-    // m_chooser.addOption("Circle",
-    //     loadPathplannerTrajectoryToRamseteCommand("pathplanner/generatedJSON/Circle Path.wpilib.json", true));
+    m_chooser.setDefaultOption("Score Charge Station", ScoreChargeStation);
+
     SmartDashboard.putData(m_chooser);
   }
-
-  // public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
-  //   Trajectory trajectory;
-  //   try {
-  //     Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
-  //     trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-  //   } catch (IOException exception) {
-  //     DriverStation.reportError("Unable to open trajectory" + filename, exception.getStackTrace());
-  //     System.out.println("Unable to read from file " + filename);
-  //     return new InstantCommand();
-  //   }
-  //   RamseteCommand ramseteCommand = new RamseteCommand(trajectory,
-  //       driveTrainSubsystem::getPose,
-  //       new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-  //       new SimpleMotorFeedforward(Constants.ksVolts,
-  //           Constants.kvVoltSecondsPerMeter,
-  //           Constants.kaVoltSecondsSquaredPerMeter),
-  //       Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
-  //       new PIDController(Constants.V_kP, 0, 0),
-  //       new PIDController(Constants.V_kP, 0, 0),
-  //       driveTrainSubsystem::DifferentialDriveVolts,
-  //       driveTrainSubsystem);
-
-  //   if (resetOdomtry) {
-  //     return new SequentialCommandGroup(
-  //         new InstantCommand(() -> driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())),
-  //         ramseteCommand);
-  //   } else {
-  //     return ramseteCommand;
-  //   }
-  // }
 
   private void configureBindings() {
     // MAIN DRIVER CONTROLLER BINDS
@@ -135,7 +101,6 @@ public class RobotContainer {
     co_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
     co_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
     co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
-
   }
 
   public Command getAutonomousCommand() {
