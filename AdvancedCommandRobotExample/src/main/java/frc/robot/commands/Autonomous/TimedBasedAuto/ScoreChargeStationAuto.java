@@ -8,8 +8,8 @@ import frc.robot.commands.SimpleCommands.Extend;
 import frc.robot.commands.SimpleCommands.Intake;
 import frc.robot.commands.SimpleCommands.Retract;
 
-public class ScoreChargeStation extends SequentialCommandGroup {
-  public ScoreChargeStation() {
+public class ScoreChargeStationAuto extends SequentialCommandGroup {
+  public ScoreChargeStationAuto() {
     addCommands(
         new TiltPID(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5),
         new Extend().withTimeout(0.5),
