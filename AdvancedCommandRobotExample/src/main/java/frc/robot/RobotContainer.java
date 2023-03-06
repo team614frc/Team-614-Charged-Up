@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
 import frc.robot.commands.PIDCommand.TiltPID;
+import frc.robot.commands.PIDCommand.TiltPIDCommand;
 // import frc.robot.commands.ManipulatorDefaultCommand;
 import frc.robot.commands.SetLEDColorCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -129,60 +130,81 @@ public class RobotContainer {
 
     private void configureBindings() {
         // MAIN DRIVER CONTROLLER BINDS
-        m_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(new Intake(Constants.MANIPULATOR_SPEED_INTAKE));
-        m_CommandXboxController.button(Constants.RIGHT_BUMPER).whileTrue(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE));
-        m_CommandXboxController.button(Constants.A_BUTTON).whileTrue(new Intake(Constants.MANIPULATOR_SPEED_BLEH));
-        m_CommandXboxController.button(Constants.BACK_BUTTON).onTrue(new TiltPID(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
+        m_CommandXboxController.button(Constants.BACK_BUTTON).whileTrue(new Intake(Constants.MANIPULATOR_SPEED_PCHOO));
+        m_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
                         .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5))
-                        .andThen(new TiltPID(Constants.TILT_UP_SETPOINT).withTimeout(0.7)));
-
-        m_CommandXboxController.button(Constants.START_BUTTON).whileTrue(new Retract());
-        // m_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
-        // m_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
-        m_CommandXboxController.button(Constants.Y_BUTTON) // Score Mid Cube
-                .onTrue(new TiltPID(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5)
+                        .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7)));
+        m_CommandXboxController.button(Constants.Y_BUTTON) // Score High Cube
+                .onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5)
                         .andThen(new Extend().withTimeout(0.5))
-                        .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.2))
+                        .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
                         .andThen(new Retract().withTimeout(0.5)) 
-                        .andThen(new TiltPID(Constants.TILT_UP_SETPOINT).withTimeout(0.5)));
+                        .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
 
-        m_CommandXboxController.button(Constants.X_BUTTON) // Score High Cube
-                .onTrue(new TiltPID(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5)
-                        .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE))
-                        .andThen(new TiltPID(Constants.TILT_UP_SETPOINT).withTimeout(0.5)));
+        m_CommandXboxController.button(Constants.X_BUTTON) // Score Mid Cube
+                .onTrue(new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5)
+                        .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
+                        .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
 
-        m_CommandXboxController.rightTrigger().onTrue(new TiltPID(Constants.TILT_UP_SETPOINT));
+        m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_UP_SETPOINT));
         // Score Cone
-        m_CommandXboxController.leftTrigger().onTrue(new TiltPID(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1)
+        m_CommandXboxController.button(Constants.B_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1)
                 .andThen(new Extend().withTimeout(0.6))
-                .andThen(new TiltPID(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.11))
+                .andThen(new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5))
                 .andThen(new Retract().withTimeout(0.5))
-                .andThen(new TiltPID(Constants.TILT_UP_SETPOINT).withTimeout(0.1)));
+                .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
 
-        m_CommandXboxController.button(Constants.B_BUTTON).onTrue(Commands // Load from load station
-                .parallel(new TiltPID(Constants.TILT_LOAD_STATION_SETPOINT),
+        m_CommandXboxController.button(Constants.RIGHT_BUMPER).onTrue(Commands // Load from load station
+                .parallel(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT),
                         new Intake(Constants.MANIPULATOR_SPEED_INTAKE)));
+        m_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(Commands
+                .parallel(new TiltPIDCommand(Constants.TILT_LOW_SETPOINT),
+                        new Intake(Constants.MANIPULATOR_SPEED_INTAKE)));
+                        
         // m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new
         // SetLEDColorCommand(0)); Sets LED's to purple
         // m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new
         // SetLEDColorCommand(1)); Sets LED's to yellow
 
         // CO-DRIVER CONTROLLER BINDS
-        co_CommandXboxController.button(Constants.LEFT_BUMPER)
-                .whileTrue(new Intake(Constants.MANIPULATOR_SPEED_INTAKE));
-        co_CommandXboxController.button(Constants.RIGHT_BUMPER)
-                .whileTrue(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE));
-        co_CommandXboxController.button(Constants.X_BUTTON).whileTrue(new Retract());
-        co_CommandXboxController.button(Constants.Y_BUTTON).whileTrue(new Extend());
-        co_CommandXboxController.rightTrigger().whileTrue(new MaxTiltUp());
-        co_CommandXboxController.leftTrigger().whileTrue(new MaxTiltDown());
-        co_CommandXboxController.button(Constants.B_BUTTON).whileTrue(new TiltHold());
 
+        co_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
+                .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5))
+                .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7)));
+        co_CommandXboxController.button(Constants.Y_BUTTON) // Score High Cube
+        .onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5)
+                .andThen(new Extend().withTimeout(0.5))
+                .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
+                .andThen(new Retract().withTimeout(0.5)) 
+                .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
+
+        co_CommandXboxController.button(Constants.X_BUTTON) // Score Mid Cube
+        .onTrue(new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5)
+                .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
+                .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
+
+        co_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_UP_SETPOINT));
+        // Score Cone
+        co_CommandXboxController.button(Constants.B_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1)
+                .andThen(new Extend().withTimeout(0.6))
+                .andThen(new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5))
+                .andThen(new Retract().withTimeout(0.5))
+                .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
+
+        co_CommandXboxController.button(Constants.RIGHT_BUMPER).onTrue(Commands // Load from load station
+                .parallel(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT),
+                        new Intake(Constants.MANIPULATOR_SPEED_INTAKE)));
+        co_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(Commands
+                .parallel(new TiltPIDCommand(Constants.TILT_LOW_SETPOINT),
+                        new Intake(Constants.MANIPULATOR_SPEED_INTAKE)));
+        co_CommandXboxController.axisGreaterThan(1, 0.5).whileTrue(new Retract());
+        co_CommandXboxController.axisLessThan(1, -0.5).whileTrue(new Extend());
+        co_CommandXboxController.axisGreaterThan(5, 0.5).whileTrue(new MaxTiltDown());
+        co_CommandXboxController.axisLessThan(5, -0.5).whileTrue(new MaxTiltUp());
     }
 
     public Command getAutonomousCommand() {
         // Returns the selected auto command
         return m_chooser.getSelected();
-        }
     }
 }

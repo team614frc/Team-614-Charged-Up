@@ -52,7 +52,7 @@ public final class Constants {
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
-  public static final int INTAKE_MOTOR = 4; 
+  public static final int INTAKE_MOTOR = 4; //4
 
   // Xbox Controller
   public static final int DRIVER_CONTROLLER_PORT = 0;
@@ -98,8 +98,9 @@ public final class Constants {
   // Manipulator PID setpoints (test)
   public static final double MANIPULATOR_SPEED_INTAKE  =  0.8; // for testing
   public static final double MANIPULATOR_SPEED_OUTTAKE = -0.8;
-  public static final double MANIPULATOR_SPEED_BLEH = -0.1;
-
+  public static final double MANIPULATOR_SPEED_BLEH = -0.4;
+  public static final double MANIPULATOR_SPEED_PCHOO = -1;
+  
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 10;
 
@@ -107,9 +108,11 @@ public final class Constants {
   public static final double TILT_UP_SPEED = 0.4;
   public static final double TILT_DOWN_SPEED = -0.2;
   public static final double TILT_REST_SPEED = 0.05;
+  public static final double TILT_DEFAULT_SETPOINT = 5;
   public static final double TILT_LOAD_STATION_SETPOINT = 10.48; //10.48 for charge station
   public static final double TILT_MID_SCORE_SETPOINT = 14.5;
   public static final double TILT_HYBRID_SCORE_SETPOINT = 22;
+  public static final double TILT_LOW_SETPOINT = 22;
   public static final double TILT_UP_SETPOINT = 0.5;
 
   //Position PID Values
@@ -117,7 +120,7 @@ public final class Constants {
   public static final double P_kI = 0.00001; //0.06
   public static final double P_kD = 0; //1.95
   //Pivot PID Values
-  public static final double Pivot_kP = 0.05; //1.18
+  public static final double Pivot_kP = 0.025; //1.18
   public static final double Pivot_kI = 0; //0.06
   public static final double Pivot_kD = 0; //1.95
 

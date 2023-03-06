@@ -26,6 +26,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     // Runs scheduled commands
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("Tilt Right Encoder Value", RobotContainer.tiltSubsystem.getRightHeight());
+    SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
   }
 
   @Override
