@@ -36,31 +36,41 @@ public class LoadPathplannerTrajectoryCommand extends CommandBase {
             cancel();
         }
     }
-    
+
     @Override
     public void execute() {
         RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
-            RobotContainer.driveTrainSubsystem::getPose,
-            new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-            new SimpleMotorFeedforward(Constants.ksVolts,
-                Constants.kvVoltSecondsPerMeter,
-                Constants.kaVoltSecondsSquaredPerMeter),
-            Constants.kDriveKinematics,
-            RobotContainer.driveTrainSubsystem::getWheelSpeeds,
-            new PIDController(Constants.V_kP, 0, 0),
-            new PIDController(Constants.V_kP, 0, 0),
-            RobotContainer.driveTrainSubsystem::DifferentialDriveVolts,
-            RobotContainer.driveTrainSubsystem
-        );
-    
+                trajectory,
+                RobotContainer.driveTrainSubsystem::getPose,
+                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
+                new SimpleMotorFeedforward(Constants.ksVolts,
+                        Constants.kvVoltSecondsPerMeter,
+                        Constants.kaVoltSecondsSquaredPerMeter),
+                Constants.kDriveKinematics,
+                RobotContainer.driveTrainSubsystem::getWheelSpeeds,
+                new PIDController(Constants.V_kP, 0, 0),
+                new PIDController(Constants.V_kP, 0, 0),
+                RobotContainer.driveTrainSubsystem::DifferentialDriveVolts,
+                RobotContainer.driveTrainSubsystem);
+
         if (resetOdomtry) {
             new SequentialCommandGroup(
-                new InstantCommand(() -> RobotContainer.driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())),
-                ramseteCommand
-            ).schedule();
+                    new InstantCommand(
+                            () -> RobotContainer.driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())),
+                    ramseteCommand).schedule();
         } else {
             ramseteCommand.schedule();
         }
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
     }
 }

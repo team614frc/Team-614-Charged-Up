@@ -20,7 +20,7 @@ public final class Constants {
   // Tick Conversions
   public static final double M_PI = Math.PI;
 
-  public static final double ksVolts = 1.92397; // .14397 //.56397
+  public static final double ksVolts = .34281; //.34281
   public static final double kvVoltSecondsPerMeter = 1.316;
   public static final double kaVoltSecondsSquaredPerMeter = 0.14549;
   public static final double kTrackWidthMeters = Units.inchesToMeters(20);
@@ -130,7 +130,7 @@ public final class Constants {
   public static final double Elevator_kD = 0; //6.14
 
   // Velocity-based PID Values
-  public static final double V_kP = 0.16375;
+  public static final double V_kP = 0.433933;
   public static final double V_kI = 0;
   public static final double V_kD = 0;
 
