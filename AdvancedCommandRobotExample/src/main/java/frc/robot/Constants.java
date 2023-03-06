@@ -99,6 +99,7 @@ public final class Constants {
   public static final double MANIPULATOR_SPEED_INTAKE  =  0.8; // for testing
   public static final double MANIPULATOR_SPEED_OUTTAKE = -0.8;
   public static final double MANIPULATOR_SPEED_BLEH = -0.4;
+  public static final double MANIPULATOR_SPEED_PCHOO = -1;
   
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 10;

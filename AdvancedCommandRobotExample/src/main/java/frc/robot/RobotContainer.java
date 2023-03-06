@@ -130,6 +130,7 @@ public class RobotContainer {
 
     private void configureBindings() {
         // MAIN DRIVER CONTROLLER BINDS
+        m_CommandXboxController.button(Constants.BACK_BUTTON).whileTrue(new Intake(Constants.MANIPULATOR_SPEED_PCHOO));
         m_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
                         .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5))
                         .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7)));
@@ -196,6 +197,10 @@ public class RobotContainer {
         co_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(Commands
                 .parallel(new TiltPIDCommand(Constants.TILT_LOW_SETPOINT),
                         new Intake(Constants.MANIPULATOR_SPEED_INTAKE)));
+        co_CommandXboxController.axisGreaterThan(1, 0.5).whileTrue(new Retract());
+        co_CommandXboxController.axisLessThan(1, -0.5).whileTrue(new Extend());
+        co_CommandXboxController.axisGreaterThan(5, 0.5).whileTrue(new MaxTiltDown());
+        co_CommandXboxController.axisLessThan(5, -0.5).whileTrue(new MaxTiltUp());
     }
 
     public Command getAutonomousCommand() {
