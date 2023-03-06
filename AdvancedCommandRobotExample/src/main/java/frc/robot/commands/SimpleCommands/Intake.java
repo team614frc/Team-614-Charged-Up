@@ -30,6 +30,8 @@ public class Intake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.manipulator.set(Constants.MOTOR_REST_BACK);
+    RobotContainer.tiltSubsystem.setSetpoint(Constants.TILT_DEFAULT_SETPOINT);
+
   }
 
   // gets returned true when the command ends
