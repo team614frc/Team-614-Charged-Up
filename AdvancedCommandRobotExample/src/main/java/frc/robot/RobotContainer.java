@@ -52,8 +52,6 @@ public class RobotContainer {
         public RobotContainer() {
                 configureBindings();
                 driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
-                // manipulator.setDefaultCommand(new
-                // ManipulatorDefaultCommand(RobotContainer.manipulator));
 
                 m_chooser.addOption("Test Auto", TestAuto);
 

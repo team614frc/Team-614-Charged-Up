@@ -22,7 +22,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    // Runs scheduled commands
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Tilt Right Encoder Value", RobotContainer.tiltSubsystem.getRightHeight());
     SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
@@ -45,12 +44,15 @@ public class Robot extends TimedRobot {
     DriveTrainSubsystem.zeroHeading();
 
     RobotContainer.driveTrainSubsystem.navX.reset();
+
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
+
     RobotContainer.driveTrainSubsystem.setBreakMode();
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    // Runs an auto command in auto mode if there is one selected
+
     if (m_autonomousCommand != null)
       m_autonomousCommand.schedule();
   }
