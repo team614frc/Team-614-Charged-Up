@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands.Autonomous.TimedBasedAuto.Timed;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -9,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
 public class Dance extends CommandBase {
-  /** Creates a new Dance. */
   private final double DANCE_TIME = 5.0; // dance time in seconds
   private final double ROTATION_SPEED = 0.5; // rotation speed of the robot
   private final double ROTATION_TIME = 0.5; // time to rotate in one direction

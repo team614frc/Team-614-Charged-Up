@@ -22,25 +22,23 @@ public class LEDSubsystem extends SubsystemBase {
     led.start();
   }
 
-
   public void setLedColorOrange() {
     for (int i = 0; i < NumLEDs; i++) {
-      ledBuffer.setRGB(i, 255, 17, 50); 
+      ledBuffer.setRGB(i, 255, 17, 50);
     }
     led.setData(ledBuffer);
   }
 
-
   public void setLedColorGreen() {
     for (int i = 0; i < NumLEDs; i++) {
-      ledBuffer.setRGB(i, 60, 255, 0); 
+      ledBuffer.setRGB(i, 60, 255, 0);
     }
     led.setData(ledBuffer);
   }
 
   public void setLedColorPurple() {
     for (int i = 0; i < NumLEDs; i++) {
-      ledBuffer.setRGB(i, 50, 0, 50); 
+      ledBuffer.setRGB(i, 50, 0, 50);
     }
     led.setData(ledBuffer);
   }
