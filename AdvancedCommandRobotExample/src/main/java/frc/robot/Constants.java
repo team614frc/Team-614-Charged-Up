@@ -108,9 +108,10 @@ public final class Constants {
   public static final double TILT_DOWN_SPEED = -0.2;
   public static final double TILT_REST_SPEED = 0.05;
   public static final double TILT_DEFAULT_SETPOINT = 5;
-  public static final double TILT_LOAD_STATION_SETPOINT = 10.48; // 10.48 for charge station
+  public static final double TILT_LOAD_STATION_SETPOINT = 10.48; //10.48 for charge station
+  public static final double TILT_HIGH_CUBE_AUTO_SETPOINT = 13;
   public static final double TILT_MID_SCORE_SETPOINT = 14.5;
-  public static final double TILT_HYBRID_SCORE_SETPOINT = 22;
+  public static final double TILT_PCHOO_SETPOINT = 18;
   public static final double TILT_LOW_SETPOINT = 22;
   public static final double TILT_UP_SETPOINT = 0.5;
   public static final double TILT_HIGH_CUBE_SETPOINT = 13;
