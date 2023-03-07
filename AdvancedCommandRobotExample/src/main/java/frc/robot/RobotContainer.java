@@ -18,7 +18,7 @@ import frc.robot.commands.SimpleCommands.Intake;
 import frc.robot.commands.SimpleCommands.MaxTiltUp;
 import frc.robot.commands.SimpleCommands.Retract;
 import frc.robot.commands.SimpleCommands.MaxTiltDown;
-import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Auto1;
 
 public class RobotContainer {
         public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
@@ -33,7 +33,9 @@ public class RobotContainer {
         public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
         public static LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-        private final Command TestAuto = new TestAuto();
+        private final Command TwoCubeChargeStation = new Auto1();
+        private final Command TestAuto = new Auto2();
+        private final Command TestAuto = new Auto3();
 
         SendableChooser<Command> m_chooser = new SendableChooser<>();
 

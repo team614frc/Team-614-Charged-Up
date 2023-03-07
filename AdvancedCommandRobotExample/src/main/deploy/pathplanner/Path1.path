@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.7023759271132144,
-        "y": 3.857554334071102
+        "x": 1.7206109866765191,
+        "y": 1.0475789133396456
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3046706558529397,
-        "y": 3.88623503543966
+        "x": 2.7206109866765216,
+        "y": 1.0475789133396456
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -24,41 +24,16 @@
     },
     {
       "anchorPoint": {
-        "x": 3.7100250229123004,
-        "y": 3.226578903962818
+        "x": 4.325894197238769,
+        "y": 0.49190662017847725
       },
       "prevControl": {
-        "x": 2.8712088359661516,
-        "y": 3.2337578739021526
+        "x": 4.316784815383643,
+        "y": 1.2206571685886651
       },
       "nextControl": {
-        "x": 4.54884120985845,
-        "y": 3.219399934023483
-      },
-      "holonomicAngle": 0,
-      "isReversal": false,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 6.578095159768138,
-        "y": 3.3699824108056093
-      },
-      "prevControl": {
-        "x": 6.013697140767526,
-        "y": 3.3699824108056093
-      },
-      "nextControl": {
-        "x": 6.013697140767526,
-        "y": 3.3699824108056093
+        "x": 4.316784815383643,
+        "y": 1.2206571685886651
       },
       "holonomicAngle": 0,
       "isReversal": true,
@@ -74,12 +49,12 @@
     },
     {
       "anchorPoint": {
-        "x": 6.778860069348045,
-        "y": 1.1615684054266147
+        "x": 6.621458424735031,
+        "y": 0.9
       },
       "prevControl": {
-        "x": 9.489186348676807,
-        "y": 1.147228054742335
+        "x": 5.621458424735031,
+        "y": 0.9
       },
       "nextControl": null,
       "holonomicAngle": 0,
@@ -95,8 +70,8 @@
       }
     }
   ],
-  "maxVelocity": 1.0,
-  "maxAcceleration": 1.0,
-  "isReversed": null,
+  "maxVelocity": 2.0,
+  "maxAcceleration": 2.0,
+  "isReversed": true,
   "markers": []
 }
