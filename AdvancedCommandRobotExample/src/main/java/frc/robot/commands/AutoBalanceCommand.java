@@ -1,6 +1,3 @@
-// Author: UMN Robotics Ri3d
-// Last Updated : January 2023
-
 package frc.robot.commands;
 
 import frc.robot.Constants;
