@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
+    RobotContainer.driveTrainSubsystem.setBreakMode();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // Runs an auto command in auto mode if there is one selected
     if (m_autonomousCommand != null)

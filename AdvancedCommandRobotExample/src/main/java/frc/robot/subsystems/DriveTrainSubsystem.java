@@ -18,10 +18,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class DriveTrainSubsystem extends SubsystemBase {
   // Create Drivetrain Motor Variables
 
-  CANSparkMax followerRightMotor = null;
-  CANSparkMax leaderRightMotor = null;
-  CANSparkMax followerLeftMotor = null;
-  CANSparkMax leaderLeftMotor = null;
+  public CANSparkMax followerRightMotor = null;
+  public CANSparkMax leaderRightMotor = null;
+  public CANSparkMax followerLeftMotor = null;
+  public CANSparkMax leaderLeftMotor = null;
 
   // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;

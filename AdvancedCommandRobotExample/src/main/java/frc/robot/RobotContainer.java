@@ -32,9 +32,9 @@ import frc.robot.commands.SimpleCommands.Intake;
 import frc.robot.commands.SimpleCommands.MaxTiltUp;
 import frc.robot.commands.SimpleCommands.Retract;
 import frc.robot.commands.SimpleCommands.MaxTiltDown;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationAuto;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreAuto;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreChargeStationAuto;
+// import frc.robot.commands.Autonomous.TimedBasedAuto.ChargeStationAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreHighAuto;
+// import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreChargeStationAuto;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
 
 public class RobotContainer {
@@ -51,10 +51,11 @@ public class RobotContainer {
     public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     public static LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-    private final Command ScoreChargeStation = new ScoreChargeStationAuto();
-    private final Command ScoreAuto = new ScoreAuto();
-    private final Command ChargeStation = new ChargeStationAuto();
+//     private final Command ScoreChargeStation = new ScoreChargeStationAuto();
+//     private final Command ScoreAuto = new ScoreAuto();
+//     private final Command ChargeStation = new ChargeStationAuto();
     private final Command TestAuto = new TestAuto();
+    private final Command ScoreHighAuto = new ScoreHighAuto();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -66,9 +67,9 @@ public class RobotContainer {
 
         // I want this to work
         m_chooser.addOption("Test Auto", TestAuto);
-        m_chooser.setDefaultOption("Score Charge Station", ScoreChargeStation);
-        m_chooser.addOption("Score Auto", ScoreAuto);
-        m_chooser.addOption("Charge Station", ChargeStation);
+        m_chooser.setDefaultOption("Score High Charge Station", ScoreHighAuto);
+        // m_chooser.addOption("Score Auto", ScoreAuto);
+        // m_chooser.addOption("Charge Station", ChargeStation);
 
         // Testing Option for removal
         m_chooser.addOption("path planner backwards 3 meters",
@@ -77,7 +78,7 @@ public class RobotContainer {
         SmartDashboard.putData(m_chooser);
     }
 
-    public Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
+    public static Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
         Trajectory trajectory;
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
