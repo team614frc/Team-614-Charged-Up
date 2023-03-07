@@ -14,17 +14,16 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class PathPlannerCommand extends InstantCommand {
+public class PathPlannerLoadPathCommand extends InstantCommand {
   private final String filename;
   private final boolean resetOdomtry;
   private Trajectory trajectory;
 
-  public PathPlannerCommand(String filename, boolean resetOdomtry) {
+  public PathPlannerLoadPathCommand(String filename, boolean resetOdomtry) {
     this.filename = filename;
     this.resetOdomtry = resetOdomtry;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     try {

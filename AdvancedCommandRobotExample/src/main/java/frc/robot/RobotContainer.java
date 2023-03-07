@@ -2,9 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -13,15 +10,6 @@ import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
-import java.io.IOException;
-import java.nio.file.Path;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.RamseteController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,38 +44,6 @@ public class RobotContainer {
                 m_chooser.addOption("Test Auto", TestAuto);
 
                 SmartDashboard.putData(m_chooser);
-        }
-
-        public static Command loadPathplannerTrajectoryToRamseteCommand(String filename, boolean resetOdomtry) {
-                Trajectory trajectory;
-                try {
-                        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
-                        trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-                } catch (IOException exception) {
-                        DriverStation.reportError("Unable to open trajectory" + filename, exception.getStackTrace());
-                        System.out.println("Unable to read from file " + filename);
-                        return new InstantCommand();
-                }
-                RamseteCommand ramseteCommand = new RamseteCommand(trajectory,
-                                driveTrainSubsystem::getPose,
-                                new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-                                new SimpleMotorFeedforward(Constants.ksVolts,
-                                                Constants.kvVoltSecondsPerMeter,
-                                                Constants.kaVoltSecondsSquaredPerMeter),
-                                Constants.kDriveKinematics, driveTrainSubsystem::getWheelSpeeds,
-                                new PIDController(Constants.V_kP, 0, 0),
-                                new PIDController(Constants.V_kP, 0, 0),
-                                driveTrainSubsystem::DifferentialDriveVolts,
-                                driveTrainSubsystem);
-
-                if (resetOdomtry) {
-                        return new SequentialCommandGroup(
-                                        new InstantCommand(() -> driveTrainSubsystem
-                                                        .resetOdometry(trajectory.getInitialPose())),
-                                        ramseteCommand);
-                } else {
-                        return ramseteCommand;
-                }
         }
 
         private void configureBindings() {
@@ -138,7 +94,6 @@ public class RobotContainer {
                 // SetLEDColorCommand(1)); Sets LED's to yellow
 
                 // CO-DRIVER CONTROLLER BINDS
-
                 co_CommandXboxController.button(Constants.A_BUTTON)
                                 .onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
                                                 .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE)
