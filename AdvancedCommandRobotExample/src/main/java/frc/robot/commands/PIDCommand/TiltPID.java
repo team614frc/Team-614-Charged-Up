@@ -8,7 +8,8 @@ import frc.robot.RobotContainer;
 public class TiltPID extends PIDCommand {
   /** Creates a new TiltPID. */
   static double tiltSetpoint;
-  public TiltPID(double tiltSetpoint) { 
+
+  public TiltPID(double tiltSetpoint) {
     super(
         // The controller that the command will use
         new PIDController(Constants.Pivot_kP, Constants.Pivot_kI, Constants.Pivot_kD),
@@ -26,7 +27,8 @@ public class TiltPID extends PIDCommand {
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(0.1);
   }
-//Returns true when the command should end.
+
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

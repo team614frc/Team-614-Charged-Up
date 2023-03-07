@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     DriveTrainSubsystem.zeroHeading();
-    
+
     RobotContainer.driveTrainSubsystem.navX.reset();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
   }
 
   public void autonomousExit() {
+    RobotContainer.driveTrainSubsystem.setCoastMode();
   }
 
   @Override
@@ -67,7 +68,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    
+
   }
 
   @Override

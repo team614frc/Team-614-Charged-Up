@@ -13,24 +13,24 @@ public class Manipulator extends SubsystemBase {
   public PowerDistribution pdh;
   CANSparkMax intakeMotor;
 
-  public Manipulator(){
+  public Manipulator() {
     intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
     pdh = new PowerDistribution();
-    
+
     intakeMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
   }
 
-@Override
-public void periodic() {
-  //This method will be called once per scheduler run
-}
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
 
-//   // Returns rate of motor
+  // // Returns rate of motor
   public double getSpeed() {
     return intakeMotor.get();
   }
 
-//   // Speed of motor
+  // // Speed of motor
   public void set(double val) {
     intakeMotor.set(val);
     SmartDashboard.putNumber("Motor Speed", intakeMotor.get());
