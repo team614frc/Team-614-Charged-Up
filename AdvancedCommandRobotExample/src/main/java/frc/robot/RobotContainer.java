@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.PIDCommand.ElevatorPIDCommand;
-import frc.robot.commands.PIDCommand.TiltPID;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 // import frc.robot.commands.ManipulatorDefaultCommand;
 import frc.robot.commands.SetLEDColorCommand;
@@ -130,8 +129,7 @@ public class RobotContainer {
 
     private void configureBindings() {
         // MAIN DRIVER CONTROLLER BINDS
-        m_CommandXboxController.button(Constants.BACK_BUTTON).whileTrue(new Intake(Constants.MANIPULATOR_SPEED_PCHOO));
-        m_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
+        m_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOW_SETPOINT).withTimeout(0.5)
                         .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5))
                         .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7)));
         m_CommandXboxController.button(Constants.Y_BUTTON) // Score High Cube
@@ -146,7 +144,7 @@ public class RobotContainer {
                         .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
                         .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
 
-        m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_UP_SETPOINT));
+        m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
         // Score Cone
         m_CommandXboxController.button(Constants.B_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1)
                 .andThen(new Extend().withTimeout(0.6))
@@ -167,8 +165,9 @@ public class RobotContainer {
         // SetLEDColorCommand(1)); Sets LED's to yellow
 
         // CO-DRIVER CONTROLLER BINDS
-
-        co_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_HYBRID_SCORE_SETPOINT).withTimeout(0.5)
+        co_CommandXboxController.button(Constants.START_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_PCHOO_SETPOINT).withTimeout(0.5)
+                .andThen(new Intake(Constants.MANIPULATOR_SPEED_PCHOO).withTimeout(0.5)));
+        co_CommandXboxController.button(Constants.A_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOW_SETPOINT).withTimeout(0.5)
                 .andThen(new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5))
                 .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7)));
         co_CommandXboxController.button(Constants.Y_BUTTON) // Score High Cube
@@ -183,7 +182,7 @@ public class RobotContainer {
                 .andThen(new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5))
                 .andThen(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5)));
 
-        co_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_UP_SETPOINT));
+        co_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
         // Score Cone
         co_CommandXboxController.button(Constants.B_BUTTON).onTrue(new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1)
                 .andThen(new Extend().withTimeout(0.6))
