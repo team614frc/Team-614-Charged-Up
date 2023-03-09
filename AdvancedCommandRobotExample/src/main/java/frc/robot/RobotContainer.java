@@ -27,6 +27,8 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto1;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto2;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto3;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
 
 public class RobotContainer {
     public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
@@ -44,7 +46,9 @@ public class RobotContainer {
     private final Command TwoCubeChargeStation = new Auto1();
     private final Command ScoreCubeHigh = new Auto2();
     private final Command ChargeStation = new Auto3();
-    private final Command ScoreCubeChargeStation = new Auto4();
+    private final Command ScoreMidCubeChargeStation = new Auto4();
+    private final Command eventpath = new Auto5();
+    private final Command test = new Auto6();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -55,7 +59,9 @@ public class RobotContainer {
         m_chooser.addOption("Test Auto #1", TwoCubeChargeStation);
         m_chooser.addOption("Score Cube High #2", ScoreCubeHigh);
         m_chooser.addOption("ChargeStation #3", ChargeStation);
-        m_chooser.addOption("Score Cube Charge Station #4", ScoreCubeChargeStation);
+        m_chooser.addOption("Score Mid Cube Charge Station #4", ScoreMidCubeChargeStation);
+        m_chooser.addOption("eventpath #5", eventpath);
+        m_chooser.addOption("test", test);
 
         SmartDashboard.putData(m_chooser);
     }
