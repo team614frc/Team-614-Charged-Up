@@ -8,7 +8,7 @@ public class Auto3 extends SequentialCommandGroup {
   public Auto3() {
     addCommands(
       new ScoreMidCube(),
-      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/Path3.wpilib.json", true).withTimeout(15)
+      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/BTCMM.wpilib.json", true)
     );
   }
 }

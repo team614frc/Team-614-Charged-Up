@@ -8,7 +8,7 @@ public class Auto4 extends SequentialCommandGroup {
   public Auto4() {
     addCommands(
       new ScoreMidCube(),
-      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/Path0.wpilib.json", true).withTimeout(15)
+      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/RBCMMCS.wpilib.json", true)
     );
   }
 }
