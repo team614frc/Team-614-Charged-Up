@@ -5,15 +5,19 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
+
+  public HttpCamera camera;
   private NetworkTable limelightTable;
 
   public LimelightSubsystem() {
+    camera = new HttpCamera("Camera", "http://limelight.local.5800/stream.mpjpg");
     limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
