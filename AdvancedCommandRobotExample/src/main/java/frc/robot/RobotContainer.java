@@ -27,6 +27,8 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto1;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto2;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto3;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
+import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
 
 public class RobotContainer {
     public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
@@ -41,10 +43,12 @@ public class RobotContainer {
     public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     public static LEDSubsystem ledSubsystem = new LEDSubsystem();
 
-    private final Command TwoCubeChargeStation = new Auto1();
-    private final Command ScoreCubeHigh = new Auto2();
-    private final Command ChargeStation = new Auto3();
-    private final Command ScoreCubeChargeStation = new Auto4();
+    private final Command BBCMMCS = new Auto1();
+    private final Command BTCMCS = new Auto2();
+    private final Command BTCMM = new Auto3();
+    private final Command RBCMMCS = new Auto4();
+    private final Command RTCMCS = new Auto5();
+    private final Command RTCMM = new Auto6();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -52,10 +56,12 @@ public class RobotContainer {
         configureBindings();
         driveTrainSubsystem.setDefaultCommand(new ArcadeDrive());
 
-        m_chooser.addOption("Test Auto #1", TwoCubeChargeStation);
-        m_chooser.addOption("Score Cube High #2", ScoreCubeHigh);
-        m_chooser.addOption("ChargeStation #3", ChargeStation);
-        m_chooser.addOption("Score Cube Charge Station #4", ScoreCubeChargeStation);
+        m_chooser.addOption("Blue - Mid Cube Over Charge Station #1", BBCMMCS);
+        m_chooser.addOption("Blue - Mid Cube Around Charge Station #2", BTCMCS);
+        m_chooser.addOption("Blue - Mid Cube Mobility #3", BTCMM);
+        m_chooser.addOption("Red - Mid Cube Over Charge Station #4", RBCMMCS);
+        m_chooser.addOption("Red - Mid Cube Around Charge Station #5", RTCMCS);
+        m_chooser.addOption("Red - Mid Cube Mobility", RTCMM);
 
         SmartDashboard.putData(m_chooser);
     }

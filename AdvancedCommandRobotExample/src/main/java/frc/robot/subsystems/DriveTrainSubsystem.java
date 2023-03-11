@@ -159,7 +159,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setMaxOutput(double maxOutput) {
     differentialDrive.setMaxOutput(maxOutput);
   }
-
+  
   public static void zeroHeading() {
     navX.calibrate();
     navX.reset();
