@@ -1,6 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -12,12 +11,9 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 
 public class PathPlannerLoadEventMapCommand extends InstantCommand {
-  private PathPlannerTrajectory examplePath;
-  private FollowPathWithEvents command;
   private final String filename;
   private final boolean resetOdomtry;
   private final HashMap<String, Command> eventMap;
-  private Trajectory trajectory;
 
   public PathPlannerLoadEventMapCommand(String filename, boolean resetOdomtry, HashMap<String, Command> eventMap) {
     this.filename = filename;
@@ -29,9 +25,9 @@ public class PathPlannerLoadEventMapCommand extends InstantCommand {
   public void initialize() {
     addRequirements(RobotContainer.driveTrainSubsystem);
     PathConstraints constraints = new PathConstraints(2, 2);
-    examplePath = PathPlanner.loadPath(filename, constraints);
+    PathPlannerTrajectory examplePath = PathPlanner.loadPath(filename, constraints);
 
-    command = new FollowPathWithEvents(
+    FollowPathWithEvents command = new FollowPathWithEvents(
         new PathPlannerLoadPathCommand(filename, resetOdomtry),
         examplePath.getMarkers(),
         eventMap);
@@ -39,7 +35,7 @@ public class PathPlannerLoadEventMapCommand extends InstantCommand {
     if (resetOdomtry) {
       new SequentialCommandGroup(
           new InstantCommand(
-              () -> RobotContainer.driveTrainSubsystem.resetOdometry(trajectory.getInitialPose())),
+              () -> RobotContainer.driveTrainSubsystem.resetOdometry(examplePath.getInitialPose())),
           command).schedule();
     } else {
       command.schedule();

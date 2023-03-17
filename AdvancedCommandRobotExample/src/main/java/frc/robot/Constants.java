@@ -151,7 +151,7 @@ public final class Constants {
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 18;
   public static final int TILT_LEFT_MOTOR = 1;
-
+  
   public static class OperatorConstants {
   }
 }

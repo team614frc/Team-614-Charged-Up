@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class AutoBalance extends CommandBase {
+public class ReverseBalance extends CommandBase {
   private double error;
   private double currentAngle;
   private double lastAngle = 0;
@@ -14,21 +14,16 @@ public class AutoBalance extends CommandBase {
   private double maxSpeed = 0.5;
   private double diferenceInAngle;
   double stopAngle = 10.0;
+  boolean driveBackwards;
 
-  public AutoBalance() {
+  public ReverseBalance() {
     addRequirements(RobotContainer.driveTrainSubsystem);
-  }
-
-  public long getMiliSeconds() {
-    return System.currentTimeMillis();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    balanceTimeMili = getMiliSeconds();
-    lastAngle = -RobotContainer.driveTrainSubsystem.getPitch();
-
+    SmartDashboard.putBoolean("BALANCING", true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,9 +32,18 @@ public class AutoBalance extends CommandBase {
     SmartDashboard.putNumber("AutoBalanceStopAngle", stopAngle);
 
     // sets angle to roll: angle the balence beam can rotate.
-    this.currentAngle = Math.abs(RobotContainer.driveTrainSubsystem.getPitch());
+    this.currentAngle = RobotContainer.driveTrainSubsystem.getPitch();
+    if (currentAngle > 12.5) {
+      RobotContainer.driveTrainSubsystem.arcadeDrive(0.3, 0);
 
-    RobotContainer.driveTrainSubsystem.arcadeDrive(0.3, 0);
+    } else if (currentAngle < -6) {
+      RobotContainer.driveTrainSubsystem.arcadeDrive(-0.4, 0);
+
+    } else if (currentAngle <= 12.5 && currentAngle >= -6) {
+      RobotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0);
+
+    }
+    // m_drivetrain.arcadeDrive(0.3, 0);
 
     // System.out.println("drivePower*FM: "+(drivePower*ForwardMult)+"angle:
     // "+currentAngle+" ForwardMult:"+ForwardMult+" difInAngle: "+diferenceInAngle+"
@@ -57,22 +61,12 @@ public class AutoBalance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
-    SmartDashboard.putBoolean("balancing", false);
+    SmartDashboard.putBoolean("BALANCING", false);
   }
 
+  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    SmartDashboard.putNumber("balanceTimeMili Milisecs", (getMiliSeconds() - balanceTimeMili));
-
-    // not balenced, reset timer
-    // if (){
-    // balanceTimeMili = getMiliSeconds();
-    // }
-
-    // if balenced for 2 secs, lock motors and finish
-    // return ((getMiliSeconds()-balanceTimeMili) > 0.5);
-    return (currentAngle < 10);// 12
-    // return ( m_driveTrain.getNavxDisplacement() >= Units.inchesToMeters(9.25));
+    return false;
   }
 }

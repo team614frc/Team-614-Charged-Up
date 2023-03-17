@@ -29,6 +29,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto3;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
+import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
 
 public class RobotContainer {
     public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
@@ -49,6 +50,7 @@ public class RobotContainer {
     private final Command RBCMMCS = new Auto4();
     private final Command RTCMCS = new Auto5();
     private final Command RTCMM = new Auto6();
+    private final Command TestAuto = new TestAuto();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -62,6 +64,7 @@ public class RobotContainer {
         m_chooser.addOption("Red - Mid Cube Over Charge Station #4", RBCMMCS);
         m_chooser.addOption("Red - Mid Cube Around Charge Station #5", RTCMCS);
         m_chooser.addOption("Red - Mid Cube Mobility", RTCMM);
+        m_chooser.addOption("--TESTAUTO--", TestAuto);
 
         SmartDashboard.putData(m_chooser);
     }
