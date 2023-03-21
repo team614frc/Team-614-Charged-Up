@@ -11,7 +11,7 @@ import frc.robot.commands.SimpleCommands.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+// https://docs.wpilib.org/ena/stable/docs/software/commandbased/convenience-features.html
 public class PchooOverCS extends SequentialCommandGroup {
   /** Creates a new PchooOverCS. */
   public PchooOverCS() {
