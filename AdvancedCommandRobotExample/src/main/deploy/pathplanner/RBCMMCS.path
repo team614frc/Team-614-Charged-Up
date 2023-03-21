@@ -73,5 +73,12 @@
   "maxVelocity": 2.0,
   "maxAcceleration": 2.0,
   "isReversed": true,
-  "markers": []
+  "markers": [
+    {
+      "position": 2.0,
+      "names": [
+        "balance"
+      ]
+    }
+  ]
 }

@@ -1,12 +1,13 @@
 package frc.robot.commands.PIDCommand;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class RotateLeftPIDCommand extends PIDCommand {
-
+boolean IsRunning = false;
   public RotateLeftPIDCommand(double rotationSetpoint) {
     super(
         // The controller that the command will use
@@ -24,6 +25,11 @@ public class RotateLeftPIDCommand extends PIDCommand {
   }
 
   // Returns true when the command should end.
+  @Override
+  public void initialize() {
+    IsRunning = true;
+    SmartDashboard.putBoolean("IsRunning", IsRunning);
+  }
   @Override
   public boolean isFinished() {
     return getController().atSetpoint();

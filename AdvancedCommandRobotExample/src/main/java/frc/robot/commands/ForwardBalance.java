@@ -38,13 +38,10 @@ public class ForwardBalance extends CommandBase {
     this.currentAngle = RobotContainer.driveTrainSubsystem.getPitch();
     if (currentAngle > 12) {
       RobotContainer.driveTrainSubsystem.arcadeDrive(0.4, 0);
-
     } else if (currentAngle < -7) {
       RobotContainer.driveTrainSubsystem.arcadeDrive(-0.3, 0);
-
     } else if (currentAngle <= 12 && currentAngle >= -7) {
       RobotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0);
-
     }
     // m_drivetrain.arcadeDrive(0.3, 0);
 
