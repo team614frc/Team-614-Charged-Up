@@ -5,7 +5,8 @@
 package frc.robot.commands.Autonomous.TimedBasedAuto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ForwardBalance;
+import frc.robot.commands.PathPlannerLoadEventMapCommand;
+import frc.robot.commands.getEventMap;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,6 +17,6 @@ public class AutoBalance extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new ForwardBalance());
+        new PathPlannerLoadEventMapCommand("BBCMMCS", getEventMap.ScoreAutoBalanceBlue()).withTimeout(15));
   }
 }
