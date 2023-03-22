@@ -147,11 +147,11 @@ public final class Constants {
 
   // ELEVATOR MOTOR ID'S
   public static final int ELEVATOR_RIGHT_MOTOR = 17;
-  public static final int ELEVATOR_LEFT_MOTOR = 52;
+  public static final int ELEVATOR_LEFT_MOTOR = 3;
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 18;
-  public static final int TILT_LEFT_MOTOR = 51;
+  public static final int TILT_LEFT_MOTOR = 1;
 
   public static class OperatorConstants {
   }
