@@ -11,12 +11,12 @@ import frc.robot.commands.getEventMap;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoBalance extends SequentialCommandGroup {
-  /** Creates a new AutoBalance. */
-  public AutoBalance() {
+public class ScoreRotateBalance extends SequentialCommandGroup {
+  /** Creates a new ScoreRotateBalance. */
+  public ScoreRotateBalance() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PathPlannerLoadEventMapCommand("BBCMMCS", getEventMap.ScoreAutoBalanceBlue()).withTimeout(15));
+        new PathPlannerLoadEventMapCommand("ScoreRotateBalance", getEventMap.ScoreRotateBalance()).withTimeout(15));
   }
 }
