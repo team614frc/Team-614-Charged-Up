@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.AutoBalance;
+import frc.robot.commands.ForwardBalance;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 import frc.robot.commands.SequentialParallelCommands.GroundIntake;
 import frc.robot.commands.SequentialParallelCommands.LoadStation;
@@ -15,7 +15,7 @@ import frc.robot.commands.SequentialParallelCommands.ScoreMidCube;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
+// import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -30,6 +30,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto3;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
+import frc.robot.commands.Autonomous.TimedBasedAuto.DoNothing;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
 
 public class RobotContainer {
@@ -42,7 +43,7 @@ public class RobotContainer {
     public static Manipulator manipulator = new Manipulator();
     public static ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     public static TiltSubsystem tiltSubsystem = new TiltSubsystem();
-    public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+    // public static LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
     public static LEDSubsystem ledSubsystem = new LEDSubsystem();
 
     private final Command BBCMMCS = new Auto1();
@@ -52,7 +53,9 @@ public class RobotContainer {
     private final Command RTCMCS = new Auto5();
     private final Command RTCMM = new Auto6();
     private final Command TestAuto = new TestAuto();
-    private final Command AutoBalance = new AutoBalance();
+    private final Command DoNothing = new DoNothing();
+    private final Command ScoreMidCubeAuto = new ScoreMidCube();
+    private final Command ScoreHighCubeAuto = new ScoreHighCube();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -66,8 +69,10 @@ public class RobotContainer {
         m_chooser.addOption("Red - Mid Cube Over Charge Station #4", RBCMMCS);
         m_chooser.addOption("Red - Mid Cube Around Charge Station #5", RTCMCS);
         m_chooser.addOption("Red - Mid Cube Mobility", RTCMM);
-        m_chooser.addOption("Auto Balance", AutoBalance);
         m_chooser.addOption("--TESTAUTO--", TestAuto);
+        m_chooser.addOption("Do Nothing", DoNothing);
+        m_chooser.addOption("Score Mid Cube and do Nothing:", ScoreMidCubeAuto);
+        m_chooser.addOption("Score High Cube and do Nothing", ScoreHighCubeAuto);
 
         SmartDashboard.putData(m_chooser);
     }
@@ -82,6 +87,8 @@ public class RobotContainer {
         m_CommandXboxController.button(Constants.RIGHT_BUMPER).onTrue(new LoadStation());
         m_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(new GroundIntake());
         m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
+        m_CommandXboxController.leftTrigger().onTrue(new PchooOverCS());
+        //m_CommandXboxController.leftTrigger().whileTrue(new ForwardBalance());
         // m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new
         // SetLEDColorCommand(0)); Sets LED's to purple
         // m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new
@@ -95,6 +102,8 @@ public class RobotContainer {
         co_CommandXboxController.button(Constants.B_BUTTON).onTrue(new ScoreMidCone());
         co_CommandXboxController.button(Constants.RIGHT_BUMPER).onTrue(new LoadStation());
         co_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(new GroundIntake());
+        m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
+        co_CommandXboxController.leftTrigger().onTrue(new PchooOverCS());
         co_CommandXboxController.axisGreaterThan(1, 0.5).whileTrue(new Retract());
         co_CommandXboxController.axisLessThan(1, -0.5).whileTrue(new Extend());
         co_CommandXboxController.axisGreaterThan(5, 0.5).whileTrue(new MaxTiltDown());

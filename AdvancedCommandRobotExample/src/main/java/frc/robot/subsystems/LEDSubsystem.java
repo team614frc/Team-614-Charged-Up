@@ -24,7 +24,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   public void setLedColorOrange() {
     for (int i = 0; i < NumLEDs; i++) {
-      ledBuffer.setRGB(i, 255, 17, 50);
+      ledBuffer.setRGB(i, 255, 17, 0);
     }
     led.setData(ledBuffer);
   }

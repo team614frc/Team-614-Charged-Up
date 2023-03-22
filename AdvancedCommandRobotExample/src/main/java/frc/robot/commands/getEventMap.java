@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
 import java.util.HashMap;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.SimpleCommands.Intake;
@@ -20,6 +22,7 @@ public class getEventMap {
   public static HashMap<String, Command> ScoreAutoBalanceBlue() {
     HashMap<String, Command> ScoreAutoBalanceBlue = new HashMap<>();
     ScoreAutoBalanceBlue.put("balance", new ForwardBalance());
+    System.out.print("asdoiasbdioiuabsdub");
     return ScoreAutoBalanceBlue;
   }
 

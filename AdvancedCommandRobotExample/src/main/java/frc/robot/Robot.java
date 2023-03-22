@@ -25,6 +25,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Tilt Right Encoder Value", RobotContainer.tiltSubsystem.getRightHeight());
     SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Pitch Angle Value:", RobotContainer.driveTrainSubsystem.getPitch());
+    SmartDashboard.putNumber("Roll Angle Value:", RobotContainer.driveTrainSubsystem.getRoll());
+    SmartDashboard.putNumber("Rotate Stick Value", RobotContainer.m_CommandXboxController.getRightX());
   }
 
   @Override

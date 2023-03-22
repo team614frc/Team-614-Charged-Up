@@ -88,7 +88,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "balance"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -103,12 +105,6 @@
       "position": 1.827272727272726,
       "names": [
         "intake"
-      ]
-    },
-    {
-      "position": 3.0,
-      "names": [
-        "balance"
       ]
     }
   ]

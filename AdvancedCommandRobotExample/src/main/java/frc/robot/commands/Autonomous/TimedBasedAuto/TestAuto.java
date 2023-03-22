@@ -7,6 +7,6 @@ import frc.robot.commands.getEventMap;
 public class TestAuto extends SequentialCommandGroup {
   public TestAuto() {
     addCommands(
-        new PathPlannerLoadEventMapCommand("Marker1Path1", getEventMap.ScoreAutoBalanceBlue()).withTimeout(15));
+        new PathPlannerLoadEventMapCommand("MoveForward", getEventMap.ScoreAutoBalanceBlue()).withTimeout(15));
   }
 }

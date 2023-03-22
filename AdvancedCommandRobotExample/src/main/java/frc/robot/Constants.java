@@ -39,7 +39,7 @@ public final class Constants {
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
   public static final double MOTOR_REST_BACK = 0.05;
-
+  
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
 
@@ -97,6 +97,7 @@ public final class Constants {
   // Manipulator PID setpoints (test)
   public static final double MANIPULATOR_SPEED_INTAKE = 0.8; // for testing
   public static final double MANIPULATOR_SPEED_OUTTAKE = -0.8;
+  public static final double MANIPULATOR_SPEED_EHH = -0.6;
   public static final double MANIPULATOR_SPEED_BLEH = -0.4;
   public static final double MANIPULATOR_SPEED_PCHOO = -1;
 
@@ -146,11 +147,11 @@ public final class Constants {
 
   // ELEVATOR MOTOR ID'S
   public static final int ELEVATOR_RIGHT_MOTOR = 17;
-  public static final int ELEVATOR_LEFT_MOTOR = 3;
+  public static final int ELEVATOR_LEFT_MOTOR = 52;
 
   // TILT MOTOR ID'S
   public static final int TILT_RIGHT_MOTOR = 18;
-  public static final int TILT_LEFT_MOTOR = 1;
+  public static final int TILT_LEFT_MOTOR = 51;
 
   public static class OperatorConstants {
   }
