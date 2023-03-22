@@ -3,7 +3,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.AutoBalance;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 import frc.robot.commands.SequentialParallelCommands.GroundIntake;
 import frc.robot.commands.SequentialParallelCommands.LoadStation;
@@ -31,6 +30,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.BalanceAuto;
 
 public class RobotContainer {
     public static DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem();
@@ -51,8 +51,8 @@ public class RobotContainer {
     private final Command RBCMMCS = new Auto4();
     private final Command RTCMCS = new Auto5();
     private final Command RTCMM = new Auto6();
+    private final Command BalanceAuto = new BalanceAuto();
     private final Command TestAuto = new TestAuto();
-    private final Command AutoBalance = new AutoBalance();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -66,7 +66,7 @@ public class RobotContainer {
         m_chooser.addOption("Red - Mid Cube Over Charge Station #4", RBCMMCS);
         m_chooser.addOption("Red - Mid Cube Around Charge Station #5", RTCMCS);
         m_chooser.addOption("Red - Mid Cube Mobility", RTCMM);
-        m_chooser.addOption("Auto Balance", AutoBalance);
+        m_chooser.addOption("Auto Balance", BalanceAuto);
         m_chooser.addOption("--TESTAUTO--", TestAuto);
 
         SmartDashboard.putData(m_chooser);

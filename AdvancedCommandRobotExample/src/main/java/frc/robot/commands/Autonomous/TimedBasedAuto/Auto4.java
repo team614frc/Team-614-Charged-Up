@@ -7,8 +7,7 @@ import frc.robot.commands.SequentialParallelCommands.ScoreMidCube;
 public class Auto4 extends SequentialCommandGroup {
   public Auto4() {
     addCommands(
-      new ScoreMidCube(),
-      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/RBCMMCS.wpilib.json", true)
-    );
+        new ScoreMidCube(),
+        new PathPlannerLoadPathCommand("pathplanner/generatedJSON/RBCMMCS.wpilib.json", true));
   }
 }

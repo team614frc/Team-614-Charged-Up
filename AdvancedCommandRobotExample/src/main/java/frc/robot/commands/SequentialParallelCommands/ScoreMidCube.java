@@ -18,8 +18,8 @@ public class ScoreMidCube extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5),
-      new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
-      new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
+        new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5),
+        new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
+        new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
   }
 }

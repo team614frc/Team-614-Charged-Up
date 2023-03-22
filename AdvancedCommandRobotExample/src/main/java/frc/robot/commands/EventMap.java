@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.SimpleCommands.Intake;
 
-public class getEventMap {
+public class EventMap {
 
-  public getEventMap() {
+  public EventMap() {
   }
 
   public static HashMap<String, Command> ScoreGrabBalance() {
@@ -17,15 +17,9 @@ public class getEventMap {
     return ScoreGrabBalance;
   }
 
-  public static HashMap<String, Command> ScoreAutoBalanceBlue() {
+  public static HashMap<String, Command> ScoreAutoBalance() {
     HashMap<String, Command> ScoreAutoBalanceBlue = new HashMap<>();
     ScoreAutoBalanceBlue.put("balance", new ForwardBalance());
     return ScoreAutoBalanceBlue;
-  }
-
-  public static HashMap<String, Command> ScoreAutoBalanceRed() {
-    HashMap<String, Command> ScoreAutoBalanceRed = new HashMap<>();
-    ScoreAutoBalanceRed.put("balance", new ForwardBalance());
-    return ScoreAutoBalanceRed;
   }
 }

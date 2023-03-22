@@ -18,7 +18,7 @@ public class PchooOverCS extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new TiltPIDCommand(Constants.TILT_PCHOO_SETPOINT).withTimeout(0.5),
-    new Intake(Constants.MANIPULATOR_SPEED_PCHOO).withTimeout(0.5));
+        new TiltPIDCommand(Constants.TILT_PCHOO_SETPOINT).withTimeout(0.5),
+        new Intake(Constants.MANIPULATOR_SPEED_PCHOO).withTimeout(0.5));
   }
 }

@@ -18,8 +18,8 @@ public class ScoreHybrid extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TiltPIDCommand(Constants.TILT_LOW_SETPOINT).withTimeout(0.5),
-      new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5),
-      new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7));
+        new TiltPIDCommand(Constants.TILT_LOW_SETPOINT).withTimeout(0.5),
+        new Intake(Constants.MANIPULATOR_SPEED_OUTTAKE).withTimeout(0.5),
+        new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.7));
   }
 }

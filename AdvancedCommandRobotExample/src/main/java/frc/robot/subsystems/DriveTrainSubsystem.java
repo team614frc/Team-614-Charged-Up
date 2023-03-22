@@ -158,7 +158,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void setMaxOutput(double maxOutput) {
     differentialDrive.setMaxOutput(maxOutput);
   }
-  
+
   public static void zeroHeading() {
     navX.calibrate();
     navX.reset();
@@ -167,15 +167,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public Gyro getGyro() {
     return navX;
   }
-  
+
   public double getPitch() {
     return navX.getPitch();
   }
-  
+
   public double getRoll() {
     return navX.getRoll();
   }
-  
+
   public double getYaw() {
     return navX.getYaw();
   }

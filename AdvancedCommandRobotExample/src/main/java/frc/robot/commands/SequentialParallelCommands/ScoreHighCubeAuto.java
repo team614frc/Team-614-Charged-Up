@@ -20,10 +20,10 @@ public class ScoreHighCubeAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TiltPIDCommand(Constants.TILT_HIGH_CUBE_AUTO_SETPOINT).withTimeout(0.5),
-      new Extend().withTimeout(0.5),
-      new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
-      new Retract().withTimeout(0.5),
-      new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
+        new TiltPIDCommand(Constants.TILT_HIGH_CUBE_AUTO_SETPOINT).withTimeout(0.5),
+        new Extend().withTimeout(0.5),
+        new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
+        new Retract().withTimeout(0.5),
+        new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
   }
 }

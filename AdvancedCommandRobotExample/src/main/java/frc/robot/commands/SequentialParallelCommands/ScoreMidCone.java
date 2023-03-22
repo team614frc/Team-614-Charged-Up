@@ -19,10 +19,10 @@ public class ScoreMidCone extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1),
-      new Extend().withTimeout(0.6),
-      new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5),
-      new Retract().withTimeout(0.5),
-      new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
+        new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.1),
+        new Extend().withTimeout(0.6),
+        new TiltPIDCommand(Constants.TILT_MID_SCORE_SETPOINT).withTimeout(0.5),
+        new Retract().withTimeout(0.5),
+        new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
   }
 }

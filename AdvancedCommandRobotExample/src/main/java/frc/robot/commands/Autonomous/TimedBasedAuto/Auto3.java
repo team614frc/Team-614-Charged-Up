@@ -7,8 +7,7 @@ import frc.robot.commands.SequentialParallelCommands.ScoreMidCube;
 public class Auto3 extends SequentialCommandGroup {
   public Auto3() {
     addCommands(
-      new ScoreMidCube(),
-      new PathPlannerLoadPathCommand("pathplanner/generatedJSON/BTCMM.wpilib.json", true)
-    );
+        new ScoreMidCube(),
+        new PathPlannerLoadPathCommand("pathplanner/generatedJSON/BTCMM.wpilib.json", true));
   }
 }

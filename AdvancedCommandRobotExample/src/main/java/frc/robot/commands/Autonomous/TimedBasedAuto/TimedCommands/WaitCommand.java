@@ -11,8 +11,10 @@ public class WaitCommand extends CommandBase {
   Timer WaitTimer = null;
   // Local variables for this command
   double localRunTime;
-  /*A command which will stop the drivetrain 
-  for a specified amount of time.*/
+  /*
+   * A command which will stop the drivetrain
+   * for a specified amount of time.
+   */
 
   public WaitCommand(double runtime) {
     // Requires the drivetrain subsystem for the command

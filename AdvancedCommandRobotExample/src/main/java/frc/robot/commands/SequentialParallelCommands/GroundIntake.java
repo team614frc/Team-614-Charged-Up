@@ -17,7 +17,7 @@ public class GroundIntake extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new TiltPIDCommand(Constants.TILT_LOW_SETPOINT),
-      new Intake(Constants.MANIPULATOR_SPEED_INTAKE));
+        new TiltPIDCommand(Constants.TILT_LOW_SETPOINT),
+        new Intake(Constants.MANIPULATOR_SPEED_INTAKE));
   }
 }

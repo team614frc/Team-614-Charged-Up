@@ -18,10 +18,10 @@ public class ScoreHighCube extends SequentialCommandGroup {
   /** Creates a new ScoreHighCube. */
   public ScoreHighCube() {
     addCommands(
-    new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5),
-    new Extend().withTimeout(0.5),
-    new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
-    new Retract().withTimeout(0.5),
-    new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
+        new TiltPIDCommand(Constants.TILT_LOAD_STATION_SETPOINT).withTimeout(0.5),
+        new Extend().withTimeout(0.5),
+        new Intake(Constants.MANIPULATOR_SPEED_BLEH).withTimeout(0.5),
+        new Retract().withTimeout(0.5),
+        new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT).withTimeout(0.5));
   }
 }
