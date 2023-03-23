@@ -3,16 +3,12 @@ package frc.robot.commands;
 import java.util.HashMap;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import frc.robot.Constants;
 import frc.robot.commands.PIDCommand.TiltPIDCommand;
 import frc.robot.commands.SequentialParallelCommands.GroundIntake;
 import frc.robot.commands.SequentialParallelCommands.PchooOverCS;
-import frc.robot.commands.SequentialParallelCommands.PchooOverCSBalance;
 import frc.robot.commands.SequentialParallelCommands.ScoreHighCubeAuto;
 import frc.robot.commands.SequentialParallelCommands.ScoreMidCone;
-import frc.robot.commands.SimpleCommands.Intake;
-import frc.robot.commands.SimpleCommands.Tilt;
 
 public class getEventMap {
 
@@ -23,7 +19,7 @@ public class getEventMap {
     HashMap<String, Command> ScoreGrabPchooBalance = new HashMap<>();
     ScoreGrabPchooBalance.put("score1", new ScoreHighCubeAuto());
     ScoreGrabPchooBalance.put("intake", new GroundIntake());
-    ScoreGrabPchooBalance.put("armup", new PchooOverCS());
+    ScoreGrabPchooBalance.put("armup", new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
     ScoreGrabPchooBalance.put("score2", new ScoreMidCone());
     return ScoreGrabPchooBalance;
   }

@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PathPlannerLoadEventMapCommand;
 import frc.robot.commands.getEventMap;
 
-public class ScoreGrabBalance extends SequentialCommandGroup {
-  public ScoreGrabBalance() {
+public class ScoreGrabAuto extends SequentialCommandGroup {
+  public ScoreGrabAuto() {
     addCommands(
-        new PathPlannerLoadEventMapCommand("ScoreGrabBalance", getEventMap.ScoreGrabBalance()).withTimeout(15));
+        new PathPlannerLoadEventMapCommand("ScoreGrabBalance", getEventMap.ScoreGrab()).withTimeout(15));
   }
 }

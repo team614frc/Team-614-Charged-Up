@@ -30,7 +30,7 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
 import frc.robot.commands.Autonomous.TimedBasedAuto.DoNothingAuto;
-import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreGrabBalance;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreGrabAuto;
 import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreRotateBalance;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
 
@@ -57,7 +57,7 @@ public class RobotContainer {
     private final Command DoNothing = new DoNothingAuto();
     private final Command ScoreMidCubeAuto = new ScoreMidCube();
     private final Command ScoreHighCubeAuto = new ScoreHighCube();
-    private final Command ScoreGrabBalance = new ScoreGrabBalance();
+    private final Command ScoreGrabAuto = new ScoreGrabAuto();
     private final Command ScoreRotateBalance = new ScoreRotateBalance();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -76,7 +76,7 @@ public class RobotContainer {
         m_chooser.setDefaultOption("Do Nothing", DoNothing);
         m_chooser.addOption("Score Mid Cube and do Nothing:", ScoreMidCubeAuto);
         m_chooser.addOption("Score High Cube and do Nothing", ScoreHighCubeAuto);
-        m_chooser.addOption("Red - Score Grab Balance", ScoreGrabBalance);
+        m_chooser.addOption("Red - Score Grab", ScoreGrabAuto);
         m_chooser.addOption("Red - Score Rotate Balance", ScoreRotateBalance);
 
         SmartDashboard.putData(m_chooser);
