@@ -7,6 +7,7 @@ package frc.robot.commands.SequentialParallelCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.ForwardBalance;
+import frc.robot.commands.PIDCommand.TiltPIDCommand;
 import frc.robot.commands.SimpleCommands.Intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -18,6 +19,8 @@ public class PchooOverCSBalance extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new TiltPIDCommand(Constants.TILT_PCHOO_SETPOINT).withTimeout(0.5),
+      new Intake(Constants.MANIPULATOR_SPEED_PCHOO).withTimeout(0.5),
       new Intake(Constants.MANIPULATOR_SPEED_PCHOO),
       new ForwardBalance()
     );

@@ -31,7 +31,9 @@ import frc.robot.commands.Autonomous.TimedBasedAuto.Auto3;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto4;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto5;
 import frc.robot.commands.Autonomous.TimedBasedAuto.Auto6;
-import frc.robot.commands.Autonomous.TimedBasedAuto.DoNothing;
+import frc.robot.commands.Autonomous.TimedBasedAuto.DoNothingAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreGrabAuto;
+import frc.robot.commands.Autonomous.TimedBasedAuto.ScoreRotateBalance;
 import frc.robot.commands.Autonomous.TimedBasedAuto.TestAuto;
 
 public class RobotContainer {
@@ -54,9 +56,11 @@ public class RobotContainer {
     private final Command RTCMCS = new Auto5();
     private final Command RTCMM = new Auto6();
     private final Command TestAuto = new TestAuto();
-    private final Command DoNothing = new DoNothing();
+    private final Command DoNothing = new DoNothingAuto();
     private final Command ScoreMidCubeAuto = new ScoreMidCube();
     private final Command ScoreHighCubeAuto = new ScoreHighCube();
+    private final Command ScoreGrabAuto = new ScoreGrabAuto();
+    private final Command ScoreRotateBalance = new ScoreRotateBalance();
 
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -71,9 +75,11 @@ public class RobotContainer {
         m_chooser.addOption("Red - Mid Cube Around Charge Station #5", RTCMCS);
         m_chooser.addOption("Red - Mid Cube Mobility", RTCMM);
         m_chooser.addOption("--TESTAUTO--", TestAuto);
-        m_chooser.addOption("Do Nothing", DoNothing);
+        m_chooser.setDefaultOption("Do Nothing", DoNothing);
         m_chooser.addOption("Score Mid Cube and do Nothing:", ScoreMidCubeAuto);
         m_chooser.addOption("Score High Cube and do Nothing", ScoreHighCubeAuto);
+        m_chooser.addOption("Red - Score Grab", ScoreGrabAuto);
+        m_chooser.addOption("Red - Score Rotate Balance", ScoreRotateBalance);
 
         SmartDashboard.putData(m_chooser);
     }
