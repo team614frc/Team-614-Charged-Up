@@ -38,16 +38,16 @@ public final class Constants {
 
   // GLOBAL STOP MOTOR
   public static final double MOTOR_ZERO_SPEED = 0.0;
-  public static final double MOTOR_REST_BACK = 0.05;
+  public static final double MOTOR_REST_BACK = -0.05;
   
   // GLOBAL INVERT
   public static final int GLOBAL_INVERT = -1;
 
   // DRIVE TRAIN MOTORS new old
   public static final int DRIVETRAIN_FOLLOWER_RIGHT_MOTOR = 9; // 9 //1
-  public static final int DRIVETRAIN_LEADER_RIGHT_MOTOR = 2; // 2 //3
+  public static final int DRIVETRAIN_LEADER_RIGHT_MOTOR = 19; // 2 //3
   public static final int DRIVETRAIN_FOLLOWER_LEFT_MOTOR = 10; // 10 //14
-  public static final int DRIVETRAIN_LEADER_LEFT_MOTOR = 19; // 19 //13
+  public static final int DRIVETRAIN_LEADER_LEFT_MOTOR = 1; // 19 //13
   public static final int MOTOR_CURRENT_LIMIT = 40;
 
   // INTAKE MOTORS
@@ -87,7 +87,7 @@ public final class Constants {
   public static final double ELEVATOR_SETPOINT2 = 5;
 
   // Elevator Min and Max height
-  public static final double ELEVATOR_MAX_HEIGHT = 34; // 22.8
+  public static final double ELEVATOR_MAX_HEIGHT = 33; // 22.8
   public static final double ELEVATOR_MIN_HEIGHT = 5;
 
   // Tilt Min and Max height
@@ -95,11 +95,11 @@ public final class Constants {
   public static final double TILT_MAX_ENCODER_VALUE = 20; // 17 //15
 
   // Manipulator PID setpoints (test)
-  public static final double MANIPULATOR_SPEED_INTAKE = 0.8; // for testing
-  public static final double MANIPULATOR_SPEED_OUTTAKE = -0.8;
-  public static final double MANIPULATOR_SPEED_EHH = -0.6;
-  public static final double MANIPULATOR_SPEED_BLEH = -0.4;
-  public static final double MANIPULATOR_SPEED_PCHOO = -1;
+  public static final double MANIPULATOR_SPEED_INTAKE = -0.8; // for testing
+  public static final double MANIPULATOR_SPEED_OUTTAKE = 0.8;
+  public static final double MANIPULATOR_SPEED_EHH = 0.6;
+  public static final double MANIPULATOR_SPEED_BLEH = 0.4;
+  public static final double MANIPULATOR_SPEED_PCHOO = 1;
 
   // Thresholds
   public static final double MANIPULATOR_THRESHOLD = 10;
@@ -113,7 +113,7 @@ public final class Constants {
   public static final double TILT_HIGH_CUBE_AUTO_SETPOINT = 13;
   public static final double TILT_MID_SCORE_SETPOINT = 14.5;
   public static final double TILT_PCHOO_SETPOINT = 18;
-  public static final double TILT_LOW_SETPOINT = 22;
+  public static final double TILT_LOW_SETPOINT = 24;
   public static final double TILT_UP_SETPOINT = 0.5;
   public static final double TILT_HIGH_CUBE_SETPOINT = 13;
 
@@ -150,8 +150,8 @@ public final class Constants {
   public static final int ELEVATOR_LEFT_MOTOR = 3;
 
   // TILT MOTOR ID'S
-  public static final int TILT_RIGHT_MOTOR = 18;
-  public static final int TILT_LEFT_MOTOR = 1;
+  public static final int TILT_RIGHT_MOTOR = 2;
+  public static final int TILT_LEFT_MOTOR = 18;
 
   public static class OperatorConstants {
   }

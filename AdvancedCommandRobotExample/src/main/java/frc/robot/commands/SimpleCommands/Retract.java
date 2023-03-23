@@ -18,7 +18,7 @@ public class Retract extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((RobotContainer.elevatorSubsystem.getRightHeight() > Constants.ELEVATOR_MIN_HEIGHT))  {
+    if ((RobotContainer.elevatorSubsystem.getLeftHeight() > Constants.ELEVATOR_MIN_HEIGHT))  {
               RobotContainer.elevatorSubsystem.set(Constants.ELEVATOR_DOWN_SPEED);
             }
     else {

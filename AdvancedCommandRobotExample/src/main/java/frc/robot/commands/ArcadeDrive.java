@@ -36,14 +36,11 @@ boolean isPressedUp = RobotContainer.m_CommandXboxController.povUp().getAsBoolea
 
     // Arcade Drive
     // Right side of drivetrain is inverted
-    RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+    // RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
     // if(isPressedDown = true){
     //   RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed*0.5);
     // }
-    // else {
-    //   RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
-    // }
-    // if (isPressedUp = true){
+    // else if (isPressedUp = true){
     // RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
     // }
     // else {

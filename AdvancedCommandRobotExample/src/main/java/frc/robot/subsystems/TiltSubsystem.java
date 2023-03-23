@@ -49,18 +49,18 @@ public class TiltSubsystem extends PIDSubsystem {
 
   @Override
   protected void useOutput(double output, double setpoint) {
-    if ((getRightHeight() > 21) && (setpoint > 21)) {
+    if ((getLeftHeight() > 22.5) && (setpoint > 21)) {
       tiltLeftMotor.set(0);
       tiltRightMotor.set(0);
     } else {
-      tiltLeftMotor.set(-1 * (output + getController().calculate(getMeasurement(), setpoint)));
+      tiltLeftMotor.set(output + getController().calculate(getMeasurement(), setpoint));
       tiltRightMotor.set(output + getController().calculate(getMeasurement(), setpoint));
     }
   }
 
   @Override
   protected double getMeasurement() {
-    return RobotContainer.tiltSubsystem.getRightHeight();
+    return RobotContainer.tiltSubsystem.getLeftHeight();
   }
 
   public boolean atSetpoint() {
