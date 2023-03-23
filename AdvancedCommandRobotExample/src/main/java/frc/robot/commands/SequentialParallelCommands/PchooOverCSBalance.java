@@ -21,6 +21,7 @@ public class PchooOverCSBalance extends SequentialCommandGroup {
     addCommands(
       new TiltPIDCommand(Constants.TILT_PCHOO_SETPOINT).withTimeout(0.5),
       new Intake(Constants.MANIPULATOR_SPEED_PCHOO).withTimeout(0.5),
+      new Intake(Constants.MANIPULATOR_SPEED_PCHOO),
       new ForwardBalance()
     );
   }

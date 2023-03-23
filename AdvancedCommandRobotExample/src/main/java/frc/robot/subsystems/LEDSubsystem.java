@@ -10,7 +10,7 @@ public class LEDSubsystem extends SubsystemBase {
   private AddressableLED led;
   private AddressableLEDBuffer ledBuffer;
 
-  private final int NumLEDs = 60;
+  private final int NumLEDs = 180;
 
   private int rainbowInitialHue = 0;
 
@@ -45,7 +45,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   public void setLedColorYellow() {
     for (int i = 0; i < NumLEDs; i++) {
-      ledBuffer.setRGB(i, 255, 95, 50);
+      ledBuffer.setRGB(i, 255, 95, 0);
     }
     led.setData(ledBuffer);
   }

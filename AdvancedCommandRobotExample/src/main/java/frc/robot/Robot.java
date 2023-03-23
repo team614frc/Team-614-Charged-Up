@@ -27,11 +27,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
     SmartDashboard.putNumber("Pitch Angle Value:", RobotContainer.driveTrainSubsystem.getPitch());
     SmartDashboard.putNumber("Roll Angle Value:", RobotContainer.driveTrainSubsystem.getRoll());
-    SmartDashboard.putNumber("Rotate Stick Value", RobotContainer.m_CommandXboxController.getRightX());
+    SmartDashboard.putNumber("Current elevator left motor tick position:", RobotContainer.elevatorSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Current elevator right motor tick position:", RobotContainer.elevatorSubsystem.getRightHeight());
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
   public void disabledInit() {
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
