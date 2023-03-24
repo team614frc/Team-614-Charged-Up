@@ -3,10 +3,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
-
+boolean isPressedDown = RobotContainer.m_CommandXboxController.povDown().getAsBoolean();
+boolean isPressedUp = RobotContainer.m_CommandXboxController.povUp().getAsBoolean();
   public ArcadeDrive() {
     addRequirements(RobotContainer.driveTrainSubsystem);
   }
@@ -34,7 +36,16 @@ public class ArcadeDrive extends CommandBase {
 
     // Arcade Drive
     // Right side of drivetrain is inverted
-    RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+    // RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+    // if(isPressedDown = true){
+    //   RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed*0.5);
+    // }
+    // else if (isPressedUp = true){
+    // RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+    // }
+    // else {
+      RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+    // }
     // Passes the adjusted movement values and rotation values
   }
 

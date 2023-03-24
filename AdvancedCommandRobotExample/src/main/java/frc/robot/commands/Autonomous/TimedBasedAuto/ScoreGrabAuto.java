@@ -3,12 +3,13 @@ package frc.robot.commands.Autonomous.TimedBasedAuto;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PathPlannerLoadEventMapCommand;
 import frc.robot.commands.getEventMap;
+import frc.robot.commands.SequentialParallelCommands.ScoreMidCube;
 import frc.robot.commands.SequentialParallelCommands.ScoreMidCubeAuto;
 
-public class TestAuto extends SequentialCommandGroup {
-  public TestAuto() {
+public class ScoreGrabAuto extends SequentialCommandGroup {
+  public ScoreGrabAuto() {
     addCommands(
       new ScoreMidCubeAuto(),
-        new PathPlannerLoadEventMapCommand("BottomBlueScoreGrabPchooBalance", getEventMap.ScoreGrab()).withTimeout(15));
+        new PathPlannerLoadEventMapCommand("TopRedScoreGrab", getEventMap.ScoreGrab()).withTimeout(15));
   }
 }

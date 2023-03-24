@@ -27,8 +27,6 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public void periodic() {
     // Called once per scheduler run
-    SmartDashboard.putNumber("Current left motor tick position:", elevatorLeftMotor.getEncoder().getPosition());
-    SmartDashboard.putNumber("Current right motor tick position:", elevatorRightMotor.getEncoder().getPosition());
     SmartDashboard.putNumber("Current elevator speed:", elevatorLeftMotor.get());
   }
 
@@ -44,7 +42,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public double getLeftHeight() {
     SmartDashboard.putNumber("Position is", elevatorLeftMotor.getEncoder().getPosition());
-    return elevatorLeftMotor.getEncoder().getPosition();
+    return Math.abs(elevatorLeftMotor.getEncoder().getPosition());
   }
 
   public void resetElevatorEncoders() {
@@ -53,7 +51,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void set(double val) {
-    elevatorLeftMotor.set(val);
-    elevatorRightMotor.set(-1 * val);
+    elevatorLeftMotor.set(-1 * val);
+    elevatorRightMotor.set(val);
   }
 }

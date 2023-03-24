@@ -63,7 +63,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "balance"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -73,12 +75,5 @@
   "maxVelocity": 2.0,
   "maxAcceleration": 2.0,
   "isReversed": true,
-  "markers": [
-    {
-      "position": 2.0,
-      "names": [
-        "balance"
-      ]
-    }
-  ]
+  "markers": []
 }

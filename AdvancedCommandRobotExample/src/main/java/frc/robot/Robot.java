@@ -18,6 +18,7 @@ public class Robot extends TimedRobot {
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
+    RobotContainer.driveTrainSubsystem.setBreakMode();
   }
 
   @Override
@@ -25,10 +26,16 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Tilt Right Encoder Value", RobotContainer.tiltSubsystem.getRightHeight());
     SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Pitch Angle Value:", RobotContainer.driveTrainSubsystem.getPitch());
+    SmartDashboard.putNumber("Roll Angle Value:", RobotContainer.driveTrainSubsystem.getRoll());
+    SmartDashboard.putNumber("Current elevator left motor tick position:", RobotContainer.elevatorSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Current elevator right motor tick position:", RobotContainer.elevatorSubsystem.getRightHeight());
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
   public void disabledInit() {
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
@@ -61,7 +68,6 @@ public class Robot extends TimedRobot {
   }
 
   public void autonomousExit() {
-    RobotContainer.driveTrainSubsystem.setCoastMode();
   }
 
   @Override

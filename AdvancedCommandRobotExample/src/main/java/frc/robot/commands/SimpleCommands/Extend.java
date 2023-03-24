@@ -18,7 +18,7 @@ public class Extend extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((RobotContainer.elevatorSubsystem.getRightHeight() < Constants.ELEVATOR_MAX_HEIGHT))  {
+    if ((RobotContainer.elevatorSubsystem.getLeftHeight() < Constants.ELEVATOR_MAX_HEIGHT))  {
               RobotContainer.elevatorSubsystem.set(Constants.ELEVATOR_UP_SPEED);
             }
     else {

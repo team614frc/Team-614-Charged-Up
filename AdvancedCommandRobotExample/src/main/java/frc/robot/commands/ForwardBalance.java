@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class ForwardBalance extends CommandBase {
@@ -35,13 +36,14 @@ public class ForwardBalance extends CommandBase {
     SmartDashboard.putNumber("AutoBalanceStopAngle", stopAngle);
 
     // sets angle to roll: angle the balence beam can rotate.
-    this.currentAngle = RobotContainer.driveTrainSubsystem.getPitch();
-    if (currentAngle > 12) {
-      RobotContainer.driveTrainSubsystem.arcadeDrive(0.4, 0);
-    } else if (currentAngle < -7) {
+    this.currentAngle = RobotContainer.driveTrainSubsystem.getRoll();
+    if (currentAngle > 6) {
+      RobotContainer.driveTrainSubsystem.arcadeDrive(0.3, 0);
+    } else if (currentAngle < 2) {
       RobotContainer.driveTrainSubsystem.arcadeDrive(-0.3, 0);
-    } else if (currentAngle <= 12 && currentAngle >= -7) {
+    } else if (currentAngle <= 6 && currentAngle >= 2) {
       RobotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0);
+      RobotContainer.driveTrainSubsystem.setBreakMode();
     }
     // m_drivetrain.arcadeDrive(0.3, 0);
 

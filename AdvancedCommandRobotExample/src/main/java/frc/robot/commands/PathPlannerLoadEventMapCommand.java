@@ -2,12 +2,10 @@ package frc.robot.commands;
 
 import java.util.HashMap;
 import java.util.List;
-
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.RamseteAutoBuilder;
-
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -36,7 +34,10 @@ public class PathPlannerLoadEventMapCommand extends InstantCommand {
         Constants.kDriveKinematics,
         RobotContainer.driveTrainSubsystem::DifferentialDriveVolts,
         eventMap,
+        false,
         RobotContainer.driveTrainSubsystem);
+
+    //RamseteAutoBuilder autoBuilder2 = new RamseteAutoBuilder(null, null, null, null, null, null, null, null, eventMap, null)
 
     autoBuilder.fullAuto(pathGroup).schedule();
   }
