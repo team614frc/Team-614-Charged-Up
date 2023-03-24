@@ -44,7 +44,7 @@ boolean isPressedUp = RobotContainer.m_CommandXboxController.povUp().getAsBoolea
     // RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
     // }
     // else {
-    //   RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
+      RobotContainer.driveTrainSubsystem.arcadeDrive(-moveAdjustedSpeed, -rotateAdjustedSpeed);
     // }
     // Passes the adjusted movement values and rotation values
   }
