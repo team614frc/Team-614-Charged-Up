@@ -188,5 +188,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
     SmartDashboard.putNumber("Average Encoder Distance 2", getEncoderPositionAverage());
     SmartDashboard.putNumber("Gyro Heading", getHeading());
+    SmartDashboard.putNumber("Right Side Drivetrain", leaderRightMotor.get());
+    SmartDashboard.putNumber("Left Side Drivetrain", leaderLeftMotor.get());
   }
 }

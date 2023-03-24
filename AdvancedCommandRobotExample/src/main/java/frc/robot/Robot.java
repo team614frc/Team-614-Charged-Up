@@ -18,6 +18,7 @@ public class Robot extends TimedRobot {
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
+    RobotContainer.driveTrainSubsystem.setBreakMode();
   }
 
   @Override
@@ -67,7 +68,6 @@ public class Robot extends TimedRobot {
   }
 
   public void autonomousExit() {
-    RobotContainer.driveTrainSubsystem.setCoastMode();
   }
 
   @Override
