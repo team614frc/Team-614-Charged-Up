@@ -1,7 +1,7 @@
-package frc.robot.Subsystems;
+package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.Subsystems.Manipulator;
+import frc.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
