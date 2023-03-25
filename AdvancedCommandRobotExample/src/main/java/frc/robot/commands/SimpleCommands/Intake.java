@@ -1,4 +1,4 @@
-package frc.robot.commands.SimpleCommands;
+package frc.robot.Commands.SimpleCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

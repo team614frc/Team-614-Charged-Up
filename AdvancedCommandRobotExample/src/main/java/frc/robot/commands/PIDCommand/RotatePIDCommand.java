@@ -1,10 +1,10 @@
-package frc.robot.commands.PIDCommand;
+package frc.robot.Commands.PIDCommand;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.Subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RotatePIDCommand extends PIDCommand {
