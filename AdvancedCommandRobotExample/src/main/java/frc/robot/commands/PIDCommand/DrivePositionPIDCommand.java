@@ -1,4 +1,4 @@
-package frc.robot.commands.PIDCommand;
+package frc.robot.Commands.PIDCommand;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
