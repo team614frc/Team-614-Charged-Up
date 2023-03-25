@@ -5,10 +5,10 @@ import frc.robot.Commands.PathPlannerCommands.EventMap;
 import frc.robot.Commands.PathPlannerCommands.PathPlannerLoadEventMapCommand;
 import frc.robot.Commands.SequentialParallelCommands.ScoreMidCubeAuto;
 
-public class TestAuto extends SequentialCommandGroup {
-  public TestAuto() {
+public class BlueTopScoreGrabAuto extends SequentialCommandGroup {
+  public BlueTopScoreGrabAuto() {
     addCommands(
       new ScoreMidCubeAuto(),
-        new PathPlannerLoadEventMapCommand("TopBlueScoreGrab", EventMap.ScoreBalance()).withTimeout(15));
+        new PathPlannerLoadEventMapCommand("TopBlueScoreGrab", EventMap.ScoreGrab()).withTimeout(15));
   }
 }

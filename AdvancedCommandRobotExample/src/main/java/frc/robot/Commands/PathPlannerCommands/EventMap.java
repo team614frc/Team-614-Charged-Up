@@ -29,9 +29,9 @@ public class EventMap {
     return ScoreRotateBalance;
   }
 
-  public static HashMap<String, Command> ScoreAutoBalance() {
-    HashMap<String, Command> ScoreAutoBalance = new HashMap<>();
-    ScoreAutoBalance.put("balance", new ForwardBalance());
-    return ScoreAutoBalance;
+  public static HashMap<String, Command> ScoreBalance() {
+    HashMap<String, Command> ScoreBalance = new HashMap<>();
+    ScoreBalance.put("balance", new ForwardBalance());
+    return ScoreBalance;
   }
 }
