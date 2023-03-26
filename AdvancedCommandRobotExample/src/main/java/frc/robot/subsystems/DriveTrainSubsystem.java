@@ -9,28 +9,23 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class DriveTrainSubsystem extends SubsystemBase {
-  // Create Drivetrain Motor Variables
+  public CANSparkMax followerRightMotor = null;
+  public CANSparkMax leaderRightMotor = null;
+  public CANSparkMax followerLeftMotor = null;
+  public CANSparkMax leaderLeftMotor = null;
 
-  CANSparkMax followerRightMotor = null;
-  CANSparkMax leaderRightMotor = null;
-  CANSparkMax followerLeftMotor = null;
-  CANSparkMax leaderLeftMotor = null;
-
-  // Create Differntial Drive Variables
   DifferentialDrive differentialDrive = null;
   public static AHRS navX;
 
   private final DifferentialDriveOdometry m_odometry;
 
   public DriveTrainSubsystem() {
-    // motor initalization
     followerRightMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_RIGHT_MOTOR, MotorType.kBrushless);
     leaderRightMotor = new CANSparkMax(Constants.DRIVETRAIN_LEADER_RIGHT_MOTOR, MotorType.kBrushless);
     followerLeftMotor = new CANSparkMax(Constants.DRIVETRAIN_FOLLOWER_LEFT_MOTOR, MotorType.kBrushless);
@@ -41,22 +36,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leaderLeftMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
     leaderRightMotor.getEncoder().setVelocityConversionFactor(Constants.kLinearDistanceConversionFactor / 60);
 
-    // Leader motors follow follower motors and invertion is set.
-    // Note: ROBOT MAY NOT GO STRAIGHT AND INVERTION MAY NEED TO CHANGE
-    // MAKE SURE TO SET THE CURRENT LIMITS AS WELL
-    // NOTE: LEADER MOTORS are LEADERS in this example
     leaderRightMotor.setInverted(true);
-    
+
     followerRightMotor.follow(leaderRightMotor, false);
     followerLeftMotor.follow(leaderLeftMotor, false);
 
-    // Current Limits Set
     followerRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     leaderRightMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     followerLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
     leaderLeftMotor.setSmartCurrentLimit(Constants.MOTOR_CURRENT_LIMIT);
 
-    // Create DifferentialDrive Object
     differentialDrive = new DifferentialDrive(leaderLeftMotor, leaderRightMotor);
 
     navX = new AHRS(SPI.Port.kMXP);
@@ -179,6 +168,18 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return navX;
   }
 
+  public double getPitch() {
+    return navX.getPitch();
+  }
+
+  public double getRoll() {
+    return navX.getRoll();
+  }
+
+  public double getYaw() {
+    return navX.getYaw();
+  }
+
   @Override
   public void periodic() {
     m_odometry.update(navX.getRotation2d(), getLeaderLeftEncoderPosition(), getLeaderRightEncoderPosition());
@@ -187,5 +188,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Right Encoder Value Meters", getLeaderRightEncoderPosition());
     SmartDashboard.putNumber("Average Encoder Distance 2", getEncoderPositionAverage());
     SmartDashboard.putNumber("Gyro Heading", getHeading());
+    SmartDashboard.putNumber("Right Side Drivetrain", leaderRightMotor.get());
+    SmartDashboard.putNumber("Left Side Drivetrain", leaderLeftMotor.get());
   }
 }

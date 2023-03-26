@@ -1,7 +1,5 @@
 package frc.robot;
 
-import com.pathplanner.lib.server.PathPlannerServer;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,18 +18,24 @@ public class Robot extends TimedRobot {
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
+    RobotContainer.driveTrainSubsystem.setBreakMode();
   }
 
   @Override
   public void robotPeriodic() {
-    // Runs scheduled commands
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("Tilt Right Encoder Value", RobotContainer.tiltSubsystem.getRightHeight());
     SmartDashboard.putNumber("Tilt Left Encoder Value", RobotContainer.tiltSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Pitch Angle Value:", RobotContainer.driveTrainSubsystem.getPitch());
+    SmartDashboard.putNumber("Roll Angle Value:", RobotContainer.driveTrainSubsystem.getRoll());
+    SmartDashboard.putNumber("Current elevator left motor tick position:", RobotContainer.elevatorSubsystem.getLeftHeight());
+    SmartDashboard.putNumber("Current elevator right motor tick position:", RobotContainer.elevatorSubsystem.getRightHeight());
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
   public void disabledInit() {
+    RobotContainer.ledSubsystem.setLedColorOrange();
   }
 
   @Override
@@ -45,13 +49,17 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     DriveTrainSubsystem.zeroHeading();
-    
+
     RobotContainer.driveTrainSubsystem.navX.reset();
+
     RobotContainer.tiltSubsystem.resetTiltEncoders();
     RobotContainer.driveTrainSubsystem.resetEncoderValues();
     RobotContainer.elevatorSubsystem.resetElevatorEncoders();
+
+    RobotContainer.driveTrainSubsystem.setBreakMode();
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    // Runs an auto command in auto mode if there is one selected
+
     if (m_autonomousCommand != null)
       m_autonomousCommand.schedule();
   }
@@ -68,7 +76,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    
+
   }
 
   @Override
