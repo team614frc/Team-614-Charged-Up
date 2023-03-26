@@ -1,4 +1,4 @@
-package frc.robot.Commands.PathPlannerCommands;
+package frc.robot.commands.PathPlannerCommands;
 
 import java.io.IOException;
 import java.nio.file.Path;

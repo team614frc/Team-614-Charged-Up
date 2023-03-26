@@ -1,10 +1,10 @@
-package frc.robot.Commands.SequentialParallelCommands;
+package frc.robot.commands.SequentialParallelCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.Commands.PIDCommand.TiltPIDCommand;
-import frc.robot.Commands.SimpleCommands.Extend;
-import frc.robot.Commands.SimpleCommands.Retract;
+import frc.robot.commands.PIDCommand.TiltPIDCommand;
+import frc.robot.commands.SimpleCommands.Extend;
+import frc.robot.commands.SimpleCommands.Retract;
 
 public class ScoreMidCone extends SequentialCommandGroup {
 

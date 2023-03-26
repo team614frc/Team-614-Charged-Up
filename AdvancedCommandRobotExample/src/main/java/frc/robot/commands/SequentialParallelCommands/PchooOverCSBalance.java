@@ -2,12 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.Commands.SequentialParallelCommands;
+package frc.robot.commands.SequentialParallelCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.Commands.PathPlannerCommands.AutoBalance;
-import frc.robot.Commands.SimpleCommands.Intake;
+import frc.robot.commands.PathPlannerCommands.AutoBalance;
+import frc.robot.commands.SimpleCommands.Intake;
 
 public class PchooOverCSBalance extends SequentialCommandGroup {
   /** Creates a new PchooOverCSBalance. */

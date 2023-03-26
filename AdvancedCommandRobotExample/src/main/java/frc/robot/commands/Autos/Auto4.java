@@ -1,8 +1,8 @@
-package frc.robot.Commands.Autos;
+package frc.robot.commands.Autos;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Commands.PathPlannerCommands.PathPlannerLoadPathCommand;
-import frc.robot.Commands.SequentialParallelCommands.ScoreMidCubeAuto;
+import frc.robot.commands.PathPlannerCommands.PathPlannerLoadPathCommand;
+import frc.robot.commands.SequentialParallelCommands.ScoreMidCubeAuto;
 
 public class Auto4 extends SequentialCommandGroup {
   public Auto4() {

@@ -1,4 +1,4 @@
-package frc.robot.Commands.TimedCommands.TimedBasedAuto.TimedCommands;
+package frc.robot.commands.TimedCommands.TimedBasedAuto.TimedCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
