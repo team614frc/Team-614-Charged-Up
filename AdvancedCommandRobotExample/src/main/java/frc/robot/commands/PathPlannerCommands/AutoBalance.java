@@ -36,11 +36,11 @@ public class AutoBalance extends CommandBase {
 
     // sets angle to roll: angle the balence beam can rotate.
     this.currentAngle = RobotContainer.driveTrainSubsystem.getRoll();
-    if (currentAngle > 6) {
+    if (currentAngle > 12.5) { //6
       RobotContainer.driveTrainSubsystem.arcadeDrive(0.3, 0);
-    } else if (currentAngle < 2) {
+    } else if (currentAngle < -7) { //2
       RobotContainer.driveTrainSubsystem.arcadeDrive(-0.3, 0);
-    } else if (currentAngle <= 6 && currentAngle >= 2) {
+    } else if (currentAngle <= -12.5 && currentAngle >= -7) { //6 & 2
       RobotContainer.driveTrainSubsystem.arcadeDrive(0.0, 0);
       RobotContainer.driveTrainSubsystem.setBreakMode();
     }

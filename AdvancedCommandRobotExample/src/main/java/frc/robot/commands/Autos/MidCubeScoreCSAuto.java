@@ -7,6 +7,7 @@ package frc.robot.commands.Autos;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.PathPlannerCommands.EventMap;
 import frc.robot.commands.PathPlannerCommands.PathPlannerLoadEventMapCommand;
+import frc.robot.commands.SequentialParallelCommands.ScoreHighCubeAuto;
 import frc.robot.commands.SequentialParallelCommands.ScoreMidCubeAuto;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -18,7 +19,7 @@ public class MidCubeScoreCSAuto extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ScoreMidCubeAuto(),
+      new ScoreHighCubeAuto(),
       new PathPlannerLoadEventMapCommand("CuRedScoreCS", EventMap.ScoreBalance()).withTimeout(15));
   }
 }

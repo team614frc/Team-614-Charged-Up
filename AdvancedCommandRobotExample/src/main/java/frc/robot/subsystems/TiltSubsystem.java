@@ -50,7 +50,7 @@ public class TiltSubsystem extends PIDSubsystem {
 
   @Override
   protected void useOutput(double output, double setpoint) {
-    if ((getLeftHeight() > 22.5) && (setpoint > 21)) {
+    if ((getLeftHeight() > 21.5) && (setpoint > 21)) {
       tiltLeftMotor.set(0);
       tiltRightMotor.set(0);
     } else {

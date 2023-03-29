@@ -49,6 +49,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.TiltSubsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -158,7 +159,6 @@ public class RobotContainer {
         m_CommandXboxController.button(Constants.LEFT_BUMPER).onTrue(new GroundIntake());
         m_CommandXboxController.rightTrigger().onTrue(new TiltPIDCommand(Constants.TILT_DEFAULT_SETPOINT));
         m_CommandXboxController.leftTrigger().onTrue(new PchooOverCS());
-        // m_CommandXboxController.leftTrigger().whileTrue(new AutoBalance());
         m_CommandXboxController.button(Constants.START_BUTTON).toggleOnTrue(new SetLEDColorCommand(0)); // Sets LED's to
                                                                                                         // purple
         m_CommandXboxController.button(Constants.BACK_BUTTON).toggleOnTrue(new SetLEDColorCommand(1)); // Sets LED's to
